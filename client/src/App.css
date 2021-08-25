@@ -334,6 +334,14 @@ a:hover, .navbar-brand:hover {
   /* padding-top: 5%; */
 }
 
+.items .card-body {
+  text-align: left;
+}
+
+.items .btn {
+  background-color: var(--gold);
+}
+
 .item-card {
   margin: 2%;
 }
@@ -638,6 +646,15 @@ flex-direction: column;
 
 .browse-img-div img {
   width: 50%;
+}
+
+.profile {
+  width: 70%;
+  align-self: center;
+}
+
+.profile, .items .card {
+  padding: 3vh, 4vh;
 }
 
 }
