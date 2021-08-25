@@ -2,10 +2,12 @@ import './App.css';
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Header from './components/Header';
-import Homepage from './components/Homepage';
-import HomepageContent from './components/Homepage-Content';
-import Browse from './components/Browse';
+import Header from './pages/Header';
+import Homepage from './pages/Homepage';
+import HomepageContent from './pages/Homepage-Content';
+import Browse from './pages/Browse';
+import MyBounty from './pages/MyBounty';
+
 
 function App() {
 
@@ -21,6 +23,10 @@ function App() {
         <Route exact path="/browse">
           <Browse />
         </Route>
+        <Route exact path="/dashboard">
+          <MyBounty />
+        </Route>
+
       </Switch>
     </Router>
   );

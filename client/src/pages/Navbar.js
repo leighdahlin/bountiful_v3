@@ -3,16 +3,16 @@ import "../assets/css/modal.css"
 import logo from "../assets/images/b-logo.png";
 
 export default function LoggedIn() {
-    const loggedIn = false;
+    const loggedIn = true;
     if(loggedIn) {
         return (
             <div className="navbar-nav level-right">
                 <li className="nav-item">
-                    <Link className="nav-link" to="/">Browse</Link>
+                    <Link className="nav-link" to="/browse">Browse</Link>
                     {/* <Link className="nav-link" to="/api/items">Browse</Link> */}
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/">My Bounty</Link>
+                    <Link className="nav-link" to="/dashboard">My Bounty</Link>
                     {/* <Link className="nav-link" to="/dashboard">My Bounty</Link> */}
                 </li>
                 <li className="nav-item">

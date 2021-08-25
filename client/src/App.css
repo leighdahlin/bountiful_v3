@@ -227,6 +227,14 @@ a:hover, .navbar-brand:hover {
   font-size: 1.5rem;
 }
 
+.browse-img-div img {
+  width: 75%;
+}
+
+.browse-img-div, .card-body {
+  text-align: center;
+}
+
 .card-body p {
   line-height: 1;
 }
@@ -364,10 +372,15 @@ a:hover, .navbar-brand:hover {
   width: 100%;
 }
 
+.browse-form select {
+  padding: .5%;
+}
+
 .browse-items {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
   padding: 3%;
 }
@@ -415,8 +428,8 @@ a:hover, .navbar-brand:hover {
 }
 
 #browse-cat-btn, .add-cart {
-  background-color: var(--blue);
-  color: var(--gray);
+  background-color: var(--gold);
+  color: var(--forest);
   width: 125px;
 }
 
@@ -618,8 +631,13 @@ flex-direction: column;
   flex-direction: column;
 }
 
-.profile {
-  
+.browse-form {
+  flex-direction: column;
+  margin-top: 3.5%;
+}
+
+.browse-img-div img {
+  width: 50%;
 }
 
 }
