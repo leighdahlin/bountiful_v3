@@ -1,0 +1,20 @@
+[
+    {
+      "category_name": "fruits"
+    },
+    {
+      "category_name": "vegetables"
+    },
+    {
+      "category_name": "herbs"
+    },
+    {
+        "category_name": "dairy"
+    },
+    {
+        "category_name": "flowers"
+    },
+    {
+        "category_name": "seeds"
+    }
+]

@@ -1,0 +1,43 @@
+[
+    {
+        "first_name": "Sal",
+        "last_name": "Vador",
+        "username": "summerSal",
+        "location": "West Sac",
+        "email": "sal@hotmail.com",
+        "password": "password123"
+      },
+      {
+        "first_name": "Lernantino",
+        "last_name": "Williams",
+        "username": "happyFarmer",
+        "location": "North Sac",
+        "email": "lernantino@gmail.com",
+        "password": "password123"
+      },
+      {
+        "first_name": "Amiko",
+        "last_name": "Moritz",
+        "username": "amiRight",
+        "location": "Midtown",
+        "email": "amiko2k20@aol.com",
+        "password": "password123"
+      },
+      {
+        "first_name": "Jordan",
+        "last_name": "Lee",
+        "username": "jLee",
+        "location": "Downtown",
+        "email": "jordan99@msn.com",
+        "password": "password123"
+      },
+      {
+        "first_name": "Blake",
+        "last_name": "Smith",
+        "username": "humanBean",
+        "location": "East Sac",
+        "email": "the_blake@yahoo.com",
+        "password": "password123"
+      }
+
+]
