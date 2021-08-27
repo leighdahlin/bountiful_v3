@@ -648,6 +648,10 @@ a:hover, .navbar-brand:hover {
   flex-direction: column;
 }
 
+.homepage-content-div-1, .homepage-content-div-2 {
+  flex-direction: column;
+  }
+
 }
 
 @media screen and (max-width: 576px) {
@@ -666,10 +670,6 @@ a:hover, .navbar-brand:hover {
 
 .content {
   top: 50%;
-}
-
-.homepage-content-div-1, .homepage-content-div-2 {
-flex-direction: column;
 }
 
 .homepage-pg {

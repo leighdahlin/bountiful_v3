@@ -3,14 +3,16 @@ const media576px = window.matchMedia("(max-width: 576px)")
 const media768px = window.matchMedia("(max-width: 768px)")
 const media992px = window.matchMedia("(max-width: 992px)")
 
+console.log("RIGHT SCRIPT INSERTED");
+
 const moveHP = () => {
     console.log("FIRST WORKING")
     if (media576px.matches) {
-        hpContentSelector.setAttribute("style","top: 65%");
+        hpContentSelector.setAttribute("style","top: 70%");
     } else if (media768px.matches)  {
-        hpContentSelector.setAttribute("style","top: 110%");
+        hpContentSelector.setAttribute("style","top: 100%");
     } else if (media992px.matches) {
-        hpContentSelector.setAttribute("style","top: 145%");
+        hpContentSelector.setAttribute("style","top: 120%");
     }
     document.querySelector(".navbar-toggler-icon").removeEventListener('click', moveHP);
     document.querySelector(".navbar-toggler-icon").addEventListener('click', standardHP)
