@@ -179,14 +179,26 @@ a:hover, .navbar-brand:hover {
 
 
 /* ** DASHBOARD ONLY - MY BOUNTY - SELLER VIEW ** */
-#dashboard-image {
-  /* position: absolute;
+.d-flex, .tab-content {
   width: 100%;
-  height: 100%;
-  background-image: url("/images/limes.jpg");
-  background-size: cover; */
-  background-color: var(--blue);
+}
 
+.dashboard-container .nav {
+  margin: 2%;
+  color: var(--gray)
+}
+
+.dashboard-container .nav-pills .nav-link.active, .dashboard-container .nav-pills .show>.nav-link {
+  background-color: var(--forest);
+  color: var(--gray)
+}
+
+.dashboard-container .nav-link {
+  color: var(--gray)
+}
+
+.dashboard-container .nav-link:focus, .dashboard-container .nav-link:hover {
+  color: var(--forest)
 }
 
 .modal .b-logo {
@@ -288,7 +300,24 @@ a:hover, .navbar-brand:hover {
 
 .dashboard-container {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
+  background-color: var(--blue);
+
+}
+
+.seller-profile-container {
+  display: flex;
+  align-items: flex-start;
+  background-color: var(--blue);
+
+}
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
 }
 
 .profile {
@@ -297,7 +326,7 @@ a:hover, .navbar-brand:hover {
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 35%;
+  width: 55%;
   margin: 5%;
 }
 
@@ -311,6 +340,15 @@ a:hover, .navbar-brand:hover {
   align-items: flex-start;
   justify-content: center;
   width: 100%;
+}
+
+.seller-bounty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+
 }
 
 .dashboard-header {
@@ -334,11 +372,19 @@ a:hover, .navbar-brand:hover {
   /* padding-top: 5%; */
 }
 
-.items .card-body {
+.seller-items {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.items .card-body, .seller-items .card-body {
   text-align: left;
 }
 
-.items .btn {
+.items .btn, .seller-items .btn {
   background-color: var(--gold);
 }
 
@@ -508,7 +554,7 @@ a:hover, .navbar-brand:hover {
   margin-top: 10%;
 }
 
-.profile, .itemview-components, .items .card {
+.profile, .itemview-components, .items .card, .seller-items .card {
   background-color: #fff;
   padding: 4vh 5vh;
   border-bottom-left-radius: 1rem;
@@ -633,10 +679,6 @@ flex-direction: column;
 .hp-pics-div {
   flex-direction: column;
   padding-bottom: 3%;
-}
-
-.dashboard-container {
-  flex-direction: column;
 }
 
 .browse-form {

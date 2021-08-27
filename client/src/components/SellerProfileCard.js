@@ -3,9 +3,7 @@ import formatTime from "../utils/helpers.js";
 
 export default function DashboardCard(props) {
     return props.data.map((item) => (
-    <div className = "your-bounty">
-        <div className="items">
-        <div id = {item.id} className="card mb-3 item-card" style={{maxWidth: "500px"}}>
+    <div id = {item.id} className="card mb-3 item-card" style={{maxWidth: "500px"}}>
         <div className="row g-0">
             <div className="col-md-4 card-pic">
                 <div className="item-buttons">
@@ -26,17 +24,11 @@ export default function DashboardCard(props) {
                         <p className="card-text">Description: <span className="item-description">{item.item_description}</span></p>
                         <p className="card-text"><small className="text-muted">Date created: {formatTime(item.createdAt)}</small></p>
                         <div className="center-btns">
-                            <button id = {item.id} type="button" className="btn item-btn edit-item">Edit</button>   
-                            <button type="button" className="btn item-btn delete-item" data-id={item.id}>Delete</button>           
                         </div>
                     </div>
             </div>
         </div>
     </div>
-
-        </div>
-    </div>
-
 
     ));
 }
