@@ -209,9 +209,9 @@ a:hover, .navbar-brand:hover {
   display: none;
 }
 
-#add-item, #edit-profile, .save-btn {
+#add-item, #edit-profile, .save-btn, #send-message {
   justify-self: center;
-  width: 60%;
+  width: 80%;
   font-size: .85rem;
   margin-bottom: 5%;
   margin-top: 6%;

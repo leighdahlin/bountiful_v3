@@ -10,7 +10,7 @@ export default function MyBounty() {
             item_unit: "pint",
             item_quantity: "5",
             name: "Blueberries",
-            cateogry: "Fruit",
+            category: "Fruit",
             description: "Fresh, juicy blueberries",
             createdAt: Date.now()
         },
@@ -21,7 +21,7 @@ export default function MyBounty() {
             item_unit: "quart",
             item_quantity: "3",
             name: "Strawberries",
-            cateogry: "Fruit",
+            category: "Fruit",
             description: "Fresh, juicy Strawberries",
             createdAt: Date.now()
 
@@ -33,7 +33,7 @@ export default function MyBounty() {
             item_unit: "pint",
             item_quantity: "5",
             name: "Blueberries",
-            cateogry: "Fruit",
+            category: "Fruit",
             description: "Fresh, juicy blueberries",
             createdAt: Date.now()
         },
@@ -44,7 +44,7 @@ export default function MyBounty() {
             item_unit: "quart",
             item_quantity: "3",
             name: "Blueberries",
-            cateogry: "Fruit",
+            category: "Fruit",
             description: "Fresh, juicy blueberries",
             createdAt: Date.now()
         },
@@ -55,7 +55,7 @@ export default function MyBounty() {
             item_unit: "pint",
             item_quantity: "5",
             name: "Blueberries",
-            cateogry: "Fruit",
+            category: "Fruit",
             description: "Fresh, juicy blueberries",
             createdAt: Date.now()
         },
@@ -66,7 +66,7 @@ export default function MyBounty() {
             item_unit: "quart",
             item_quantity: "3",
             name: "Blueberries",
-            cateogry: "Fruit",
+            category: "Fruit",
             description: "Fresh, juicy blueberries",
             createdAt: Date.now()
         },
@@ -77,7 +77,7 @@ export default function MyBounty() {
             item_unit: "quart",
             item_quantity: "3",
             name: "Blueberries",
-            cateogry: "Fruit",
+            category: "Fruit",
             description: "Fresh, juicy blueberries",
             createdAt: Date.now()
         },
@@ -88,7 +88,7 @@ export default function MyBounty() {
             item_unit: "pint",
             item_quantity: "5",
             name: "Blueberries",
-            cateogry: "Fruit",
+            category: "Fruit",
             description: "Fresh, juicy blueberries",
             createdAt: Date.now()
         },
@@ -99,7 +99,7 @@ export default function MyBounty() {
             item_unit: "quart",
             item_quantity: "3",
             name: "Blueberries",
-            cateogry: "Fruit",
+            category: "Fruit",
             description: "Fresh, juicy blueberries",
             createdAt: Date.now()
         }
