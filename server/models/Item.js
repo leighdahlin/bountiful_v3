@@ -29,13 +29,13 @@ const itemSchema = new Schema({
     type: String,
     required: true,
   },
-  user: [{
+  users: [{
     type: Schema.Types.ObjectId,
     ref: 'User',
     },
   ],
     
-  category: [{
+  categories: [{
     type: Schema.Types.ObjectId,
     ref: 'Category',
     },
