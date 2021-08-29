@@ -8,7 +8,7 @@ console.log("RIGHT SCRIPT INSERTED");
 const moveHP = () => {
     console.log("FIRST WORKING")
     if (media576px.matches) {
-        hpContentSelector.setAttribute("style","top: 70%");
+        hpContentSelector.setAttribute("style","top: 50%");
     } else if (media768px.matches)  {
         hpContentSelector.setAttribute("style","top: 100%");
     } else if (media992px.matches) {

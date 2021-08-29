@@ -7,7 +7,7 @@
   --clay: #be5a38;
 }
 
-html {
+body {
   background-color: var(--blue);
 }
 
@@ -82,23 +82,21 @@ a:hover, .navbar-brand:hover {
 }
 
 .image {
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
   height: 100%;
-  background-image: url(./assets/images/different-vegetables-textile-bag-grey.jpg);
-  background-size: cover;
+  /* background-image: url(./assets/images/different-vegetables-textile-bag-grey.jpg);
+  background-size: cover; */
 }
 
-.no-hero-image {
+/* .no-hero-image {
   width: auto;
   height: auto;
-}
+} */
 
 .content {
-  position: absolute;
-  top: 115%;
-  width: 100%;
-  height: 200px;
+  position: relative;
+  background-color: var(--gray);
 }
 
 .homepage-content {
@@ -118,19 +116,17 @@ a:hover, .navbar-brand:hover {
 }
 
 .homepage-content section {
-  /* height: 45rem; */
   text-align: center;
 }
 
 .homepage-title {
   padding: 3%;
   padding-bottom: 4%;
+  text-align: center;
 }
 
 .homepage-content-div-1 {
   display: flex;
-  /* width: 100%;
-  height: 100%; */
   align-items: center;
   justify-content: space-around;
   padding-bottom: 5%;
