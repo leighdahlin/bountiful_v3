@@ -21,12 +21,30 @@ const typeDefs = gql`
     title: String
     item_name: String
     item_description: String
-    item_quantity: Number
+    item_quantity: Float
     item_unit: String
-    item_price: Number
+    item_price: Float
     cat_name: String
-    users: [User]!
-    categories: [Category]!
+    user: User
+    category: Category
+  }
+
+  input ItemData {
+    _id: ID
+    title: String
+    item_name: String
+    item_description: String
+    item_quantity: Float
+    item_unit: String
+    item_price: Float
+    cat_name: String
+    user: User
+    category: Category
+  }
+
+  type itemResponse{
+    success: Boolean
+    item: Item
   }
 
   type Auth {
@@ -38,22 +56,31 @@ const typeDefs = gql`
     users: [User]
     user(email: String!): User
     categories: [Catergory]
-    items(username: String): [Item]
-    item(itemID:ID!): Item
+    items(category:ID, username: String): [Item]
+    item(_id:ID!): Item
   }
 
-//   type Mutation {
-//     addUser(username: String!, email: String!, password: String!): Auth
-//     login(email: String!, password: String!): Auth
-//     addThought(thoughtText: String!, thoughtAuthor: String!): Thought
-//     addComment(
-//       thoughtId: ID!
-//       commentText: String!
-//       commentAuthor: String!
-//     ): Thought
-//     removeThought(thoughtId: ID!): Thought
-//     removeComment(thoughtId: ID!, commentId: ID!): Thought
-//   }
+  type Mutation {
+    addUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
+    updateUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): User
+
+    createItem(item:ItemData): itemResponse
+    updateItem(
+      _id: ID
+      title: String
+      item_name: String
+      item_description: String
+      item_quantity: Float
+      item_unit: String
+      item_price: Float
+      cat_name: String
+      category: Category
+    ): Item
+    removeItem(_id: ID!): Item
+
+    removeComment(thoughtId: ID!, commentId: ID!): Thought
+  }
 `;
 
 module.exports = typeDefs;
