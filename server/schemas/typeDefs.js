@@ -38,8 +38,6 @@ const typeDefs = gql`
     item_unit: String
     item_price: Float
     cat_name: String
-    user: User
-    category: Category
   }
 
   type itemResponse{
@@ -55,7 +53,7 @@ const typeDefs = gql`
   type Query {
     users: [User]
     user(userId: ID!, email: String!): User
-    categories: [Catergory]
+    categories: [Category]
     items(category:ID, username: String): [Item]
     item(_id:ID!): Item
   }
@@ -65,7 +63,16 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     updateUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): User
 
-    createItem(item:ItemData): itemResponse
+    createItem(
+      itemId: ID
+      title: String
+      item_name: String
+      item_description: String
+      item_quantity: Float
+      item_unit: String
+      item_price: Float
+      cat_name: String
+    ): Item
     updateItem(
       itemId: ID
       title: String
@@ -75,11 +82,9 @@ const typeDefs = gql`
       item_unit: String
       item_price: Float
       cat_name: String
-      category: Category
     ): Item
     removeItem( itemId: ID!): Item
 
-    removeComment(thoughtId: ID!, commentId: ID!): Thought
   }
 `;
 
