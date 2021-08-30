@@ -3,8 +3,6 @@ import VegPic1 from "../assets/images/veg-box-frontview.jpg";
 import VegPic2 from "../assets/images/close-up-woman-harvesting-garden.jpg";
 import VegPic3 from "../assets/images/vegetable-basket.jpg";
 
-
-
 export default function HomepageContent() {
     return (
     <div className="content homepage-content">

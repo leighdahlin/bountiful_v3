@@ -82,23 +82,21 @@ a:hover, .navbar-brand:hover {
 }
 
 .image {
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
   height: 100%;
-  background-image: url(./assets/images/different-vegetables-textile-bag-grey.jpg);
-  background-size: cover;
+  /* background-image: url(./assets/images/different-vegetables-textile-bag-grey.jpg);
+  background-size: cover; */
 }
 
-.no-hero-image {
+/* .no-hero-image {
   width: auto;
   height: auto;
-}
+} */
 
 .content {
-  position: absolute;
-  top: 115%;
-  width: 100%;
-  height: 200px;
+  position: relative;
+  background-color: var(--gray);
 }
 
 .homepage-content {
@@ -118,19 +116,17 @@ a:hover, .navbar-brand:hover {
 }
 
 .homepage-content section {
-  /* height: 45rem; */
   text-align: center;
 }
 
 .homepage-title {
   padding: 3%;
   padding-bottom: 4%;
+  text-align: center;
 }
 
 .homepage-content-div-1 {
   display: flex;
-  /* width: 100%;
-  height: 100%; */
   align-items: center;
   justify-content: space-around;
   padding-bottom: 5%;
@@ -179,14 +175,37 @@ a:hover, .navbar-brand:hover {
 
 
 /* ** DASHBOARD ONLY - MY BOUNTY - SELLER VIEW ** */
-#dashboard-image {
-  /* position: absolute;
+.d-flex, .tab-content {
   width: 100%;
-  height: 100%;
-  background-image: url("/images/limes.jpg");
-  background-size: cover; */
-  background-color: var(--blue);
+}
 
+.dashboard-container .nav {
+  flex-direction: column;
+  margin: 2%;
+  color: var(--gray)
+}
+
+.dashboard-container .nav-pills .nav-link.active, .dashboard-container .nav-pills .show>.nav-link {
+  background-color: var(--forest);
+  color: var(--gray)
+}
+
+.dashboard-container .nav-link, .seller-profile-container .nav-link {
+  color: var(--gray)
+}
+
+.dashboard-container .nav-link:focus, .dashboard-container .nav-link:hover {
+  color: var(--forest)
+}
+
+.seller-profile-container .nav-link:focus, .seller-profile-container .nav-link:hover {
+  cursor: pointer;
+  background-color: var(--gold);
+  color: var(--forest)
+}
+
+.seller-profile-container .nav-tabs .nav-item.show .nav-link, .seller-profile-container .nav-tabs .nav-link.active {
+  color: var(--blue);
 }
 
 .modal .b-logo {
@@ -197,15 +216,24 @@ a:hover, .navbar-brand:hover {
   display: none;
 }
 
-#add-item, #edit-profile, .save-btn {
+#add-item, #edit-profile, .save-btn, #send-message {
   justify-self: center;
-  width: 60%;
+  width: 80%;
   font-size: .85rem;
   margin-bottom: 5%;
   margin-top: 6%;
   background-color: var(--clay);
   color: var(--gray);
 }
+
+#send-message {
+  width: 100%;
+}
+
+#add-item {
+  width: 25%;
+}
+
 /* 
 #edit-profile, .save-btn, #add-item {
   width: 100%;
@@ -286,9 +314,38 @@ a:hover, .navbar-brand:hover {
 
 }
 
+.seller-profile-container #profile-img {
+  width: 80%;
+}
+
 .dashboard-container {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
+  background-color: var(--blue);
+
+}
+
+.seller-profile-container {
+  display: flex;
+  align-items: flex-start;
+  background-color: var(--blue);
+
+}
+
+.seller-nav-container {
+  margin: 3%;
+}
+
+.seller-nav-container .nav{
+  margin-bottom: 3%;
+}
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
 }
 
 .profile {
@@ -297,7 +354,7 @@ a:hover, .navbar-brand:hover {
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 35%;
+  width: 55%;
   margin: 5%;
 }
 
@@ -308,9 +365,18 @@ a:hover, .navbar-brand:hover {
 .your-bounty {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.seller-bounty {
+  display: flex;
+  flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   width: 100%;
+
 }
 
 .dashboard-header {
@@ -334,11 +400,19 @@ a:hover, .navbar-brand:hover {
   /* padding-top: 5%; */
 }
 
-.items .card-body {
+.seller-items {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.items .card-body, .seller-items .card-body {
   text-align: left;
 }
 
-.items .btn {
+.items .btn, .seller-items .btn {
   background-color: var(--gold);
 }
 
@@ -508,7 +582,7 @@ a:hover, .navbar-brand:hover {
   margin-top: 10%;
 }
 
-.profile, .itemview-components, .items .card {
+.profile, .itemview-components, .items .card, .seller-items .card {
   background-color: #fff;
   padding: 4vh 5vh;
   border-bottom-left-radius: 1rem;
@@ -602,6 +676,10 @@ a:hover, .navbar-brand:hover {
   flex-direction: column;
 }
 
+.homepage-content-div-1, .homepage-content-div-2 {
+  flex-direction: column;
+  }
+
 }
 
 @media screen and (max-width: 576px) {
@@ -622,10 +700,6 @@ a:hover, .navbar-brand:hover {
   top: 50%;
 }
 
-.homepage-content-div-1, .homepage-content-div-2 {
-flex-direction: column;
-}
-
 .homepage-pg {
   margin-bottom: 5%;
 }
@@ -633,10 +707,6 @@ flex-direction: column;
 .hp-pics-div {
   flex-direction: column;
   padding-bottom: 3%;
-}
-
-.dashboard-container {
-  flex-direction: column;
 }
 
 .browse-form {
@@ -655,6 +725,39 @@ flex-direction: column;
 
 .profile, .items .card {
   padding: 3vh, 4vh;
+}
+
+#add-item {
+  width: 50%;
+  margin: 8%;
+}
+
+.dashboard-container .d-flex {
+  flex-direction: column;
+}
+
+.dashboard-container .nav {
+  flex-direction: row;
+}
+
+.items-b-logo {
+  width: 75%;
+}
+
+.item-card .card-pic {
+  text-align: center;
+}
+
+.seller-profile-container {
+  flex-direction: column;
+}
+
+.seller-profile-container #profile-img {
+    width: 60%;
+}
+
+.seller-profile-container .profile {
+  padding: 3%;
 }
 
 }

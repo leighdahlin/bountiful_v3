@@ -1,12 +1,7 @@
-import ProfileInfo from '../components/ProfileInfo';
-import DashboardCard from '../components/DashboardCard';
-import useItemModal from '../assets/js/useItemModal';
-import ItemModal from '../components/ItemModal';
+import SellerProfileInfo from '../components/SellerProfileInfo';
+import SellerProfileCard from '../components/SellerProfileCard';
 
 export default function MyBounty() {
-
-    const { isItemShowing, toggleItem } = useItemModal();
-
     const data = [
         {
             id: 1,
@@ -111,31 +106,41 @@ export default function MyBounty() {
     ];    
     
     return(
-    <div id="dashboard-image" className="dashboard-container">
-        <div className="d-flex">
-            <div className="nav nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <button className="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Listings</button>
-                <button className="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</button>
-                <button className="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</button>
-                <button className="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Reviews</button>
-            </div>
-            <div className="tab-content" id="v-pills-tabContent">
-                <div className="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                    <div className = "your-bounty">
-                        <button id="add-item" className="btn" type="button" onClick={toggleItem}>Add Item</button>
-                        <div className="items">
-                            <DashboardCard data = {data} toggleItem = {toggleItem}/>
+    <div className="seller-profile-container">
+        <SellerProfileInfo />
+        
+        <div className="seller-nav-container d-flex flex-column">
+            <ul className="nav nav-tabs" id="myTab" role="tablist">
+                <li className="nav-item">
+                    <a className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bounty" role="tab" aria-controls="home" aria-selected="true">Bounty</a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#reviews" role="tab" aria-controls="profile" aria-selected="false">Reviews</a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#message" role="tab" aria-controls="contact" aria-selected="false">Message</a>
+                </li>
+            </ul>
+            <div className="tab-content" id="myTabContent">
+                <div className="tab-pane fade show active" id="bounty" role="tabpanel" aria-labelledby="home-tab">
+                    <div className = "seller-bounty">
+                        <div className="seller-items">
+                            <SellerProfileCard data = {data} />
                         </div>
                     </div>
+                </div>
+                <div className="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="profile-tab">
+                    <div className="seller-reviews">
+                        Reviews
                     </div>
-                <div className="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"><ProfileInfo /></div>
-                <div className="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-                <div className="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+                </div>
+                <div className="tab-pane fade" id="message" role="tabpanel" aria-labelledby="contact-tab">
+                    <div className="seller-message-form">
+                        Message Form
+                    </div>
+                </div>
             </div>
         </div>
-
-        <ItemModal isItemShowing={isItemShowing} hide={toggleItem} />
-                
     </div>
     )
 }

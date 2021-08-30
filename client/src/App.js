@@ -7,6 +7,7 @@ import Homepage from './pages/Homepage';
 import HomepageContent from './pages/Homepage-Content';
 import Browse from './pages/Browse';
 import MyBounty from './pages/MyBounty';
+import SellerProfile from './pages/SellerProfile';
 
 
 function App() {
@@ -26,7 +27,9 @@ function App() {
         <Route exact path="/dashboard">
           <MyBounty />
         </Route>
-
+        <Route exact path="/profile">
+          <SellerProfile />
+        </Route>
       </Switch>
     </Router>
   );

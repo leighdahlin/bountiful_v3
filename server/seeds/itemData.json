@@ -1,0 +1,135 @@
+[
+    {
+    "title": "Extra apples",
+    "item_name": "Golden delicious",
+    "item_description": "Organic apples from my private orchard",
+    "item_quantity": "100",
+    "item_unit": "lb",
+    "item_price": "20",
+    "cat_name": "fruits",
+    "user_id": "1",
+    "category_id": "1"
+},
+{
+    "title": "Extra veggies",
+    "item_name": "Broccoli",
+    "item_description": "Locally grown broccoli",
+    "item_quantity": "15",
+    "item_unit": "oz",
+    "item_price": "30",
+    "cat_name": "vegetables",
+    "user_id": "2",
+    "category_id": "2"
+},
+{
+    "title": "Extra herbs",
+    "item_name": "Sweet basil",
+    "item_description": "Organic basil leaves",
+    "item_quantity": "50",
+    "item_unit": "oz",
+    "item_price": "11",
+    "cat_name": "herbs",
+    "user_id": "2",
+    "category_id": "3"
+},
+{
+    "title": "Extra oranges",
+    "item_name": "Oranges",
+    "item_description": "Oranges from my garden",
+    "item_quantity": "200",
+    "item_unit": "lb",
+    "item_price": "80",
+    "cat_name": "fruits",
+    "user_id": "4",
+    "category_id": "1"
+},
+{
+    "title": "Farm fresh",
+    "item_name": "Eggs",
+    "item_description": "Eggs from pasture raised chickens",
+    "item_quantity": "24",
+    "item_unit": "oz",
+    "item_price": "5",
+    "cat_name": "dairy",
+    "user_id": "5",
+    "category_id": "4"
+},
+{
+    "title": "Extra peppers for my peeps",
+    "item_name": "Peppers",
+    "item_description": "Green chilli peppers",
+    "item_quantity": "45",
+    "item_unit": "oz",
+    "item_price": "25",
+    "cat_name": "vegetables",
+    "user_id": "3",
+    "category_id": "2"
+},
+{
+    "title": "Big, juicy watermelons!",
+    "item_name": "Watermelon",
+    "item_description": "The most delicious watermelon you ever tasted.",
+    "item_quantity": "20",
+    "item_unit": "unit",
+    "item_price": "10",
+    "cat_name": "fruits",
+    "user_id": "1",
+    "category_id": "1"
+},
+{
+    "title": "Squash oh gosh!",
+    "item_name": "Squash",
+    "item_description": "Locally grown squash just in time for fall",
+    "item_quantity": "15",
+    "item_unit": "unit",
+    "item_price": "30",
+    "cat_name": "vegetables",
+    "user_id": "2",
+    "category_id": "2"
+},
+{
+    "title": "For those who like mojitos...",
+    "item_name": "Mint",
+    "item_description": "Mint leaves ready for some cocktails!",
+    "item_quantity": "50",
+    "item_unit": "oz",
+    "item_price": "11",
+    "cat_name": "herbs",
+    "user_id": "2",
+    "category_id": "3"
+},
+{
+    "title": "Cherries, plump and juicy!",
+    "item_name": "Cherries",
+    "item_description": "Lots of cherries, ripe and ready to go",
+    "item_quantity": "200",
+    "item_unit": "lb",
+    "item_price": "80",
+    "cat_name": "fruits",
+    "user_id": "4",
+    "category_id": "1"
+},
+{
+    "title": "Goat's milk, fresh as can be!",
+    "item_name": "Goat Milk",
+    "item_description": "My goat, Millie's fresh milk",
+    "item_quantity": "24",
+    "item_unit": "oz",
+    "item_price": "5",
+    "cat_name": "dairy",
+    "user_id": "5",
+    "category_id": "4"
+},
+{
+    "title": "Tomatos, perfectly red and ripe",
+    "item_name": "Heirloom Tomators",
+    "item_description": "I specialize in tomoato growing",
+    "item_quantity": "45",
+    "item_unit": "oz",
+    "item_price": "25",
+    "cat_name": "vegetables",
+    "user_id": "3",
+    "category_id": "2"
+}
+
+]

@@ -6,7 +6,7 @@ import logo from "../assets/images/b-logo.png";
 export default function Header() {
     return (
     <header>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light nav-color">
+        <nav className="navbar navbar-expand-lg navbar-light nav-color">
             <div className="container-fluid">
               <Link className="navbar-brand" to="/">
                   <img className="main-logo" src={logo} style={{width:"20%"}}/>
