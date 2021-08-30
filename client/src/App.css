@@ -180,6 +180,7 @@ a:hover, .navbar-brand:hover {
 }
 
 .dashboard-container .nav {
+  flex-direction: column;
   margin: 2%;
   color: var(--gray)
 }
@@ -724,6 +725,39 @@ a:hover, .navbar-brand:hover {
 
 .profile, .items .card {
   padding: 3vh, 4vh;
+}
+
+#add-item {
+  width: 50%;
+  margin: 8%;
+}
+
+.dashboard-container .d-flex {
+  flex-direction: column;
+}
+
+.dashboard-container .nav {
+  flex-direction: row;
+}
+
+.items-b-logo {
+  width: 75%;
+}
+
+.item-card .card-pic {
+  text-align: center;
+}
+
+.seller-profile-container {
+  flex-direction: column;
+}
+
+.seller-profile-container #profile-img {
+    width: 60%;
+}
+
+.seller-profile-container .profile {
+  padding: 3%;
 }
 
 }
