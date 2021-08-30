@@ -30,6 +30,11 @@ const userSchema = new Schema({
     required: true,
     minlength: 8,
   },
+  items: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Item',
+    },
+  ],
 });
 
 // middleware to create password
