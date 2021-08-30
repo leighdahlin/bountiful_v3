@@ -15,8 +15,7 @@ export default function ProfileInfo() {
                     <h6 id="dashboard-username">{data.username}</h6>
                     <h6 id="dashboard-location">{data.location}</h6>
             
-                    <button id="edit-profile" type="button" className="btn" data-id="{data.id}">Edit Profile</button>
-                    <button id="add-item" type="button" className="btn">Add Item</button>   
+                    <button id="edit-profile" type="button" className="btn" data-id="{data.id}">Edit</button>
                 
                 </div>
             </div>

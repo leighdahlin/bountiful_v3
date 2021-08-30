@@ -124,7 +124,7 @@ export default function MyBounty() {
                     <div className = "your-bounty">
                         <button id="add-item" className="btn" type="button" onClick={toggleItem}>Add Item</button>
                         <div className="items">
-                            <DashboardCard data = {data} />
+                            <DashboardCard data = {data} toggleItem = {toggleItem}/>
                         </div>
                     </div>
                     </div>
