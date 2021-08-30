@@ -7,7 +7,7 @@
   --clay: #be5a38;
 }
 
-body {
+html {
   background-color: var(--blue);
 }
 
@@ -189,12 +189,22 @@ a:hover, .navbar-brand:hover {
   color: var(--gray)
 }
 
-.dashboard-container .nav-link {
+.dashboard-container .nav-link, .seller-profile-container .nav-link {
   color: var(--gray)
 }
 
 .dashboard-container .nav-link:focus, .dashboard-container .nav-link:hover {
   color: var(--forest)
+}
+
+.seller-profile-container .nav-link:focus, .seller-profile-container .nav-link:hover {
+  cursor: pointer;
+  background-color: var(--gold);
+  color: var(--forest)
+}
+
+.seller-profile-container .nav-tabs .nav-item.show .nav-link, .seller-profile-container .nav-tabs .nav-link.active {
+  color: var(--blue);
 }
 
 .modal .b-logo {
@@ -214,6 +224,11 @@ a:hover, .navbar-brand:hover {
   background-color: var(--clay);
   color: var(--gray);
 }
+
+#send-message {
+  width: 100%;
+}
+
 /* 
 #edit-profile, .save-btn, #add-item {
   width: 100%;
@@ -294,6 +309,10 @@ a:hover, .navbar-brand:hover {
 
 }
 
+.seller-profile-container #profile-img {
+  width: 80%;
+}
+
 .dashboard-container {
   display: flex;
   flex-direction: column;
@@ -307,6 +326,14 @@ a:hover, .navbar-brand:hover {
   align-items: flex-start;
   background-color: var(--blue);
 
+}
+
+.seller-nav-container {
+  margin: 3%;
+}
+
+.seller-nav-container .nav{
+  margin-bottom: 3%;
 }
 
 .profile-container {

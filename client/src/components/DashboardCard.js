@@ -3,9 +3,7 @@ import formatTime from "../utils/helpers.js";
 
 export default function DashboardCard(props) {
     return props.data.map((item) => (
-    <div className = "your-bounty">
-        <div className="items">
-        <div id = {item.id} className="card mb-3 item-card" style={{maxWidth: "500px"}}>
+        <div id = {item.id} key={item.id} className="card mb-3 item-card" style={{maxWidth: "500px"}}>
         <div className="row g-0">
             <div className="col-md-4 card-pic">
                 <div className="item-buttons">
@@ -33,10 +31,5 @@ export default function DashboardCard(props) {
             </div>
         </div>
     </div>
-
-        </div>
-    </div>
-
-
     ));
 }
