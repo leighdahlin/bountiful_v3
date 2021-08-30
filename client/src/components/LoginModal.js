@@ -25,7 +25,7 @@ const LoginModal = ({ isLoginShowing, hide }) => isLoginShowing ? ReactDOM.creat
                 <label htmlFor="emailLogin"><b>Email Address</b></label>
                 <input
                     id = "email-login"
-                    type="text"
+                    type="email"
                     placeholder="Enter Email Address"
                     name="uname"
                     required

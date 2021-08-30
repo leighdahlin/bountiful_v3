@@ -229,6 +229,10 @@ a:hover, .navbar-brand:hover {
   width: 100%;
 }
 
+#add-item {
+  width: 25%;
+}
+
 /* 
 #edit-profile, .save-btn, #add-item {
   width: 100%;
@@ -360,7 +364,7 @@ a:hover, .navbar-brand:hover {
 .your-bounty {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   width: 100%;
 }

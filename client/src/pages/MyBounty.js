@@ -1,7 +1,12 @@
 import ProfileInfo from '../components/ProfileInfo';
 import DashboardCard from '../components/DashboardCard';
+import useItemModal from '../assets/js/useItemModal';
+import ItemModal from '../components/ItemModal';
 
 export default function MyBounty() {
+
+    const { isItemShowing, toggleItem } = useItemModal();
+
     const data = [
         {
             id: 1,
@@ -117,6 +122,7 @@ export default function MyBounty() {
             <div className="tab-content" id="v-pills-tabContent">
                 <div className="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                     <div className = "your-bounty">
+                        <button id="add-item" className="btn" type="button" onClick={toggleItem}>Add Item</button>
                         <div className="items">
                             <DashboardCard data = {data} />
                         </div>
@@ -127,7 +133,8 @@ export default function MyBounty() {
                 <div className="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
             </div>
         </div>
-        
+
+        <ItemModal isItemShowing={isItemShowing} hide={toggleItem} />
                 
     </div>
     )
