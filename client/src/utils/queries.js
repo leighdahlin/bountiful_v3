@@ -93,3 +93,13 @@ export const QUERY_CAT_ITEMS = gql`
     }
   }
 `;
+
+//Query all the categories:
+export const QUERY_CATEGORIES = gql`
+  {
+    categories {
+      _id
+      category_name
+    }
+  }
+`;
