@@ -69,11 +69,17 @@ const resolvers = {
       
             throw new AuthenticationError('Not logged in');
         },
-        createItem: async (parent, { item }) => {
-            return Item.create({item});
+        createItem: async (parent, { item }, context) => {
+            // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
+            if (context.user) {
+              return Item.findOneAndUpdate({item});
+            }
+            // If user attempts to execute this mutation and isn't logged in, throw an error
+            throw new AuthenticationError('You need to be logged in!');
           },
-          updateItem: async (parent, { title, item_name, item_description, item_quantity, item_unit, item_price, cat_name }) => {
-            return Profile.findOneAndUpdate(
+          updateItem: async (parent, { title, item_name, item_description, item_quantity, item_unit, item_price, cat_name }, context) => {
+            if(context.user){
+            return Item.findOneAndUpdate(
               { _id: itemId },
               {
                 $addToSet: { title: title, item_name: item_name, item_description: item_description,
@@ -84,9 +90,14 @@ const resolvers = {
                 runValidators: true,
               }
             );
+            }
+            throw new AuthenticationError('You need to be logged in!');
           },
-          removeItem: async (parent, { itemId }) => {
-            return Item.findOneAndDelete({ _id: itemId });
+          removeItem: async (parent, { itemId }, context) => {
+              if(context.user){
+                return Item.findOneAndDelete({ _id: itemId });
+              }
+              throw new AuthenticationError('You need to be logged in!');
           },
 
 
