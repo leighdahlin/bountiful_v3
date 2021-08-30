@@ -54,7 +54,7 @@ const typeDefs = gql`
 
   type Query {
     users: [User]
-    user(email: String!): User
+    user(userId: ID!, email: String!): User
     categories: [Catergory]
     items(category:ID, username: String): [Item]
     item(_id:ID!): Item
@@ -67,7 +67,7 @@ const typeDefs = gql`
 
     createItem(item:ItemData): itemResponse
     updateItem(
-      _id: ID
+      itemId: ID
       title: String
       item_name: String
       item_description: String
@@ -77,7 +77,7 @@ const typeDefs = gql`
       cat_name: String
       category: Category
     ): Item
-    removeItem(_id: ID!): Item
+    removeItem( itemId: ID!): Item
 
     removeComment(thoughtId: ID!, commentId: ID!): Thought
   }
