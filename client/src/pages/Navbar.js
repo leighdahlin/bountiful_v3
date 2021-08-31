@@ -12,7 +12,6 @@ import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 export default function LoggedIn() {
-    const [loggedIn, setLoggedIn] = useState(false);
     const history = useHistory();
 
     const { isLoginShowing, toggleLogin } = useLoginModal();
@@ -57,11 +56,8 @@ export default function LoggedIn() {
         //hides the signup modal
         toggleSignup();
 
-        //set's logged in to true so the navbar will display correct headings
-        setLoggedIn(true);
-
-        //redirects the user to their personal dashboard
-        history.push(`/dashboard`);
+        // //redirects the user to their personal dashboard
+        // history.push(`/dashboard`);
 
         } catch (e) {
         console.error(e);
@@ -70,7 +66,7 @@ export default function LoggedIn() {
     };
 
 
-    if(loggedIn) {
+    if(Auth.loggedIn()) {
         return (
             <div className="navbar-nav level-right">
                 <li className="nav-item">
@@ -87,7 +83,7 @@ export default function LoggedIn() {
     
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" id = "logout" to="/">Logout</Link>
+                    <Link className="nav-link" id = "logout" to="/" onClick={() => Auth.logout()}>Logout</Link>
                     {/* <Link className="nav-link" id = "logout" href="#">Logout</Link> */}
     
                 </li>
@@ -95,7 +91,7 @@ export default function LoggedIn() {
         )
     } 
     
-    if(!loggedIn) {
+    else {
 
 
         return (
