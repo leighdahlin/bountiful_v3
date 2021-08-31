@@ -9,7 +9,7 @@ import useSignupModal from '../assets/js/useSignupModal';
 
 
 export default function LoggedIn() {
-    const loggedIn = true;
+    const loggedIn = false;
 
     const { isLoginShowing, toggleLogin } = useLoginModal();
     const { isSignupShowing, toggleSignup } = useSignupModal();
