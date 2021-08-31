@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import "../assets/css/modal.css"
 import LoginModal from '../components/LoginModal';
 import useLoginModal from '../assets/js/useLoginModal';
@@ -8,16 +8,16 @@ import useSignupModal from '../assets/js/useSignupModal';
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
+import { LOGIN_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
 export default function LoggedIn() {
-    const loggedIn = false;
-    const history = useHistory();
 
     const { isLoginShowing, toggleLogin } = useLoginModal();
     const { isSignupShowing, toggleSignup } = useSignupModal();
 
+    const [loginFormState, setLoginFormState] = useState({ email: '', password: '' });
     const [signupFormState, setSignupFormState] = useState({
         first_name: '',
         last_name: '',
@@ -26,34 +26,58 @@ export default function LoggedIn() {
         password: '',
         location: '',
       });
-      const [addUser, { error, data }] = useMutation(ADD_USER);
     
+      const [addUser, { error, data }] = useMutation(ADD_USER);
+      const [login, { err, dat }] = useMutation(LOGIN_USER);
+    
+      const loginHandleChange = (event) => {
+        const { name, value } = event.target;
+        setLoginFormState({
+          ...loginFormState,
+          [name]: value,
+        });
+      };
+
       // update state based on form input changes
     const signupHandleChange = (event) => {
         const { name, value } = event.target;
+        console.log("Name: " + name)
+        console.log("Value: " + value)
 
         setSignupFormState({
         ...signupFormState,
         [name]: value,
         });
-    };
 
+    };
+    const loginHandleFormSubmit = async (event) => {
+        event.preventDefault();
+        try {
+          const mutationResponse = await login({
+            variables: { email: loginFormState.email, password: loginFormState.password },
+          });
+          const token = mutationResponse.data.login.token;
+          Auth.login(token);
+          toggleLogin();
+        } catch (e) {
+          console.log(e);
+        }
+      };
     // submit form
     const signupHandleFormSubmit = async (event) => {
         event.preventDefault();
         console.log(signupFormState);
-        console.log("form submit")
 
         try {
         const { data } = await addUser({
             variables: { ...signupFormState },
         });
 
+        //authenticates user
         Auth.login(data.addUser.token);
 
+        //hides the signup modal
         toggleSignup();
-
-        history.push(`/dashboard`);
 
         } catch (e) {
         console.error(e);
@@ -62,7 +86,7 @@ export default function LoggedIn() {
     };
 
 
-    if(loggedIn) {
+    if(Auth.loggedIn()) {
         return (
             <div className="navbar-nav level-right">
                 <li className="nav-item">
@@ -79,7 +103,7 @@ export default function LoggedIn() {
     
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" id = "logout" to="/">Logout</Link>
+                    <Link className="nav-link" id = "logout" to="/" onClick={() => Auth.logout()}>Logout</Link>
                     {/* <Link className="nav-link" id = "logout" href="#">Logout</Link> */}
     
                 </li>
@@ -87,7 +111,7 @@ export default function LoggedIn() {
         )
     } 
     
-    if(!loggedIn) {
+    else {
 
 
         return (
@@ -106,8 +130,8 @@ export default function LoggedIn() {
                         style={{width: "auto"}} href="#">Sign up</a>
                 </li>
 
-                <LoginModal isLoginShowing={isLoginShowing} hide={toggleLogin} />
-                <SignupModal isSignupShowing={isSignupShowing} hide={toggleSignup}  signupFormState={signupFormState} signupHandleChange={signupHandleChange} signupHandleFormSubmit={signupHandleFormSubmit}/>
+                <LoginModal isLoginShowing={isLoginShowing} hide={toggleLogin} loginFormState={loginFormState} loginHandleChange={loginHandleChange} loginHandleFormSubmit={loginHandleFormSubmit}/>
+                <SignupModal isSignupShowing={isSignupShowing} hide={toggleSignup}  signupFormState={signupFormState} signupHandleChange={signupHandleChange} signupHandleFormSubmit={signupHandleFormSubmit} />
 
             </div>
 

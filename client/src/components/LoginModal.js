@@ -4,14 +4,14 @@ import ReactDOM from 'react-dom';
 import logo from "../assets/images/b-logo.png";
 
 
-const LoginModal = ({ isLoginShowing, hide }) => isLoginShowing ? ReactDOM.createPortal(
+const LoginModal = ({ isLoginShowing, hide, loginFormState, loginHandleChange, loginHandleFormSubmit }) => isLoginShowing ? ReactDOM.createPortal(
     <React.Fragment>
         
         <div id="login-modal" className="modal">
             <form
                 className="modal-content animate login-form"
-                action="/action_page.php"
-                method="post">
+                onSubmit={loginHandleFormSubmit}
+                >
                 <div className="imgcontainer">
                 <span
                     onClick={hide}
@@ -27,7 +27,8 @@ const LoginModal = ({ isLoginShowing, hide }) => isLoginShowing ? ReactDOM.creat
                     id = "email-login"
                     type="email"
                     placeholder="Enter Email Address"
-                    name="uname"
+                    name="email"
+                    onChange={loginHandleChange}
                     required
                 />
                 <label htmlFor="psw"><b>Password</b></label>
@@ -35,7 +36,8 @@ const LoginModal = ({ isLoginShowing, hide }) => isLoginShowing ? ReactDOM.creat
                     id = "password-login"
                     type="password"
                     placeholder="Enter Password"
-                    name="psw"
+                    name="password"
+                    onChange={loginHandleChange}
                     required/>
                 {/* <!-- REMEMBER ME BUTTON -->  
                 <!-- <button type="submit">Login</button> */}
@@ -47,7 +49,6 @@ const LoginModal = ({ isLoginShowing, hide }) => isLoginShowing ? ReactDOM.creat
                 <div className="container" style={{background: "var(--gray)"}}>
                 <button
                 type="submit"
-                onClick={hide}
                 className="submitbtn">
                 Login
                 </button>
