@@ -4,13 +4,12 @@ import ReactDOM from 'react-dom';
 import logo from "../assets/images/b-logo.png";
 
 
-const SignupModal = ({ isSignupShowing, hide }) => isSignupShowing ? ReactDOM.createPortal(
+const SignupModal = ({ isSignupShowing, hide, signupFormState, signupHandleFormSubmit, signupHandleChange }) => isSignupShowing ? ReactDOM.createPortal(
     <React.Fragment>
         <div id="signup-modal" className="modal">
             <form
             className="modal-content animate signup-form"
-            action="/action_page.php"
-            method="post"
+            onSubmit={signupHandleFormSubmit}
             >
             <div className="imgcontainer">
                 <span
@@ -27,7 +26,9 @@ const SignupModal = ({ isSignupShowing, hide }) => isSignupShowing ? ReactDOM.cr
                 id="firstname-signup"
                 type="text"
                 placeholder="Enter First Name"
-                name="firstname"
+                name="first_name"
+                value={signupFormState.first_name}
+                onChange={signupHandleChange}
                 required
                 />
 
@@ -36,7 +37,9 @@ const SignupModal = ({ isSignupShowing, hide }) => isSignupShowing ? ReactDOM.cr
                 id="lastname-signup"
                 type="text"
                 placeholder="Enter Last Name"
-                name="lastname"
+                name="last_name"
+                value={signupFormState.last_name}
+                onChange={signupHandleChange}
                 required
                 />
 
@@ -46,6 +49,8 @@ const SignupModal = ({ isSignupShowing, hide }) => isSignupShowing ? ReactDOM.cr
                 type="text"
                 placeholder="Enter Username"
                 name="username"
+                value={signupFormState.username}
+                onChange={signupHandleChange}
                 required
                 />
 
@@ -55,6 +60,8 @@ const SignupModal = ({ isSignupShowing, hide }) => isSignupShowing ? ReactDOM.cr
                 type="text"
                 placeholder="Enter Email"
                 name="email"
+                value={signupFormState.email}
+                onChange={signupHandleChange}
                 required
                 />
 
@@ -63,13 +70,15 @@ const SignupModal = ({ isSignupShowing, hide }) => isSignupShowing ? ReactDOM.cr
                 id="password-signup"
                 type="password"
                 placeholder="Enter Password"
-                name="psw"
+                name="password"
+                value={signupFormState.password}
+                onChange={signupHandleChange}
                 required
                 />
 
                 <div>
                     <label htmlFor="location-signup"><b>Locations</b></label>
-                    <select id="location-signup" name="locations" id="location-signup">
+                    <select id="location-signup" name="location" id="location-signup">
                         <option value="Downtown Sacramento">Downtown Sacramento</option>
                         <option value="West Sacramento">West Sacramento</option>
                         <option value="East Sacramento">East Sacramento</option>
