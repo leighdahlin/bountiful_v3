@@ -12,7 +12,7 @@ import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 export default function LoggedIn() {
-    const loggedIn = false;
+    const [loggedIn, setLoggedIn] = useState(false);
     const history = useHistory();
 
     const { isLoginShowing, toggleLogin } = useLoginModal();
@@ -31,28 +31,36 @@ export default function LoggedIn() {
       // update state based on form input changes
     const signupHandleChange = (event) => {
         const { name, value } = event.target;
+        console.log("Name: " + name)
+        console.log("Value: " + value)
 
         setSignupFormState({
         ...signupFormState,
         [name]: value,
         });
+
     };
 
     // submit form
     const signupHandleFormSubmit = async (event) => {
         event.preventDefault();
         console.log(signupFormState);
-        console.log("form submit")
 
         try {
         const { data } = await addUser({
             variables: { ...signupFormState },
         });
 
+        //authenticates user
         Auth.login(data.addUser.token);
 
+        //hides the signup modal
         toggleSignup();
 
+        //set's logged in to true so the navbar will display correct headings
+        setLoggedIn(true);
+
+        //redirects the user to their personal dashboard
         history.push(`/dashboard`);
 
         } catch (e) {
@@ -107,7 +115,7 @@ export default function LoggedIn() {
                 </li>
 
                 <LoginModal isLoginShowing={isLoginShowing} hide={toggleLogin} />
-                <SignupModal isSignupShowing={isSignupShowing} hide={toggleSignup}  signupFormState={signupFormState} signupHandleChange={signupHandleChange} signupHandleFormSubmit={signupHandleFormSubmit}/>
+                <SignupModal isSignupShowing={isSignupShowing} hide={toggleSignup}  signupFormState={signupFormState} signupHandleChange={signupHandleChange} signupHandleFormSubmit={signupHandleFormSubmit} />
 
             </div>
 

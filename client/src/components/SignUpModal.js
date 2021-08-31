@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import logo from "../assets/images/b-logo.png";
 
 
-const SignupModal = ({ isSignupShowing, hide, signupFormState, signupHandleFormSubmit, signupHandleChange }) => isSignupShowing ? ReactDOM.createPortal(
+const SignupModal = ({ isSignupShowing, hide, signupFormState, signupHandleFormSubmit, signupHandleChange, locationFormState, signupHandleLocationChange }) => isSignupShowing ? ReactDOM.createPortal(
     <React.Fragment>
         <div id="signup-modal" className="modal">
             <form
@@ -78,7 +78,8 @@ const SignupModal = ({ isSignupShowing, hide, signupFormState, signupHandleFormS
 
                 <div>
                     <label htmlFor="location-signup"><b>Locations</b></label>
-                    <select id="location-signup" name="location" id="location-signup" value={signupFormState.location} onChange={signupHandleChange}>
+                    <select id="location-signup" name="location" id="location-signup" value={signupFormState.location} onChange={signupHandleChange} required>
+                        <option value="" disabled selected>Choose...</option>
                         <option value="Downtown Sacramento">Downtown Sacramento</option>
                         <option value="West Sacramento">West Sacramento</option>
                         <option value="East Sacramento">East Sacramento</option>
