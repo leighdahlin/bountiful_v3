@@ -1,6 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Item, Category } = require('../models');
-// const { signToken } = require('../utils/auth'); NEED TO BUILD THIS FILE (EX22  WK22)
+const { signToken } = require('../utils/auth'); 
 
 const resolvers = {
     Query: {
@@ -28,11 +28,11 @@ const resolvers = {
         },
 
         //Find a user based on the id (for a seller profile - does args bring in the correct id? Which one of these will work?)
-        user: (parent, args) => {
-          return User.find((user) => user.id === args.id);
-        },
-        user: async (parent, { userId }) => {
-            return Profile.findOne({ _id: userId });
+        // user: (parent, args) => {
+        //   return User.find((user) => user.id === args.id);
+        // },
+        user: async (parent, { username }) => {
+            return User.findOne({ username: username});
         },
     },
 
