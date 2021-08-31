@@ -78,7 +78,7 @@ const SignupModal = ({ isSignupShowing, hide, signupFormState, signupHandleFormS
 
                 <div>
                     <label htmlFor="location-signup"><b>Locations</b></label>
-                    <select id="location-signup" name="location" id="location-signup">
+                    <select id="location-signup" name="location" id="location-signup" value={signupFormState.location} onChange={signupHandleChange}>
                         <option value="Downtown Sacramento">Downtown Sacramento</option>
                         <option value="West Sacramento">West Sacramento</option>
                         <option value="East Sacramento">East Sacramento</option>
@@ -99,7 +99,7 @@ const SignupModal = ({ isSignupShowing, hide, signupFormState, signupHandleFormS
             <div className="container" style={{background: "var(--gray)"}}>
                 <button
                 type="submit"
-                onClick={hide}
+                // onClick={hide}
                 className="submitbtn">
                 Sign-up
                 </button>

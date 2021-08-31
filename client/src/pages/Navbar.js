@@ -42,6 +42,7 @@ export default function LoggedIn() {
     const signupHandleFormSubmit = async (event) => {
         event.preventDefault();
         console.log(signupFormState);
+        console.log("form submit")
 
         try {
         const { data } = await addUser({
@@ -49,6 +50,8 @@ export default function LoggedIn() {
         });
 
         Auth.login(data.addUser.token);
+
+        toggleSignup();
 
         history.push(`/dashboard`);
 
