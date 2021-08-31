@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import "../assets/css/modal.css"
 import LoginModal from '../components/LoginModal';
 import useLoginModal from '../assets/js/useLoginModal';
@@ -8,15 +8,16 @@ import useSignupModal from '../assets/js/useSignupModal';
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
+import { LOGIN_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
 export default function LoggedIn() {
-    const history = useHistory();
 
     const { isLoginShowing, toggleLogin } = useLoginModal();
     const { isSignupShowing, toggleSignup } = useSignupModal();
 
+    const [loginFormState, setLoginFormState] = useState({ email: '', password: '' });
     const [signupFormState, setSignupFormState] = useState({
         first_name: '',
         last_name: '',
@@ -25,8 +26,18 @@ export default function LoggedIn() {
         password: '',
         location: '',
       });
-      const [addUser, { error, data }] = useMutation(ADD_USER);
     
+      const [addUser, { error, data }] = useMutation(ADD_USER);
+      const [login, { err, dat }] = useMutation(LOGIN_USER);
+    
+      const loginHandleChange = (event) => {
+        const { name, value } = event.target;
+        setLoginFormState({
+          ...loginFormState,
+          [name]: value,
+        });
+      };
+
       // update state based on form input changes
     const signupHandleChange = (event) => {
         const { name, value } = event.target;
@@ -39,7 +50,19 @@ export default function LoggedIn() {
         });
 
     };
-
+    const loginHandleFormSubmit = async (event) => {
+        event.preventDefault();
+        try {
+          const mutationResponse = await login({
+            variables: { email: loginFormState.email, password: loginFormState.password },
+          });
+          const token = mutationResponse.data.login.token;
+          Auth.login(token);
+          toggleLogin();
+        } catch (e) {
+          console.log(e);
+        }
+      };
     // submit form
     const signupHandleFormSubmit = async (event) => {
         event.preventDefault();
@@ -55,9 +78,6 @@ export default function LoggedIn() {
 
         //hides the signup modal
         toggleSignup();
-
-        // //redirects the user to their personal dashboard
-        // history.push(`/dashboard`);
 
         } catch (e) {
         console.error(e);
@@ -110,7 +130,7 @@ export default function LoggedIn() {
                         style={{width: "auto"}} href="#">Sign up</a>
                 </li>
 
-                <LoginModal isLoginShowing={isLoginShowing} hide={toggleLogin} />
+                <LoginModal isLoginShowing={isLoginShowing} hide={toggleLogin} loginFormState={loginFormState} loginHandleChange={loginHandleChange} loginHandleFormSubmit={loginHandleFormSubmit}/>
                 <SignupModal isSignupShowing={isSignupShowing} hide={toggleSignup}  signupFormState={signupFormState} signupHandleChange={signupHandleChange} signupHandleFormSubmit={signupHandleFormSubmit} />
 
             </div>
