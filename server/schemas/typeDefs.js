@@ -66,7 +66,7 @@ const typeDefs = gql`
     updateUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): User
 
     createItem(
-      itemId: ID
+      _id: ID
       title: String
       item_name: String
       item_description: String
@@ -76,7 +76,7 @@ const typeDefs = gql`
       cat_name: String
     ): Item
     updateItem(
-      itemId: ID
+      _id: ID
       title: String
       item_name: String
       item_description: String
