@@ -75,10 +75,10 @@ const resolvers = {
       
             throw new AuthenticationError('Not logged in');
         },
-        createItem: async (parent, { item }, context) => {
+        createItem: async (parent, args, context) => {
             // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
             if (context.user) {
-              return Item.findOneAndUpdate({item});
+              return Item.create(args);
             }
             // If user attempts to execute this mutation and isn't logged in, throw an error
             throw new AuthenticationError('You need to be logged in!');
