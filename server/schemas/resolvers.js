@@ -78,6 +78,7 @@ const resolvers = {
         createItem: async (parent, args, context) => {
             // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
             if (context.user) {
+              console.log("HIT CONTEXT.USER")
               return Item.create(args);
             }
             // If user attempts to execute this mutation and isn't logged in, throw an error

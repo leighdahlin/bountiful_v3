@@ -40,6 +40,8 @@ const ItemModal = ({ isItemShowing, hide, addFormState, addHandleChange , addHan
             type="text"
             placeholder="Enter Item's Name"
             name="item_name"
+            value={addFormState.item_name}
+            onChange={addHandleChange}
             required
             />
 
@@ -90,7 +92,7 @@ const ItemModal = ({ isItemShowing, hide, addFormState, addHandleChange , addHan
             <div>
                 <label htmlFor="item-categories"><b>Categories</b></label>
                 <select id="item-categories" name="cat_name" value={addFormState.cat_name} onChange={addHandleChange}>
-                    <option value="" disabled selected>Choose...</option>
+                    <option value="" disabled>Choose...</option>
                     <option value="fruits" data-id="1">Fruits</option>
                     <option value="vegetables"data-id="2">Vegetables</option>
                     <option value="herbs" data-id="3">Herbs</option>
