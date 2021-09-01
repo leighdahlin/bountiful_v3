@@ -7,21 +7,27 @@ const resolvers = {
         categories: async () => Category.find(),
         items: async () => Item.find(),
         //Find items by category or username:
-        items: async (parent, { category, username }) => {
-            const params = {};
+        // items: async (parent, { category, username }) => {
+        //     const params = {};
       
-            if (category) {
-              params.category = category;
-            }
+        //     if (category) {
+        //       params.category = category;
+        //     }
       
-            if (username) {
-              params.username = {
-                $regex: username,
-              };
-            }
+        //     if (username) {
+        //       params.username = {
+        //         $regex: username,
+        //       };
+        //     }
       
-            return Item.find(params).populate('category');
-          },
+        //     return Item.find(params).populate('category');
+        //   },
+        itemscat: async(parent, {category}) =>{
+          return Item.find({category:category});
+        },
+        itemsuser: async(parent, {username}) =>{
+          return Item.find({username:username});
+        },
         //Single item search
         item: async (parent, { itemId }) => {
             return Item.findOne({ _id: itemId });
