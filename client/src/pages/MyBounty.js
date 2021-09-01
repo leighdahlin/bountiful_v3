@@ -9,9 +9,11 @@ import DashboardCard from '../components/DashboardCard';
 import useItemModal from '../assets/js/useItemModal';
 import ItemModal from '../components/ItemModal';
 
+import { useMutation } from '@apollo/client';
 import { QUERY_ITEMS_USER } from '../utils/queries';
 import { ADD_ITEM } from '../utils/mutations';
 
+import Auth from '../utils/auth';
 
 export default function MyBounty() {
 
@@ -25,7 +27,7 @@ export default function MyBounty() {
 
     const { isItemShowing, toggleItem } = useItemModal();
 
-    const [createItem, { error, data }] = useMutation(ADD_ITEM);
+    const [createItem, { error, itemData }] = useMutation(ADD_ITEM);
 
 
     const [addFormState, setAddFormState] = useState({
@@ -43,8 +45,8 @@ export default function MyBounty() {
         console.log("Name: " + name)
         console.log("Value: " + value)
 
-        setSignupFormState({
-        ...signupFormState,
+        setAddFormState({
+        ...addFormState,
         [name]: value,
         });
 
@@ -55,12 +57,12 @@ export default function MyBounty() {
         console.log(addFormState);
 
         try {
-        const { data } = await createItem({
+        const { itemData } = await createItem({
             variables: { ...addFormState },
         });
 
         //authenticates user
-        Auth.login(data.createItem.token);
+        Auth.loggedIn();
 
         window.location.assign('/dashboard/'+ username);
 
