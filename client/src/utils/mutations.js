@@ -36,7 +36,7 @@ export const ADD_ITEM = gql`
       item_quantity: $item_quantity, item_unit: $item_unit, item_price: $item_price, cat_name: $cat_name) {
       token
       item {
-        itemId
+        _id
         title
         item_name
         item_description
