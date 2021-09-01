@@ -32,7 +32,6 @@ export const QUERY_SINGLE_USER = gql`
         username
         location
         email
-      }
     }
   }
 `;
@@ -92,7 +91,6 @@ export const QUERY_SINGLE_ITEM = gql`
         category
       }
     }
-  }
 `;
 
 //Query items based on category:
