@@ -56,7 +56,7 @@ export const QUERY_ITEMS = gql`
 
 //Query all items for sale for one user:
 export const QUERY_ITEMS_USER = gql`
-  query getItems ($username:String!) { 
+  query getItemsUser ($username:String!) { 
     itemsuser (username:$username) {
         _id
         title
