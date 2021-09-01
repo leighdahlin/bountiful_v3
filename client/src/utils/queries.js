@@ -57,7 +57,7 @@ export const QUERY_ITEMS = gql`
 //Query all items for sale for one user:
 export const QUERY_ITEMS_USER = gql`
   query getItems ($username:String!) { 
-    items ($username:username) {
+    itemsuser (username:$username) {
         _id
         title
         item_name
@@ -96,7 +96,7 @@ export const QUERY_SINGLE_ITEM = gql`
 //Query items based on category:
 export const QUERY_CAT_ITEMS = gql`
   query getItems($category: ID) {
-    items(category: $category) {
+    itemscat(category: $category) {
         _id
         title
         item_name
