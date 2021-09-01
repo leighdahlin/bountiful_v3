@@ -51,7 +51,7 @@ function App() {
         <Route exact path="/browse">
           <Browse />
         </Route>
-        <Route exact path="/dashboard">
+        <Route exact path="/dashboard/:username">
           <MyBounty />
         </Route>
         <Route exact path="/profile">
