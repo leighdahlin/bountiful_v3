@@ -4,14 +4,13 @@ import ReactDOM from 'react-dom';
 import logo from "../assets/images/b-logo.png";
 
 
-const ItemModal = ({ isItemShowing, hide }) => isItemShowing ? ReactDOM.createPortal(
+const ItemModal = ({ isItemShowing, hide, addFormState, addHandleChange , addHandleFormSubmit}) => isItemShowing ? ReactDOM.createPortal(
     <React.Fragment>
     <div id="id03" className="modal" data-bs-backdrop="static" id="staticBackdrop">
         <form
         id="create-edit-form"
         className="modal-content animate newItemForm"
-        action="/action_page.php"
-        method="post"
+        onSubmit={addHandleFormSubmit}
         >
         <div className="imgcontainer">
             <span
@@ -30,6 +29,8 @@ const ItemModal = ({ isItemShowing, hide }) => isItemShowing ? ReactDOM.createPo
             type="text"
             placeholder="Enter the title of your post"
             name="title"
+            value={addFormState.title}
+            onChange={addHandleChange}
             required
             />
 
@@ -38,7 +39,7 @@ const ItemModal = ({ isItemShowing, hide }) => isItemShowing ? ReactDOM.createPo
             id="item-name"
             type="text"
             placeholder="Enter Item's Name"
-            name="itemName"
+            name="item_name"
             required
             />
 
@@ -47,7 +48,9 @@ const ItemModal = ({ isItemShowing, hide }) => isItemShowing ? ReactDOM.createPo
             id="item-description"
             type="text"
             placeholder="Enter a description of the item"
-            name="description"
+            name="item_description"
+            value={addFormState.item_description}
+            onChange={addHandleChange}
             required
             />
 
@@ -56,7 +59,9 @@ const ItemModal = ({ isItemShowing, hide }) => isItemShowing ? ReactDOM.createPo
             id="item-unit"
             type="text"
             placeholder="Enter the units of the item (ex: pounds, ounces, single units)"
-            name="unit"
+            name="item_unit"
+            value={addFormState.item_unit}
+            onChange={addHandleChange}
             required
             />
 
@@ -65,7 +70,9 @@ const ItemModal = ({ isItemShowing, hide }) => isItemShowing ? ReactDOM.createPo
             id="item-quantity"
             type="text"
             placeholder="Enter how many units are you selling"
-            name="quantity"
+            name="item_quantity"
+            value={addFormState.item_quantity}
+            onChange={addHandleChange}
             required
             />
 
@@ -74,13 +81,16 @@ const ItemModal = ({ isItemShowing, hide }) => isItemShowing ? ReactDOM.createPo
             id="item-price"
             type="text"
             placeholder="Enter the price per unit"
-            name="price"
+            name="item_price"
+            value={addFormState.item_price}
+            onChange={addHandleChange}
             required
             />
 
             <div>
                 <label htmlFor="item-categories"><b>Categories</b></label>
-                <select id="item-categories" name="category">
+                <select id="item-categories" name="cat_name" value={addFormState.cat_name} onChange={addHandleChange}>
+                    <option value="" disabled selected>Choose...</option>
                     <option value="fruits" data-id="1">Fruits</option>
                     <option value="vegetables"data-id="2">Vegetables</option>
                     <option value="herbs" data-id="3">Herbs</option>
@@ -100,7 +110,6 @@ const ItemModal = ({ isItemShowing, hide }) => isItemShowing ? ReactDOM.createPo
             <button
                 id="create-edit-btn"
                 type="submit"
-                onClick={hide}
                 className="submitbtn modalbtn">
                 Post Item
             </button>

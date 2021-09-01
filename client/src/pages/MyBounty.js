@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Import the `useParams()` hook from React Router
 import { useParams } from 'react-router-dom';
@@ -10,6 +10,8 @@ import useItemModal from '../assets/js/useItemModal';
 import ItemModal from '../components/ItemModal';
 
 import { QUERY_ITEMS_USER } from '../utils/queries';
+import { ADD_ITEM } from '../utils/mutations';
+
 
 export default function MyBounty() {
 
@@ -22,6 +24,55 @@ export default function MyBounty() {
 
 
     const { isItemShowing, toggleItem } = useItemModal();
+
+    const [createItem, { error, data }] = useMutation(ADD_ITEM);
+
+
+    const [addFormState, setAddFormState] = useState({
+        title: '',
+        item_name: '',
+        item_description: '',
+        item_unit: '',
+        item_quantity: '',
+        item_price: '',
+        cat_name: '',
+      });
+
+      const addHandleChange = (event) => {
+        const { name, value } = event.target;
+        console.log("Name: " + name)
+        console.log("Value: " + value)
+
+        setSignupFormState({
+        ...signupFormState,
+        [name]: value,
+        });
+
+    };
+
+    const addHandleFormSubmit = async (event) => {
+        event.preventDefault();
+        console.log(addFormState);
+
+        try {
+        const { data } = await createItem({
+            variables: { ...addFormState },
+        });
+
+        //authenticates user
+        Auth.login(data.createItem.token);
+
+        window.location.assign('/dashboard/'+ username);
+
+        //hides the signup modal
+        toggleItem();
+
+        } catch (e) {
+        console.error(e);
+
+        }
+    };
+
 
     // const data = [
     //     {
@@ -155,7 +206,7 @@ export default function MyBounty() {
             </div>
         </div>
 
-        <ItemModal isItemShowing={isItemShowing} hide={toggleItem} />
+        <ItemModal isItemShowing={isItemShowing} hide={toggleItem} addFormState={addFormState} addHandleChange={addHandleChange} addHandleFormSubmit={addHandleFormSubmit}/>
                 
     </div>
     )
