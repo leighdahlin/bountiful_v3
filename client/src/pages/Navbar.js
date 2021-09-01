@@ -73,8 +73,12 @@ export default function LoggedIn() {
             variables: { ...signupFormState },
         });
 
+        const username = signupFormState.username;
+
         //authenticates user
         Auth.login(data.addUser.token);
+
+        window.location.assign('/dashboard/'+ username);
 
         //hides the signup modal
         toggleSignup();
