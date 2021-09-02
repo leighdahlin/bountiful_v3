@@ -2,6 +2,8 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Item, Category } = require('../models');
 const { signToken } = require('../utils/auth'); 
 
+//We use these resolvers to fetch the requested data from the appropriate data source
+//Returns a data of the required type or a promise that fulfills with data of the required type
 const resolvers = {
     Query: {
         categories: async () => Category.find(),

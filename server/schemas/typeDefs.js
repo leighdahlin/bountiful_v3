@@ -1,5 +1,8 @@
 const { gql } = require('apollo-server-express');
 
+
+//These define our object types, representing the types of objects we can fetch from our service
+//and what fields it has
 const typeDefs = gql`
   type User {
     _id: ID

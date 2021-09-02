@@ -35,7 +35,33 @@ const userSchema = new Schema({
     ref: 'Item',
     },
   ],
+  rating: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
+  reviews: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
 });
+
+const reviewSchema = mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
+    user: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
+  },
+  {
+    timestamps: true,
+  }
+)
 
 // middleware to create password
 userSchema.pre('save', async function (next) {

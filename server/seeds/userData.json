@@ -5,7 +5,9 @@
         "username": "summerSal",
         "location": "West Sac",
         "email": "sal@hotmail.com",
-        "password": "password123"
+        "password": "password123",
+        "rating": "4",
+        "reviews": "10"
       },
       {
         "first_name": "Lernantino",
@@ -13,7 +15,9 @@
         "username": "happyFarmer",
         "location": "North Sac",
         "email": "lernantino@gmail.com",
-        "password": "password123"
+        "password": "password123",
+        "rating": "2",
+        "reviews": "7"
       },
       {
         "first_name": "Amiko",
@@ -21,7 +25,9 @@
         "username": "amiRight",
         "location": "Midtown",
         "email": "amiko2k20@aol.com",
-        "password": "password123"
+        "password": "password123",
+        "rating": "5",
+        "reviews": "6"
       },
       {
         "first_name": "Jordan",
@@ -29,7 +35,9 @@
         "username": "jLee",
         "location": "Downtown",
         "email": "jordan99@msn.com",
-        "password": "password123"
+        "password": "password123",
+        "rating": "4",
+        "reviews": "11"
       },
       {
         "first_name": "Blake",
@@ -37,7 +45,9 @@
         "username": "humanBean",
         "location": "East Sac",
         "email": "the_blake@yahoo.com",
-        "password": "password123"
+        "password": "password123",
+        "rating": "3",
+        "reviews": "12"
       }
 
 ]
