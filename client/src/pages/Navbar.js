@@ -57,6 +57,15 @@ export default function LoggedIn() {
             variables: { email: loginFormState.email, password: loginFormState.password },
           });
           const token = mutationResponse.data.login.token;
+
+          let username = mutationResponse.data.login.user.username;
+          localStorage.setItem('username', username);
+
+          console.log(mutationResponse.data.login.user.username)
+          console.log(username)
+
+          window.location.assign('/dashboard/'+ username);
+
           Auth.login(token);
           toggleLogin();
         } catch (e) {
@@ -73,7 +82,13 @@ export default function LoggedIn() {
             variables: { ...signupFormState },
         });
 
-        const username = signupFormState.username;
+        console.log("Data from signup: ")
+        console.log(data.addUser.user.username);
+
+        let username = data.addUser.user.username;
+
+        localStorage.setItem('username', username);
+
 
         //authenticates user
         Auth.login(data.addUser.token);
@@ -91,6 +106,9 @@ export default function LoggedIn() {
 
 
     if(Auth.loggedIn()) {
+
+        const currentUsername = localStorage.getItem('username')
+
         return (
             <div className="navbar-nav level-right">
                 <li className="nav-item">
@@ -98,7 +116,7 @@ export default function LoggedIn() {
                     {/* <Link className="nav-link" to="/api/items">Browse</Link> */}
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" to="/dashboard">My Bounty</Link>
+                    <Link className="nav-link" to={`/dashboard/${currentUsername}`}>My Bounty</Link>
                     {/* <Link className="nav-link" to="/dashboard">My Bounty</Link> */}
                 </li>
                 <li className="nav-item">
