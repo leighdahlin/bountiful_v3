@@ -34,7 +34,6 @@ export const ADD_ITEM = gql`
   mutation createItem($title: String!, $item_name: String!, $item_description: String!, $item_quantity: Float!, $item_unit: String!, $item_price: Float, $cat_name: String!) {
     createItem(title: $title, item_name: $item_name, item_description: $item_description,
       item_quantity: $item_quantity, item_unit: $item_unit, item_price: $item_price, cat_name: $cat_name) {
-      token
       item {
         _id
         title
