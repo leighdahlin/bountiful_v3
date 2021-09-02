@@ -15,9 +15,9 @@ export default function ProfileInfo() {
                 
                     <h6 id="dashboard-username">{data.username}</h6>
                     <h6 id="dashboard-location">{data.location}</h6>
-                    <Ratings
+                    {/*<Ratings
                     value={data.rating}
-                    text={`${data.reviews} reviews`}/>
+                    text={`${data.reviews} reviews`}/>*/}
                     <button id="edit-profile" type="button" className="btn" data-id="{data.id}">Edit</button>
                 
                 </div>
