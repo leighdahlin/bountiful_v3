@@ -54,7 +54,7 @@ const typeDefs = gql`
     users: [User]
     user(username:String!): User
     categories: [Category]
-    items(category:ID, username: String): [Item]
+    items: [Item]
     itemscat(category:ID):[Item]
     itemsuser(username:String): [Item]
     item(_id:ID!): Item
