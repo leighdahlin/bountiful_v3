@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "../assets/css/modal.css"
-import LoginModal from '../components/LoginModal';
+import LoginModal from './LoginModal';
 import useLoginModal from '../assets/js/useLoginModal';
-import SignupModal from '../components/SignUpModal';
+import SignupModal from './SignUpModal';
 import useSignupModal from '../assets/js/useSignupModal';
 
 import { useMutation } from '@apollo/client';

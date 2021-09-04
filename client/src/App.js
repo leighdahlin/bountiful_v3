@@ -8,9 +8,9 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Header from './pages/Header';
+import Header from './components/Header';
 import Homepage from './pages/Homepage';
-import HomepageContent from './pages/Homepage-Content';
+import HomepageContent from './components/Homepage-Content';
 import Browse from './pages/Browse';
 import MyBounty from './pages/MyBounty';
 import SellerProfile from './pages/SellerProfile';

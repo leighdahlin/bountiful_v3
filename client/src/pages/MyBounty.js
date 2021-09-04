@@ -10,7 +10,8 @@ import useItemModal from '../assets/js/useItemModal';
 import ItemModal from '../components/ItemModal';
 
 import { useMutation } from '@apollo/client';
-import { QUERY_ITEMS_USER } from '../utils/queries';
+// import { QUERY_ITEMS_USER } from '../utils/queries';
+import { QUERY_SINGLE_USER } from '../utils/queries';
 import { ADD_ITEM } from '../utils/mutations';
 
 import Auth from '../utils/auth';
@@ -19,10 +20,14 @@ export default function MyBounty() {
 
     const { username } = useParams();
 
-    const { loading, data } = useQuery(QUERY_ITEMS_USER, {
-        // Pass the `thoughtId` URL parameter into query to retrieve this thought's data
+    const { loading, data } = useQuery(QUERY_SINGLE_USER, {
         variables: { username: username },
       });    
+    
+    console.log(data)
+    const profile = data?.user || {};
+    console.log("PROFILE")
+    console.log(profile)
 
 
     const { isItemShowing, toggleItem } = useItemModal();
@@ -179,11 +184,6 @@ export default function MyBounty() {
     //     }
     // ];    
     
-    if(loading) {
-        return (<div>Loading...</div>)
-    }
-
-    if(!loading) {
     return(
     <div id="dashboard-image" className="dashboard-container">
         <div className="d-flex">
@@ -198,11 +198,11 @@ export default function MyBounty() {
                     <div className = "your-bounty">
                         <button id="add-item" className="btn" type="button" onClick={toggleItem}>Add Item</button>
                         <div className="items">
-                            <DashboardCard toggleItem = {toggleItem} data={data}/>
+                            <DashboardCard toggleItem = {toggleItem} />
                         </div>
                     </div>
                     </div>
-                <div className="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"><ProfileInfo /></div>
+                <div className="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"><ProfileInfo profile={profile}/></div>
                 <div className="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
                 <div className="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
             </div>
@@ -212,5 +212,5 @@ export default function MyBounty() {
                 
     </div>
     )
-    }
+    
 }
