@@ -139,17 +139,17 @@ export default function LoggedIn() {
         return (
             <div className="navbar-nav level-right">
                 <li className="nav-item">
-                <a className="nav-link active" aria-current="page" 
+                <button className="nav-link" aria-current="page" 
                 onClick={toggleLogin}
-                    style={{width: "auto"}} href="#">Log in </a>
+                    style={{width: "auto"}}>Log in </button>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" id = "logout" >or</a>
+                    <button id="or" className="nav-link">or</button>
                 </li>
-                <li className="nav-item nav-link active">
-                    <a className="" aria-current="page" 
+                <li className="nav-item">
+                    <button className="nav-link" aria-current="page" 
                     onClick={toggleSignup}
-                        style={{width: "auto"}} href="#">Sign up</a>
+                        style={{width: "auto"}}>Sign up</button>
                 </li>
 
                 <LoginModal isLoginShowing={isLoginShowing} hide={toggleLogin} loginFormState={loginFormState} loginHandleChange={loginHandleChange} loginHandleFormSubmit={loginHandleFormSubmit}/>

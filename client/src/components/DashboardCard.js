@@ -1,17 +1,7 @@
 import logo from "../assets/images/b-logo.png";
 import formatTime from "../utils/helpers.js";
 
-import { QUERY_ITEMS_USER } from '../utils/queries';
-import { useQuery } from '@apollo/client';
-
 export default function DashboardCard({ toggleItem }) {
-
-    let username = localStorage.getItem('username');
-
-    const { loading, data } = useQuery(QUERY_ITEMS_USER, {
-        variables: { username: username },
-      });
-    
 
     // if(!data){
         return(

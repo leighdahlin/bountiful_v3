@@ -8,7 +8,7 @@ export default function ProfileInfo({ profile }) {
     return (
         <div className="profile-container">
             <div className="profile">
-                <img id="profile-img" src={profileImage} alt="profile image"/>
+                <img id="profile-img" src={profileImage} alt="profile"/>
                 <div className="profile-info">
                 
                     <h6 id="dashboard-username">{profile.username}</h6>

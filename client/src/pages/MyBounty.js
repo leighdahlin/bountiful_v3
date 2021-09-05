@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 // Import the `useParams()` hook from React Router
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 
 import ProfileInfo from '../components/ProfileInfo';
 import DashboardCard from '../components/DashboardCard';
 import useItemModal from '../assets/js/useItemModal';
 import ItemModal from '../components/ItemModal';
 
-import { useMutation } from '@apollo/client';
 // import { QUERY_ITEMS_USER } from '../utils/queries';
 import { QUERY_SINGLE_USER } from '../utils/queries';
 import { ADD_ITEM } from '../utils/mutations';
