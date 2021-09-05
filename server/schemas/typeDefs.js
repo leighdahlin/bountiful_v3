@@ -50,6 +50,13 @@ const typeDefs = gql`
     user: User
   }
 
+  type Review {
+        id: ID!
+        body: String!
+        createdAt: String!
+        username: String!
+    }
+
   type Query {
     users: [User]
     user(username:String!): User
@@ -58,12 +65,16 @@ const typeDefs = gql`
     itemscat(category:ID):[Item]
     itemsuser(username:String): [Item]
     item(_id:ID!): Item
+    getReviews: [Review]
+    getReview(reviewId: ID!): Review
   }
 
   type Mutation {
     addUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     updateUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): User
+    createReview(body: String!, username: String!, createdAt: String!): Review
+    deleteReview(reviewId: ID!): Review
 
     createItem(
       _id: ID
