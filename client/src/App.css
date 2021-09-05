@@ -467,6 +467,16 @@ a:hover, .navbar-brand:hover {
   padding: 3%;
 }
 
+.browse-items a {
+  text-decoration: none;
+  color: black;
+  width: 20rem;
+}
+
+.browse-items a:hover {
+  color: black;
+}
+
 .browse-items .card {
   margin: 2%;
   background-color: #fff;

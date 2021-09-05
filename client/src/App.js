@@ -14,6 +14,7 @@ import HomepageContent from './components/Homepage-Content';
 import Browse from './pages/Browse';
 import MyBounty from './pages/MyBounty';
 import SellerProfile from './pages/SellerProfile';
+import ViewSingleItem from './pages/ViewSingleItem';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -56,6 +57,9 @@ function App() {
         </Route>
         <Route exact path="/profile">
           <SellerProfile />
+        </Route>
+        <Route exact path="/browse/item">
+          <ViewSingleItem />
         </Route>
       </Switch>
     </Router>
