@@ -38,7 +38,10 @@ const resolvers = {
         //   return User.find((user) => user.id === args.id);
         // },
         user: async (parent, { username }) => {
-            return User.findOne({ username: username});
+            console.log("++++++++++++++++++++++++++++++++")
+            console.log(username)
+            console.log("++++++++++++++++++++++++++++++++")
+            return User.findOne({ username: username });
         },
     },
 
@@ -75,11 +78,13 @@ const resolvers = {
       
             throw new AuthenticationError('Not logged in');
         },
-        addItem: async (parent, args, context) => {
-          console.log("Inside ADDITEM resolver");
+
+        createItem: async (parent, args, context) => {
+            console.log(args)
+            console.log("INSIDE CREATE ITEM RESOLVER");
+            console.log(context.user);
             // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
             if (context.user) {
-              console.log("HIT CONTEXT.USER");
               return Item.create(args);
             }
             // If user attempts to execute this mutation and isn't logged in, throw an error

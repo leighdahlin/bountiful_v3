@@ -1,8 +1,10 @@
 import logo from "../assets/images/b-logo.png";
+import { Link } from 'react-router-dom';
+
 
 export default function BrowseCard(props) {
     return props.data.map((item) => (
-        // <a href="/view/{{id}}">
+        <Link to="/browse/item">
             <div class="card item-card" style={{width: "18rem"}}>
                 <li class="card-title list-group-item">{item.title}</li>
                 <div class="browse-img-div">
@@ -13,6 +15,6 @@ export default function BrowseCard(props) {
                     <p class="card-text">Quantity: {item.item_quantity}</p>
                 </div>
             </div>
-        // </a>
+        </Link>
     ));
 }

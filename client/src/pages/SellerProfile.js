@@ -112,13 +112,13 @@ export default function MyBounty() {
         <div className="seller-nav-container d-flex flex-column">
             <ul className="nav nav-tabs" id="myTab" role="tablist">
                 <li className="nav-item">
-                    <a className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bounty" role="tab" aria-controls="home" aria-selected="true">Bounty</a>
+                    <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bounty" role="tab" aria-controls="home" aria-selected="true">Bounty</button>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#reviews" role="tab" aria-controls="profile" aria-selected="false">Reviews</a>
+                    <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#reviews" role="tab" aria-controls="profile" aria-selected="false">Reviews</button>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#message" role="tab" aria-controls="contact" aria-selected="false">Message</a>
+                    <button className="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#message" role="tab" aria-controls="contact" aria-selected="false">Message</button>
                 </li>
             </ul>
             <div className="tab-content" id="myTabContent">
