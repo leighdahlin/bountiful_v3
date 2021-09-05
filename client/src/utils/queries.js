@@ -26,7 +26,7 @@ export const QUERY_SELLER = gql`
 
 //Query a single user for the seller profile:
 export const QUERY_SINGLE_USER = gql`
-  query user($username: String!) {
+  query singleuser($username: String!) {
     user(username: $username) {
         _id
         username
@@ -48,8 +48,15 @@ export const QUERY_ITEMS = gql`
         item_unit
         item_price
         cat_name
-        user
-        category
+        user{
+          _id
+          username
+          location
+        }
+        category{
+          _id
+          category_name
+        }
     }
   }
 `;
