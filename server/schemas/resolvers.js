@@ -58,7 +58,6 @@ const resolvers = {
       
             const token = signToken(user);
       
-            console.log(user)
             return { token, user };
         },
         addUser: async (parent, args) => {
@@ -76,10 +75,11 @@ const resolvers = {
       
             throw new AuthenticationError('Not logged in');
         },
-        createItem: async (parent, args, context) => {
+        addItem: async (parent, args, context) => {
+          console.log("Inside ADDITEM resolver");
             // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
             if (context.user) {
-              console.log("HIT CONTEXT.USER")
+              console.log("HIT CONTEXT.USER");
               return Item.create(args);
             }
             // If user attempts to execute this mutation and isn't logged in, throw an error
