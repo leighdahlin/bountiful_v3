@@ -61,7 +61,6 @@ const resolvers = {
       
             const token = signToken(user);
       
-            console.log(user)
             return { token, user };
         },
         addUser: async (parent, args) => {
@@ -79,6 +78,7 @@ const resolvers = {
       
             throw new AuthenticationError('Not logged in');
         },
+
         createItem: async (parent, args, context) => {
             console.log(args)
             console.log("INSIDE CREATE ITEM RESOLVER");

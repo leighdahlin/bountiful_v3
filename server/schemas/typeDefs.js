@@ -49,6 +49,10 @@ const typeDefs = gql`
     token: ID!
     user: User
   }
+  type AuthItem{
+    token: ID!
+    item: Item
+  }
 
   type Query {
     users: [User]
@@ -65,7 +69,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     updateUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): User
 
-    createItem(
+    addItem(
       _id: ID
       title: String
       item_name: String
@@ -74,7 +78,7 @@ const typeDefs = gql`
       item_unit: String
       item_price: Float
       cat_name: String
-    ): Item
+    ): AuthItem
     updateItem(
       _id: ID
       title: String
