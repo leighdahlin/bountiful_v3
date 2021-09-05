@@ -9,6 +9,7 @@ const typeDefs = gql`
     location: String
     email: String
     password: String
+    items: [Item]
   }
 
   type Category {
@@ -49,10 +50,6 @@ const typeDefs = gql`
     token: ID!
     user: User
   }
-  type AuthItem{
-    token: ID!
-    item: Item
-  }
 
   type Query {
     users: [User]
@@ -78,7 +75,7 @@ const typeDefs = gql`
       item_unit: String
       item_price: Float
       cat_name: String
-    ): AuthItem
+    ): Item
     updateItem(
       _id: ID
       title: String

@@ -79,7 +79,7 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        createItem: async (parent, args, context) => {
+        addItem: async (parent, args, context) => {
             console.log(args)
             console.log("INSIDE CREATE ITEM RESOLVER");
             console.log(context.user);
