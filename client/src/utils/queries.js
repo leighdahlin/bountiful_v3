@@ -2,8 +2,8 @@ import { gql } from '@apollo/client';
 
 //Query one user and all their associated items for sale:
 export const QUERY_SELLER = gql`
-  query user($username: String!) {
-    user(username: $username) {
+  query singleSeller($username: String!) {
+    seller(username: $username) {
         _id
         first_name
         last_name
