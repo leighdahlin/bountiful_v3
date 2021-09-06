@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
-const Review = () => {
+export default function Review() {
   const [reviewContent, setContent] = useState({
     rating: 5,
     reviewee: "", //need a user ID
@@ -15,27 +15,26 @@ const Review = () => {
     });
   };
 
-  const reviewFormSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const mutationResponse = await login({
-        //TODO: what function or mutation should I call here?
-        variables: {
-          reviewTitle: reviewContent.title,
-          reviewContent: reviewContent.review,
-          starRating: reviewContent.rating,
-          reviewee: reviewContent.reviewee,
-        },
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const reviewFormSubmit = async (event) => {
+  //   event.preventDefault();
+  //   try {
+  //     const mutationResponse = await login({
+  //       //TODO: what function or mutation should I call here?
+  //       variables: {
+  //         reviewTitle: reviewContent.title,
+  //         reviewContent: reviewContent.review,
+  //         starRating: reviewContent.rating,
+  //         reviewee: reviewContent.reviewee,
+  //       },
+  //     });
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   return (
-    <React.Fragment>
       <div className="review-container">
-        <form className="animate login-form" onSubmit={reviewFormSubmit}>
+        <form className="animate login-form">
           <div className="container">
             <label htmlFor="title">
               <b>Title</b>
@@ -67,8 +66,6 @@ const Review = () => {
           </div>
         </form>
       </div>
-    </React.Fragment>
   );
 };
 
-export default Review;
