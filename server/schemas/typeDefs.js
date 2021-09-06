@@ -97,9 +97,9 @@ const typeDefs = gql`
       item_quantity: Float
       item_unit: String
       item_price: Float
-      cat_name: String
+      category_name: String
     ): Item
-    removeItem( itemId: ID!): Item
+    removeItem( _id: ID!): Item
 
   }
 `;
