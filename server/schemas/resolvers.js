@@ -136,7 +136,7 @@ const resolvers = {
           updateItem: async (parent, { title, item_name, item_description, item_quantity, item_unit, item_price, cat_name }, context) => {
             if(context.user){
             return Item.findOneAndUpdate(
-              { _id: itemId },
+              { _id: _id },
               {
                 $addToSet: { title: title, item_name: item_name, item_description: item_description,
                     item_quantity: item_quantity, item_unit: item_unit, item_price: item_price, cat_name: cat_name },
@@ -149,9 +149,9 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
           },
-          removeItem: async (parent, { itemId }, context) => {
+          removeItem: async (parent, { _id }, context) => {
               if(context.user){
-                return Item.findOneAndDelete({ _id: itemId });
+                return Item.findOneAndDelete({ _id: _id });
               }
               throw new AuthenticationError('You need to be logged in!');
           },

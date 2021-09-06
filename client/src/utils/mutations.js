@@ -71,7 +71,6 @@ export const UPDATE_ITEM = gql`
   mutation updateItem($title: String!, $item_name: String!, $item_description: String!, $item_quantity: Float!, $item_unit: String!, $item_price: Float, $cat_name: String!) {
     updateItem(title: $title, item_name: $item_name, item_description: $item_description,
       item_quantity: $item_quantity, item_unit: $item_unit, item_price: $item_price, cat_name: $cat_name) {
-      item {
         _id
         title
         item_name
@@ -80,7 +79,6 @@ export const UPDATE_ITEM = gql`
         item_unit
         item_price
         cat_name
-      }
     }
   }
 `;
