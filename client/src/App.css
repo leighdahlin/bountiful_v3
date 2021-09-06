@@ -41,28 +41,24 @@ header {
   align-self: flex-end;
 }
 
-.nav-item a {
-  text-decoration: none;
-}
-
-/* #navbarNavAltMarkup  .navbar-nav{
-  justify-content: flex-end;
-} */
-
-/* .navbar-inner {
-  background: transparent;
-} */
 
 .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link, .navbar-light .navbar-nav .nav-link {
   color: var(--forest);
   font-size: 1.5rem;
 }
 
-/* .navbar-brand {
-  color: teal;
-  font-size: 2.25rem;
-  font-weight: 600;
-} */
+.nav-item button {
+  border: transparent;
+  background-color: transparent;
+}
+
+#or {
+  cursor: initial ;
+}
+
+#or:hover {
+  color: rgba(0,0,0,.55);
+}
 
 .main-logo {
   width: 30%;
@@ -465,6 +461,16 @@ a:hover, .navbar-brand:hover {
   justify-content: center;
   align-items: center;
   padding: 3%;
+}
+
+.browse-items a {
+  text-decoration: none;
+  color: black;
+  width: 20rem;
+}
+
+.browse-items a:hover {
+  color: black;
 }
 
 .browse-items .card {

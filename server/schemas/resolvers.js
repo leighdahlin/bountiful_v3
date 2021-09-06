@@ -1,7 +1,8 @@
 const { AuthenticationError, UserInputError } = require('apollo-server-express');
 const { User, Item, Category } = require('../models');
-//const Review = require('../models/Review');
-const { signToken } = require('../utils/auth'); 
+
+const { signToken } = require('../utils/auth');
+
 
 const resolvers = {
     Query: {
@@ -39,7 +40,10 @@ const resolvers = {
         //   return User.find((user) => user.id === args.id);
         // },
         user: async (parent, { username }) => {
-            return User.findOne({ username: username});
+            // console.log("++++++++++++++++++++++++++++++++")
+            // console.log(username)
+            // console.log("++++++++++++++++++++++++++++++++")
+            return User.findOne({ username: username });
         },
         //TODO: getReviews and getReview Queries:
         //reviews: async () => Review.find(),
@@ -82,7 +86,6 @@ const resolvers = {
       
             const token = signToken(user);
       
-            console.log(user)
             return { token, user };
         },
         addUser: async (parent, args) => {
@@ -91,7 +94,7 @@ const resolvers = {
       
             return { token, user };
         },
-        updateUser: async (parent, args, context) => {
+        updateUser: async (parent, {args}, context) => {
             if (context.user) {
               return User.findByIdAndUpdate(context.user.id, args, {
                 new: true,
@@ -100,15 +103,33 @@ const resolvers = {
       
             throw new AuthenticationError('Not logged in');
         },
-        createItem: async (parent, args, context) => {
-            // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
+
+        // addItem: async (parent, args, context) => {
+        //     console.log(args)
+        //     console.log("INSIDE CREATE ITEM RESOLVER");
+        //     // console.log(context.data);
+        //     console.log(context.user);
+        //     // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
+        //     if (context.user) {
+        //       return Item.create(args);
+        //     }
+        //     // If user attempts to execute this mutation and isn't logged in, throw an error
+        //     throw new AuthenticationError('You need to be logged in!');
+        //   },
+
+          addItem: async (parent, args, context) => {
+      
             if (context.user) {
-              console.log("HIT CONTEXT.USER")
-              return Item.create(args);
+              const item = new Item(args);
+      
+              await User.findByIdAndUpdate(context.user.username, { $push: { items: item } });
+      
+              return item;
             }
             // If user attempts to execute this mutation and isn't logged in, throw an error
             throw new AuthenticationError('You need to be logged in!');
           },
+
           updateItem: async (parent, { title, item_name, item_description, item_quantity, item_unit, item_price, cat_name }, context) => {
             if(context.user){
             return Item.findOneAndUpdate(

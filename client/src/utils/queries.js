@@ -26,12 +26,22 @@ export const QUERY_SELLER = gql`
 
 //Query a single user for the seller profile:
 export const QUERY_SINGLE_USER = gql`
-  query user($username: String!) {
+  query singleuser($username: String!) {
     user(username: $username) {
         _id
         username
         location
         email
+        items {
+          _id
+          title
+          item_name
+          item_description
+          item_quantity
+          item_unit
+          item_price
+          cat_name
+        }
     }
   }
 `;
@@ -48,8 +58,15 @@ export const QUERY_ITEMS = gql`
         item_unit
         item_price
         cat_name
-        user
-        category
+        user{
+          _id
+          username
+          location
+        }
+        category{
+          _id
+          category_name
+        }
     }
   }
 `;
@@ -87,8 +104,13 @@ export const QUERY_SINGLE_ITEM = gql`
         item_unit
         item_price
         cat_name
-        user
-        category
+        user{
+          _id
+        }
+        category{
+          _id
+          category_name
+        }
       }
     }
 `;
@@ -105,9 +127,12 @@ export const QUERY_CAT_ITEMS = gql`
         item_unit
         item_price
         cat_name
-        user
+        user{
+          _id
+        }
       category {
         _id
+        category_name
       }
     }
   }

@@ -9,7 +9,7 @@ export default function ProfileInfo() {
     return (
         <div className="profile-container">
             <div className="profile">
-                <img id="profile-img" src={profileImage} alt="profile image"/>
+                <img id="profile-img" src={profileImage} alt="profile"/>
                 <div className="profile-info">
                 
                     <h6 id="dashboard-username">{data.username}</h6>

@@ -9,6 +9,7 @@ const typeDefs = gql`
     location: String
     email: String
     password: String
+    items: [Item]
   }
 
   type Category {
@@ -77,7 +78,7 @@ const typeDefs = gql`
     createReview(body: String!, username: String!, createdAt: String!): Review
     deleteReview(_id: ID!): User!
 
-    createItem(
+    addItem(
       _id: ID
       title: String
       item_name: String
@@ -85,7 +86,8 @@ const typeDefs = gql`
       item_quantity: Float
       item_unit: String
       item_price: Float
-      cat_name: String
+      username: String
+      category_name: String
     ): Item
     updateItem(
       _id: ID

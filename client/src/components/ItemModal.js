@@ -6,7 +6,7 @@ import logo from "../assets/images/b-logo.png";
 
 const ItemModal = ({ isItemShowing, hide, addFormState, addHandleChange , addHandleFormSubmit}) => isItemShowing ? ReactDOM.createPortal(
     <React.Fragment>
-    <div id="id03" className="modal" data-bs-backdrop="static" id="staticBackdrop">
+    <div className="modal" data-bs-backdrop="static" id="staticBackdrop">
         <form
         id="create-edit-form"
         className="modal-content animate newItemForm"
@@ -91,7 +91,7 @@ const ItemModal = ({ isItemShowing, hide, addFormState, addHandleChange , addHan
 
             <div>
                 <label htmlFor="item-categories"><b>Categories</b></label>
-                <select id="item-categories" name="cat_name" value={addFormState.cat_name} onChange={addHandleChange}>
+                <select id="item-categories" name="category_name" value={addFormState.category_name} onChange={addHandleChange}>
                     <option value="" disabled>Choose...</option>
                     <option value="fruits" data-id="1">Fruits</option>
                     <option value="vegetables"data-id="2">Vegetables</option>
