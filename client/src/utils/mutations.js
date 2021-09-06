@@ -80,3 +80,12 @@ export const UPDATE_ITEM = gql`
     }
   }
 `;
+
+//TODO: CREATE_REVIEW
+//export const CREATE_REVIEW = gql`
+//  mutation createReview($_id: String!, $body: String!) {
+//      review {
+//       
+//      }
+//  }
+//`;

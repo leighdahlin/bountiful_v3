@@ -35,6 +35,13 @@ const userSchema = new Schema({
     ref: 'Item',
     },
   ],
+  reviews: [
+    {
+      body: String,
+      username: String,
+      createdAt: String
+    }
+  ],
 });
 
 // middleware to create password

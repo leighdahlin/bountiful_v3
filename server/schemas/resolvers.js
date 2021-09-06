@@ -1,6 +1,8 @@
-const { AuthenticationError } = require('apollo-server-express');
+const { AuthenticationError, UserInputError } = require('apollo-server-express');
 const { User, Item, Category } = require('../models');
+
 const { signToken } = require('../utils/auth');
+
 
 const resolvers = {
     Query: {
@@ -43,6 +45,29 @@ const resolvers = {
             // console.log("++++++++++++++++++++++++++++++++")
             return User.findOne({ username: username });
         },
+        //TODO: getReviews and getReview Queries:
+        //reviews: async () => Review.find(),
+        /*async getReviews() {
+      try {
+        const reviews = await Review.find().sort({ createdAt: -1 });//tells Mongoose to sort reviews in descending order
+        return reviews;
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
+    
+    //async getReview(_, { itemId }) {
+      try {
+        const review = await Review.findById(itemId);
+        if (review) {
+          return review;
+        } else {
+          throw new Error('Review not found');
+        }
+      } catch (err) {
+        throw new Error(err);
+      }
+    }*/
     },
 
     Mutation: {
@@ -127,7 +152,33 @@ const resolvers = {
               }
               throw new AuthenticationError('You need to be logged in!');
           },
-    },
-};
+          //Add createReview behind a login:
+          createReview: async (_, args, context) => {//putting _ in place of 'parent'. Context is
+            //related to checking for user auth as a basis for having permission to post a review
+            //const user = checkAuth(context);
+            if (context.user) {
+              return Review.create(args);
+            }
+            throw new AuthenticationError('You need to be logged in!');
+          },
+    
+          //TODO: Add deleteReview behind a login:
+         // deleteReview: async (_, { reviewId }, context) => {
+            //try {
+             // const review = await Review.findById({id: reviewId});
+             // if (context.user) {
+             //   await review.delete();
+             //   return 'Review deleted successfully';
+             // } else {
+                //throw new AuthenticationError('Action not allowed');
+             // }
+           // } catch (err) {
+             // throw new Error(err);
+           // }
+          
+        },
+      };
+    
+
 
 module.exports = resolvers;
