@@ -120,12 +120,12 @@ const resolvers = {
           addItem: async (parent, args, context) => {
       
             if (context.user) {
-              const item = Item.create(args);
+              const item = await Item.create(args);
               console.log(args);
               console.log("INSIDE ADD ITEM RESOLVER");
               console.log(item);
       
-              await User.findByIdAndUpdate(context.user._id, { $push: { items: item } });
+              await User.findByIdAndUpdate(context.user._id, { $addToSet: { items: item } });
       
               return item;
             }
