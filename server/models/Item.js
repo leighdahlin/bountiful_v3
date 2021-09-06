@@ -29,11 +29,11 @@ const itemSchema = new Schema({
     type: String,
     required: true,
   },
-  // users: [{
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'User',
-  //   },
-  // ],
+  user: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    },
+  ],
     
   // categories: [{
   //   type: Schema.Types.ObjectId,
