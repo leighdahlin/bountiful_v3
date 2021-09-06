@@ -9,6 +9,7 @@ const typeDefs = gql`
     location: String
     email: String
     password: String
+    items: [Item]
   }
 
   type Category {
@@ -65,7 +66,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     updateUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): User
 
-    createItem(
+    addItem(
       _id: ID
       title: String
       item_name: String

@@ -1,6 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Item, Category } = require('../models');
-const { signToken } = require('../utils/auth'); 
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
@@ -38,9 +38,9 @@ const resolvers = {
         //   return User.find((user) => user.id === args.id);
         // },
         user: async (parent, { username }) => {
-            console.log("++++++++++++++++++++++++++++++++")
-            console.log(username)
-            console.log("++++++++++++++++++++++++++++++++")
+            // console.log("++++++++++++++++++++++++++++++++")
+            // console.log(username)
+            // console.log("++++++++++++++++++++++++++++++++")
             return User.findOne({ username: username });
         },
     },
@@ -61,7 +61,6 @@ const resolvers = {
       
             const token = signToken(user);
       
-            console.log(user)
             return { token, user };
         },
         addUser: async (parent, args) => {
@@ -70,7 +69,7 @@ const resolvers = {
       
             return { token, user };
         },
-        updateUser: async (parent, args, context) => {
+        updateUser: async (parent, {args}, context) => {
             if (context.user) {
               return User.findByIdAndUpdate(context.user.id, args, {
                 new: true,
@@ -79,7 +78,8 @@ const resolvers = {
       
             throw new AuthenticationError('Not logged in');
         },
-        createItem: async (parent, args, context) => {
+
+        addItem: async (parent, args, context) => {
             console.log(args)
             console.log("INSIDE CREATE ITEM RESOLVER");
             console.log(context.user);
