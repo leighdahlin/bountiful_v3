@@ -27,8 +27,8 @@ const resolvers = {
         itemscat: async(parent, {category}) =>{
           return Item.find({category:category});
         },
-        itemsuser: async(parent, {username}) =>{
-          return Item.find({username:username});
+        itemsuser: async(parent, {username}, context) =>{
+          return Item.find({username: context.user.username});
         },
         //Single item search
         item: async (parent, { itemId }) => {
@@ -133,13 +133,13 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
           },
 
-          updateItem: async (parent, { title, item_name, item_description, item_quantity, item_unit, item_price, cat_name }, context) => {
+          updateItem: async (parent, { title, item_name, item_description, item_quantity, item_unit, item_price, category_name }, context) => {
             if(context.user){
             return Item.findOneAndUpdate(
               { _id: _id },
               {
                 $addToSet: { title: title, item_name: item_name, item_description: item_description,
-                    item_quantity: item_quantity, item_unit: item_unit, item_price: item_price, cat_name: cat_name },
+                    item_quantity: item_quantity, item_unit: item_unit, item_price: item_price, category_name: category_name },
               },
               {
                 new: true,
