@@ -43,7 +43,7 @@ export default function MyBounty() {
         item_quantity: '',
         item_unit: '',
         item_price: '',
-        cat_name: '',
+        category_name: '',
       });
 
       const [addItem, { error, itemData }] = useMutation(ADD_ITEM);
@@ -83,7 +83,7 @@ export default function MyBounty() {
             item_quantity: addFormState.item_quantity,
             item_unit: addFormState.item_unit,
             item_price: addFormState.item_price,
-            cat_name: addFormState.cat_name
+            category_name: addFormState.category_name
         });
 
 
@@ -98,7 +98,7 @@ export default function MyBounty() {
                 item_quantity: addFormState.item_quantity,
                 item_unit: addFormState.item_unit,
                 item_price: addFormState.item_price,
-                cat_name: addFormState.cat_name
+                category_name: addFormState.category_name
             },
             });
     
