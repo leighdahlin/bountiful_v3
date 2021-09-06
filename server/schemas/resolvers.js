@@ -120,7 +120,7 @@ const resolvers = {
           addItem: async (parent, args, context) => {
       
             if (context.user) {
-              const item = new Item(args);
+              const item = Item.create(args);
               console.log(args);
               console.log("INSIDE ADD ITEM RESOLVER");
               console.log(item);
