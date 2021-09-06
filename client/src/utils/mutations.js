@@ -58,7 +58,7 @@ export const ADD_ITEM = gql`
         item_quantity
         item_unit
         item_price
-        cat_name  
+        cat_name
     }
   }
 `;

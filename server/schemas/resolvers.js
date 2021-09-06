@@ -83,7 +83,7 @@ const resolvers = {
             console.log(args)
             console.log("INSIDE CREATE ITEM RESOLVER");
             // console.log(context.data);
-            
+            console.log(context.user);
             // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
             if (context.user) {
               return Item.create(args);
