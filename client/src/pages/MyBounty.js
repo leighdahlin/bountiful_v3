@@ -65,6 +65,8 @@ export default function MyBounty() {
         console.log("INSIDE ADD ITEM FORM SUBMIT");
         console.log(addFormState);
         console.log(Auth.loggedIn());
+        console.log("item price type");
+        console.log(typeof(item_price));
 
         if (Auth.loggedIn()){
             try {
