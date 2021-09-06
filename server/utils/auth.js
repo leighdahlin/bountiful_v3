@@ -18,12 +18,12 @@ module.exports = {
     try {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
-      console.log("INSIDE AUTHMIDDLE WARE - DATA");
-      console.log(data);
+      // console.log("INSIDE AUTHMIDDLE WARE - DATA");
+      // console.log(data);
     } catch {
       console.log('Invalid token');
     }
-    console.log(req.user);
+    // console.log(req.user);
     const user = req.user;
     return req ;
   },

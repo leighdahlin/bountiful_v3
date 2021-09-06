@@ -25,14 +25,14 @@ const typeDefs = gql`
     item_quantity: Float
     item_unit: String
     item_price: Float
-    cat_name: String
+    category_name: String
     user: User
     category: Category
     reviews: [Review]!
   }
 
   type Review{
-    id: ID!
+    _id: ID!
     createdAt: String!
     user: User
     body: String!
@@ -86,8 +86,8 @@ const typeDefs = gql`
       item_quantity: Float
       item_unit: String
       item_price: Float
-      username: String
       category_name: String
+      username: String
     ): Item
     updateItem(
       _id: ID

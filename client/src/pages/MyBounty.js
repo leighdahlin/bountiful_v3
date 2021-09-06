@@ -62,10 +62,10 @@ export default function MyBounty() {
 
     const addHandleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log("INSIDE ADD ITEM FORM SUBMIT");
-        console.log(Auth.loggedIn());
-        console.log("item price type");
-        console.log(typeof(item_price));
+        // console.log("INSIDE ADD ITEM FORM SUBMIT");
+        // console.log(Auth.loggedIn());
+        // console.log("item price type");
+        // console.log(typeof(item_price));
 
         const sumbitQuantity = parseFloat(addFormState.item_quantity)
         addFormState.item_quantity = sumbitQuantity;
@@ -73,8 +73,8 @@ export default function MyBounty() {
         const sumbitPrice = parseFloat(addFormState.item_price)
         addFormState.item_price = sumbitPrice;
 
-        console.log(typeof(addFormState.item_quantity))
-        console.log(typeof(addFormState.item_price))
+        // console.log(typeof(addFormState.item_quantity))
+        // console.log(typeof(addFormState.item_price))
 
         console.log({         
             title: addFormState.title,
@@ -98,7 +98,8 @@ export default function MyBounty() {
                 item_quantity: addFormState.item_quantity,
                 item_unit: addFormState.item_unit,
                 item_price: addFormState.item_price,
-                category_name: addFormState.category_name
+                category_name: addFormState.category_name,
+                username:username
             },
             });
     
