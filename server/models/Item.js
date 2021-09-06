@@ -25,21 +25,21 @@ const itemSchema = new Schema({
     type: Number,
     required: true,
   },
-  cat_name: {
+  category_name: {
     type: String,
     required: true,
   },
-  users: [{
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    },
-  ],
+  // users: [{
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'User',
+  //   },
+  // ],
     
-  categories: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Category',
-    },
-  ],
+  // categories: [{
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Category',
+  //   },
+  // ],
 });
 
 

@@ -96,8 +96,11 @@ const resolvers = {
       
             if (context.user) {
               const item = new Item(args);
+              console.log(args);
+              console.log("INSIDE ADD ITEM RESOLVER");
+              console.log(item);
       
-              await User.findByIdAndUpdate(context.user.username, { $push: { items: item } });
+              await User.findByIdAndUpdate(context.user._id, { $push: { items: item } });
       
               return item;
             }

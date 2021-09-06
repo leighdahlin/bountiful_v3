@@ -48,17 +48,21 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_ITEM = gql`
-  mutation addItem($title: String!, $item_name: String!, $item_description: String!, $item_quantity: Float!, $item_unit: String!, $item_price: Float, $cat_name: String!) {
+  mutation addItem($title: String!, $item_name: String!, $item_description: String!, $item_quantity: Float!, $item_unit: String!, $item_price: Float, $category_name: String!, $username:String!) {
     addItem(title: $title, item_name: $item_name, item_description: $item_description,
-      item_quantity: $item_quantity, item_unit: $item_unit, item_price: $item_price, cat_name: $cat_name) {
+      item_quantity: $item_quantity, item_unit: $item_unit, item_price: $item_price, category_name: $category_name, username:$username) {
           _id
-        title
-        item_name
-        item_description
-        item_quantity
-        item_unit
-        item_price
-        cat_name
+          title
+          item_name
+          item_description
+          item_quantity
+          item_unit
+          item_price
+          category_name
+          user{
+            _id
+            username
+          } 
     }
   }
 `;
