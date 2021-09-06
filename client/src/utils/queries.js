@@ -40,7 +40,7 @@ export const QUERY_SINGLE_USER = gql`
           item_quantity
           item_unit
           item_price
-          cat_name
+          category_name
         }
     }
   }
