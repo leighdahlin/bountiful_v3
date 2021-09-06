@@ -64,6 +64,8 @@ export default function MyBounty() {
         event.preventDefault();
         console.log("INSIDE ADD ITEM FORM SUBMIT");
         console.log(Auth.loggedIn());
+        console.log("item price type");
+        console.log(typeof(item_price));
 
         const sumbitQuantity = parseFloat(addFormState.item_quantity)
         addFormState.item_quantity = sumbitQuantity;
