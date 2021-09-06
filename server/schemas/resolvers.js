@@ -79,18 +79,32 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        addItem: async (parent, args, context) => {
-            console.log(args)
-            console.log("INSIDE CREATE ITEM RESOLVER");
-            // console.log(context.data);
-            console.log(context.user);
-            // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
+        // addItem: async (parent, args, context) => {
+        //     console.log(args)
+        //     console.log("INSIDE CREATE ITEM RESOLVER");
+        //     // console.log(context.data);
+        //     console.log(context.user);
+        //     // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
+        //     if (context.user) {
+        //       return Item.create(args);
+        //     }
+        //     // If user attempts to execute this mutation and isn't logged in, throw an error
+        //     throw new AuthenticationError('You need to be logged in!');
+        //   },
+
+          addItem: async (parent, args, context) => {
+      
             if (context.user) {
-              return Item.create(args);
+              const item = new Item(args);
+      
+              await User.findByIdAndUpdate(context.user.username, { $push: { items: item } });
+      
+              return item;
             }
             // If user attempts to execute this mutation and isn't logged in, throw an error
             throw new AuthenticationError('You need to be logged in!');
           },
+
           updateItem: async (parent, { title, item_name, item_description, item_quantity, item_unit, item_price, cat_name }, context) => {
             if(context.user){
             return Item.findOneAndUpdate(
