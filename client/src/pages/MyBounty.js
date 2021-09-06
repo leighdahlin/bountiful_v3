@@ -39,8 +39,8 @@ export default function MyBounty() {
         title: '',
         item_name: '',
         item_description: '',
-        item_unit: '',
         item_quantity: '',
+        item_unit: '',
         item_price: '',
         cat_name: '',
       });
@@ -67,7 +67,7 @@ export default function MyBounty() {
         });
 
         //authenticates user
-        Auth.loggedIn();
+        // Auth.loggedIn();
 
         window.location.assign('/dashboard/'+ username);
 
