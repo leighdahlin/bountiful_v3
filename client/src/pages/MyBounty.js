@@ -17,6 +17,7 @@ import { ADD_ITEM } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 export default function MyBounty() {
+    // Auth.loggedIn();
 
     const { username } = useParams();
 
@@ -32,7 +33,7 @@ export default function MyBounty() {
 
     const { isItemShowing, toggleItem } = useItemModal();
 
-    const [createItem, { error, itemData }] = useMutation(ADD_ITEM);
+    // const [addItem, { error, itemData }] = useMutation(ADD_ITEM);
 
 
     const [addFormState, setAddFormState] = useState({
@@ -44,6 +45,8 @@ export default function MyBounty() {
         item_price: '',
         cat_name: '',
       });
+
+      const [addItem, { error, itemData }] = useMutation(ADD_ITEM);
 
       const addHandleChange = (event) => {
         const { name, value } = event.target;
@@ -59,25 +62,57 @@ export default function MyBounty() {
 
     const addHandleFormSubmit = async (event) => {
         event.preventDefault();
+        console.log("INSIDE ADD ITEM FORM SUBMIT");
         console.log(addFormState);
+        console.log(Auth.loggedIn());
 
-        try {
-        const { itemData } = await createItem({
-            variables: { ...addFormState },
-        });
-
-        //authenticates user
-        Auth.loggedIn();
-
-        window.location.assign('/dashboard/'+ username);
-
-        //hides the signup modal
-        toggleItem();
-
-        } catch (e) {
-        console.error(e);
+        if (Auth.loggedIn()){
+            try {
+                console.log("INSIDE TRY FUNCTION TO ADD NEW ITEM")
+            const { itemData } = await addItem({
+                variables: { ...addFormState },
+            });
+    
+            console.log("itemData Variable from addItem Mutation")
+            console.log(itemData);
+    
+            //authenticates user
+            // Auth.loggedIn();
+    
+            window.location.assign('/dashboard/'+ username);
+    
+            //hides the signup modal
+            toggleItem();
+    
+            } catch (e) {
+            console.error(e);
+    
+            }
 
         }
+        
+
+        // try {
+        //     console.log("INSIDE TRY FUNCTION TO ADD NEW ITEM")
+        // const { itemData } = await addItem({
+        //     variables: { ...addFormState },
+        // });
+
+        // console.log("itemData Variable from addItem Mutation")
+        // console.log(itemData);
+
+        // //authenticates user
+        // // Auth.loggedIn();
+
+        // window.location.assign('/dashboard/'+ username);
+
+        // //hides the signup modal
+        // toggleItem();
+
+        // } catch (e) {
+        // console.error(e);
+
+        // }
     };
 
 
