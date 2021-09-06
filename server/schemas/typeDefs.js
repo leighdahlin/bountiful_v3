@@ -64,7 +64,7 @@ const typeDefs = gql`
     user: User
     categories: [Category]
     items: [Item]
-    itemscat(category:ID):[Item]
+    itemscat(category_name:String):[Item]
     itemsuser(username:String): [Item]
     item(_id:ID!): Item
     getReviews: [Review]
