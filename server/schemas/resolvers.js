@@ -24,8 +24,8 @@ const resolvers = {
       
         //     return Item.find(params).populate('category');
         //   },
-        itemscat: async(parent, {category}) =>{
-          return Item.find({category:category});
+        itemscat: async(parent, {category_name}) =>{
+          return Item.find({category_name:category_name});
         },
         itemsuser: async(parent, args, context) =>{
           return Item.find({username: context.user.username});

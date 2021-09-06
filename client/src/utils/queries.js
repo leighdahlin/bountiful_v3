@@ -18,7 +18,7 @@ export const QUERY_SELLER = gql`
         item_quantity
         item_unit
         item_price
-        cat_name
+        category_name
       }
     }
   }
@@ -57,15 +57,11 @@ export const QUERY_ITEMS = gql`
         item_quantity
         item_unit
         item_price
-        cat_name
+        category_name
         user{
           _id
           username
           location
-        }
-        category{
-          _id
-          category_name
         }
     }
   }
@@ -117,8 +113,8 @@ export const QUERY_SINGLE_ITEM = gql`
 
 //Query items based on category:
 export const QUERY_CAT_ITEMS = gql`
-  query getItems($category: ID) {
-    itemscat(category: $category) {
+  query getItems($category_name:String!) {
+    itemscat(category_name: $category_name) {
         _id
         title
         item_name
@@ -126,14 +122,11 @@ export const QUERY_CAT_ITEMS = gql`
         item_quantity
         item_unit
         item_price
-        cat_name
+        category_name
         user{
           _id
+          username
         }
-      category {
-        _id
-        category_name
-      }
     }
   }
 `;
