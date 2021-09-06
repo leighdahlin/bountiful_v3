@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import "../assets/css/modal.css"
 // Import the `useParams()` hook from React Router
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
@@ -40,8 +40,8 @@ export default function MyBounty() {
         title: '',
         item_name: '',
         item_description: '',
-        item_unit: '',
         item_quantity: '',
+        item_unit: '',
         item_price: '',
         cat_name: '',
       });
@@ -50,8 +50,8 @@ export default function MyBounty() {
 
       const addHandleChange = (event) => {
         const { name, value } = event.target;
-        console.log("Name: " + name)
-        console.log("Value: " + value)
+        // console.log("Name: " + name)
+        // console.log("Value: " + value)
 
         setAddFormState({
         ...addFormState,
@@ -63,14 +63,41 @@ export default function MyBounty() {
     const addHandleFormSubmit = async (event) => {
         event.preventDefault();
         console.log("INSIDE ADD ITEM FORM SUBMIT");
-        console.log(addFormState);
         console.log(Auth.loggedIn());
+
+        const sumbitQuantity = parseFloat(addFormState.item_quantity)
+        addFormState.item_quantity = sumbitQuantity;
+
+        const sumbitPrice = parseFloat(addFormState.item_price)
+        addFormState.item_price = sumbitPrice;
+
+        console.log(typeof(addFormState.item_quantity))
+        console.log(typeof(addFormState.item_price))
+
+        console.log({         
+            title: addFormState.title,
+            item_name: addFormState.item_name,
+            item_description: addFormState.item_description,
+            item_quantity: addFormState.item_quantity,
+            item_unit: addFormState.item_unit,
+            item_price: addFormState.item_price,
+            cat_name: addFormState.cat_name
+        });
+
 
         if (Auth.loggedIn()){
             try {
                 console.log("INSIDE TRY FUNCTION TO ADD NEW ITEM")
-            const { itemData } = await addItem({
-                variables: { ...addFormState },
+            const { itemDataSumbit } = await addItem({
+                variables: {         
+                title: addFormState.title,
+                item_name: addFormState.item_name,
+                item_description: addFormState.item_description,
+                item_quantity: addFormState.item_quantity,
+                item_unit: addFormState.item_unit,
+                item_price: addFormState.item_price,
+                cat_name: addFormState.cat_name
+            },
             });
     
             console.log("itemData Variable from addItem Mutation")
@@ -242,6 +269,12 @@ export default function MyBounty() {
                 <div className="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
             </div>
         </div>
+
+        {error && (
+              <div className="my-3 p-3 bg-danger text-white">
+                {error.message}
+              </div>
+        )}
 
         <ItemModal isItemShowing={isItemShowing} hide={toggleItem} addFormState={addFormState} addHandleChange={addHandleChange} addHandleFormSubmit={addHandleFormSubmit}/>
                 
