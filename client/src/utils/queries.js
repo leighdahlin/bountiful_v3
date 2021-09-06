@@ -122,3 +122,15 @@ export const QUERY_CATEGORIES = gql`
     }
   }
 `;
+
+//TODO: QUERY REVIEWS
+//export const QUERY_REVIEWS = gql`
+//  {
+//    reviews {
+//     id
+//      createdAt
+//      username
+//      body
+//    }
+//  }
+//`;

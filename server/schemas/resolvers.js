@@ -1,6 +1,6 @@
-const { AuthenticationError } = require('apollo-server-express');
+const { AuthenticationError, UserInputError } = require('apollo-server-express');
 const { User, Item, Category } = require('../models');
-const Review = require('../models/Review');
+//const Review = require('../models/Review');
 const { signToken } = require('../utils/auth'); 
 
 const resolvers = {
@@ -42,6 +42,7 @@ const resolvers = {
             return User.findOne({ username: username});
         },
         //TODO: getReviews and getReview Queries:
+        //reviews: async () => Review.find(),
         /*async getReviews() {
       try {
         const reviews = await Review.find().sort({ createdAt: -1 });//tells Mongoose to sort reviews in descending order
@@ -50,9 +51,10 @@ const resolvers = {
         throw new Error(err);
       }
     },
-    async getReview(_, { reviewId }) {
+    
+    //async getReview(_, { itemId }) {
       try {
-        const review = await Review.findById(reviewId);
+        const review = await Review.findById(itemId);
         if (review) {
           return review;
         } else {

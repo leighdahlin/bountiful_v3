@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+/*const { Schema, model } = require('mongoose');
 
 const reviewSchema = new Schema({
     body: {
@@ -24,4 +24,4 @@ const reviewSchema = new Schema({
 
 const Review = model('Review', reviewSchema);
 
-module.exports = Review;
+module.exports = Review;*/
