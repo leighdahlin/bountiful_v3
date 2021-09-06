@@ -35,13 +35,15 @@ const resolvers = {
             return Item.findOne({ _id: _id });
         },
 
-        //Find a user based on the id: WORKING:
-        // user: async (parent, { username }) => {
-        //     // console.log("++++++++++++++++++++++++++++++++")
-        //     // console.log(username)
-        //     // console.log("++++++++++++++++++++++++++++++++")
-        //     return User.findOne({ username: username });
-        // },
+        //Find a seller based on the username: WORKING:
+        seller: async (parent, { username }) => {
+            // console.log("++++++++++++++++++++++++++++++++")
+            // console.log(username)
+            // console.log("++++++++++++++++++++++++++++++++")
+            return User.findOne({ username: username }).populate({
+              path:'items'
+            });
+        },
 
         user: async (parent, args, context) => {
           if(context.user){
