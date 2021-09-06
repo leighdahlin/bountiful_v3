@@ -18,7 +18,7 @@ export const QUERY_SELLER = gql`
         item_quantity
         item_unit
         item_price
-        cat_name
+        category_name
       }
     }
   }
@@ -57,15 +57,11 @@ export const QUERY_ITEMS = gql`
         item_quantity
         item_unit
         item_price
-        cat_name
+        category_name
         user{
           _id
           username
           location
-        }
-        category{
-          _id
-          category_name
         }
     }
   }
