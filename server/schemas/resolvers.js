@@ -27,24 +27,32 @@ const resolvers = {
         itemscat: async(parent, {category}) =>{
           return Item.find({category:category});
         },
-        itemsuser: async(parent, {username}, context) =>{
+        itemsuser: async(parent, args, context) =>{
           return Item.find({username: context.user.username});
         },
         //Single item search
-        item: async (parent, { itemId }) => {
-            return Item.findOne({ _id: itemId });
+        item: async (parent, { _id }) => {
+            return Item.findOne({ _id: _id });
         },
 
-        //Find a user based on the id (for a seller profile - does args bring in the correct id? Which one of these will work?)
-        // user: (parent, args) => {
-        //   return User.find((user) => user.id === args.id);
+        //Find a user based on the id: WORKING:
+        // user: async (parent, { username }) => {
+        //     // console.log("++++++++++++++++++++++++++++++++")
+        //     // console.log(username)
+        //     // console.log("++++++++++++++++++++++++++++++++")
+        //     return User.findOne({ username: username });
         // },
-        user: async (parent, { username }) => {
-            // console.log("++++++++++++++++++++++++++++++++")
-            // console.log(username)
-            // console.log("++++++++++++++++++++++++++++++++")
-            return User.findOne({ username: username });
-        },
+
+        user: async (parent, args, context) => {
+          if(context.user){
+            const user = await User.findById(context.user._id).populate({
+              path: 'items'
+            });
+            return user;
+          }    
+      },
+
+
         //TODO: getReviews and getReview Queries:
         //reviews: async () => Review.find(),
         /*async getReviews() {
