@@ -1,5 +1,6 @@
 import SellerProfileInfo from '../components/SellerProfileInfo';
 import SellerProfileCard from '../components/SellerProfileCard';
+import Review from '../components/Review';
 
 export default function MyBounty() {
     const data = [
@@ -131,7 +132,7 @@ export default function MyBounty() {
                 </div>
                 <div className="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="profile-tab">
                     <div className="seller-reviews">
-                        Reviews
+                        <Review />
                     </div>
                 </div>
                 <div className="tab-pane fade" id="message" role="tabpanel" aria-labelledby="contact-tab">
