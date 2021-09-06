@@ -74,7 +74,8 @@ const typeDefs = gql`
       item_quantity: Float
       item_unit: String
       item_price: Float
-      cat_name: String
+      username: String
+      category_name: String
     ): Item
     updateItem(
       _id: ID
