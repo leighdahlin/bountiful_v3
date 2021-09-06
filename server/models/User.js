@@ -36,19 +36,6 @@ const userSchema = new Schema({
       ref: "Item",
     },
   ],
-  // added by AH on 9/5/2021
-  reviewsWritten: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Review",
-    },
-  ],
-  reviewsRec: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Review",
-    },
-  ],
 });
 
 // middleware to create password
