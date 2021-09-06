@@ -90,8 +90,8 @@ export const QUERY_ITEMS_USER = gql`
 
 //Query a single item:
 export const QUERY_SINGLE_ITEM = gql`
-  query getSingleItem($itemId: ID!) {
-    item(itemId: $itemId) {
+  query getSingleItem($_id: ID!) {
+    item(_id: $_id) {
         _id
         title
         item_name
@@ -99,13 +99,9 @@ export const QUERY_SINGLE_ITEM = gql`
         item_quantity
         item_unit
         item_price
-        cat_name
+        category_name
         user{
           _id
-        }
-        category{
-          _id
-          category_name
         }
       }
     }
