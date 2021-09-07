@@ -1,4 +1,5 @@
 const { gql } = require('apollo-server-express');
+//const dateFormat = require('../utils/dateFormat');
 
 const typeDefs = gql`
   type User {
@@ -10,6 +11,7 @@ const typeDefs = gql`
     email: String
     password: String
     items: [Item]
+    reviews: [Review]
   }
 
   type Category {
@@ -28,14 +30,15 @@ const typeDefs = gql`
     category_name: String
     user: User
     category: Category
-    reviews: [Review]!
+    
   }
 
   type Review{
-    _id: ID!
-    createdAt: String!
-    user: User
+    _id: ID
+    title: String!
     body: String!
+    createdAt: String
+    
   }
 
   input ItemData {
@@ -75,8 +78,8 @@ const typeDefs = gql`
     addUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     updateUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): User
-    createReview(body: String!, username: String!, createdAt: String!): Review
-    deleteReview(_id: ID!): User!
+    createReview(userId: ID!, title: String, body: String!, createdAt: String): User
+    deleteReview(userId: ID!, reviewId: ID!): User
 
     addItem(
       _id: ID

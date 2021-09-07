@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
+//const dateFormat = require('../utils/dateFormat');
 
 const userSchema = new Schema({
   first_name: {
@@ -38,10 +39,20 @@ const userSchema = new Schema({
   ],
   reviews: [
     {
-      body: String,
-      username: String,
-      createdAt: String
-    }
+      title: {
+        type: String,
+        required: true,
+      },
+      body: {
+        type: String,
+        required: true,
+      },
+      createdAt: {
+        type: String,
+        //default: Date.now,
+        //get: (timestamp) => dateFormat(timestamp),
+      },
+    },
   ],
 });
 
