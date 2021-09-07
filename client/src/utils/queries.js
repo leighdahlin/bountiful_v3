@@ -102,6 +102,9 @@ export const QUERY_SINGLE_ITEM = gql`
         category_name
         user{
           _id
+          username
+          location
+          email
         }
       }
     }
