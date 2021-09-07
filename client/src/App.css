@@ -489,6 +489,7 @@ a:hover, .navbar-brand:hover {
 }
 
 .card-pic {
+  text-align: center;
   align-self: center;
 }
 
@@ -686,6 +687,10 @@ a:hover, .navbar-brand:hover {
   flex-direction: column;
   }
 
+.items-b-logo {
+  width: 55%;
+}
+
 }
 
 @media screen and (max-width: 576px) {
@@ -744,10 +749,6 @@ a:hover, .navbar-brand:hover {
 
 .dashboard-container .nav {
   flex-direction: row;
-}
-
-.items-b-logo {
-  width: 75%;
 }
 
 .item-card .card-pic {

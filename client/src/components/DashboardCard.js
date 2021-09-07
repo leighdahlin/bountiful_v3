@@ -30,7 +30,7 @@ export default function DashboardCard({ toggleItem, items }) {
                             <p className="card-text">Quantity: <span className="item-quantity">{item.item_quantity}</span></p>
                             
                             <p className="card-text">Description: <span className="item-description">{item.item_description}</span></p>
-                            {/* <p className="card-text"><small className="text-muted">Date created: {formatTime(item.createdAt)}</small></p> */}
+                            <p className="card-text"><small className="text-muted">Date created: {formatTime(item.createdAt)}</small></p>
                             <div className="center-btns">
                                 <button id = {item.id} type="button" className="btn item-btn edit-item" onClick={toggleItem}>Edit</button>   
                                 <button type="button" className="btn item-btn delete-item" data-id={item.id}>Delete</button>           

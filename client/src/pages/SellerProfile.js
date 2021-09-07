@@ -2,113 +2,29 @@ import SellerProfileInfo from '../components/SellerProfileInfo';
 import SellerProfileCard from '../components/SellerProfileCard';
 import Review from '../components/Review';
 
-export default function MyBounty() {
-    const data = [
-        {
-            id: 1,
-            title: "Blueberries",
-            item_price: "5",
-            item_unit: "pint",
-            item_quantity: "5",
-            name: "Blueberries",
-            category: "Fruit",
-            description: "Fresh, juicy blueberries",
-            createdAt: Date.now()
-        },
-        {
-            id: 2,
-            title: "Strawberries",
-            item_price: "8",
-            item_unit: "quart",
-            item_quantity: "3",
-            name: "Strawberries",
-            category: "Fruit",
-            description: "Fresh, juicy Strawberries",
-            createdAt: Date.now()
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
 
-        },
-        {
-            id: 3,
-            title: "Squash",
-            item_price: "5",
-            item_unit: "pint",
-            item_quantity: "5",
-            name: "Blueberries",
-            category: "Fruit",
-            description: "Fresh, juicy blueberries",
-            createdAt: Date.now()
-        },
-        {
-            id: 4,
-            title: "Seeds",
-            item_price: "8",
-            item_unit: "quart",
-            item_quantity: "3",
-            name: "Blueberries",
-            category: "Fruit",
-            description: "Fresh, juicy blueberries",
-            createdAt: Date.now()
-        },
-        {
-            id: 5,
-            title: "Corn",
-            item_price: "5",
-            item_unit: "pint",
-            item_quantity: "5",
-            name: "Blueberries",
-            category: "Fruit",
-            description: "Fresh, juicy blueberries",
-            createdAt: Date.now()
-        },
-        {
-            id: 6,
-            title: "Potatos",
-            item_price: "8",
-            item_unit: "quart",
-            item_quantity: "3",
-            name: "Blueberries",
-            category: "Fruit",
-            description: "Fresh, juicy blueberries",
-            createdAt: Date.now()
-        },
-        {
-            id: 7,
-            title: "Watermelon",
-            item_price: "8",
-            item_unit: "quart",
-            item_quantity: "3",
-            name: "Blueberries",
-            category: "Fruit",
-            description: "Fresh, juicy blueberries",
-            createdAt: Date.now()
-        },
-        {
-            id: 8,
-            title: "Eggs",
-            item_price: "5",
-            item_unit: "pint",
-            item_quantity: "5",
-            name: "Blueberries",
-            category: "Fruit",
-            description: "Fresh, juicy blueberries",
-            createdAt: Date.now()
-        },
-        {
-            id: 9,
-            title: "Goat Milk",
-            item_price: "8",
-            item_unit: "quart",
-            item_quantity: "3",
-            name: "Blueberries",
-            category: "Fruit",
-            description: "Fresh, juicy blueberries",
-            createdAt: Date.now()
-        }
-    ];    
-    
+import { QUERY_SELLER } from '../utils/queries';
+
+export default function MyBounty() {
+
+    const { username } = useParams();
+
+    const { loading, data } = useQuery(QUERY_SELLER, {
+        variables: { username: username },
+      });
+
+    const profile = data?.seller || {};
+    const sellerListings = profile.items
+
+    if(loading) {
+        return <div>Loading...</div>
+    }
+
     return(
     <div className="seller-profile-container">
-        <SellerProfileInfo />
+        <SellerProfileInfo userData={profile}/>
         
         <div className="seller-nav-container d-flex flex-column">
             <ul className="nav nav-tabs" id="myTab" role="tablist">
@@ -126,7 +42,7 @@ export default function MyBounty() {
                 <div className="tab-pane fade show active" id="bounty" role="tabpanel" aria-labelledby="home-tab">
                     <div className = "seller-bounty">
                         <div className="seller-items">
-                            <SellerProfileCard data = {data} />
+                            <SellerProfileCard data = {sellerListings} />
                         </div>
                     </div>
                 </div>
