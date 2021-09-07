@@ -29,6 +29,11 @@ const itemSchema = new Schema({
     type: String,
     required: true,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    required: true,
+  },
   user: [{
     type: Schema.Types.ObjectId,
     ref: 'User',
