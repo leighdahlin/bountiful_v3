@@ -132,7 +132,10 @@ const resolvers = {
           addItem: async (parent, args, context) => {
       
             if (context.user) {
-              const item = await Item.create(args);
+              const item = await (Item.create(args)).populate({
+                path:"user"
+              });
+
               console.log(args);
               console.log("INSIDE ADD ITEM RESOLVER");
               console.log(item);
