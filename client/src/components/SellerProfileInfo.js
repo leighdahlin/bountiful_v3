@@ -1,4 +1,5 @@
 import profileImage from "../assets/images/UserProfile-1.png";
+import { Link } from 'react-router-dom';
 
 export default function ProfileInfo({ userData }) {
     return (
@@ -10,7 +11,7 @@ export default function ProfileInfo({ userData }) {
                     <h6 id="dashboard-username">{userData.username}</h6>
                     <h6 id="dashboard-location">{userData.location}</h6>
             
-                    {/* <button id="send-message" type="button" className="btn">Message</button> */}
+                    <Link to={`/profile/${userData.username}`}><button id="send-message" type="button" className="btn">Message</button></Link>
                 
                 </div>
             </div>
