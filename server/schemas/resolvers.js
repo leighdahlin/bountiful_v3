@@ -136,10 +136,11 @@ const resolvers = {
               console.log(args);
               console.log("INSIDE ADD ITEM RESOLVER");
               console.log(item);
+              console.log(item._id);
       
               await User.findByIdAndUpdate(context.user._id, { $addToSet: { items: item } });
       
-              return Item.findByIdAndUpdate({_id:_id}, {$addToSet: {user: {_id:context.user._id, username: context.user.username, location:context.user.location, email: context.user.email}}});
+              return Item.findByIdAndUpdate({_id:item._id}, {$addToSet: {user: {_id:context.user._id, username: context.user.username, location:context.user.location, email: context.user.email}}});
             }
             // If user attempts to execute this mutation and isn't logged in, throw an error
             throw new AuthenticationError('You need to be logged in!');
