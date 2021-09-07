@@ -32,9 +32,7 @@ const resolvers = {
         },
         //Single item search
         item: async (parent, { _id }) => {
-            return Item.findOne({ _id: _id }).populate({
-              path:'user'
-            });
+            return Item.findOne({ _id: _id }).populate('user');
         },
 
         //Find a seller based on the username: WORKING:
@@ -144,7 +142,10 @@ const resolvers = {
                 console.log(item2);
               
               //Update a user with the created item:
-              await User.findByIdAndUpdate(context.user._id, { $addToSet: { items: item2 } });
+              await User.findByIdAndUpdate(context.user._id, { $addToSet: { items: item2 } }, {
+                new: true,
+                runValidators: true,
+              });
               //Update the item with the user that created the item from context:
               
               return item2;

@@ -33,11 +33,10 @@ const itemSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  user: [{
+  user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     },
-  ],
     
   // categories: [{
   //   type: Schema.Types.ObjectId,
