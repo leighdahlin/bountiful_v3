@@ -26,6 +26,7 @@ const typeDefs = gql`
     item_unit: String
     item_price: Float
     category_name: String
+    createdAt: String
     user: User
     category: Category
     reviews: [Review]!

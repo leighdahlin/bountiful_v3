@@ -31,8 +31,7 @@ const itemSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now,
-    required: true,
+    default: Date.now
   },
   user: [{
     type: Schema.Types.ObjectId,
