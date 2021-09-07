@@ -172,11 +172,11 @@ export default function MyBounty() {
             </div>
         </div>
 
-        {error && (
+        {/* {error && (
               <div className="my-3 p-3 bg-danger text-white">
                 {error.message}
               </div>
-        )}
+        )} */}
 
         <ItemModal isItemShowing={isItemShowing} hide={toggleItem} addFormState={addFormState} addHandleChange={addHandleChange} addHandleFormSubmit={addHandleFormSubmit}/>
                 

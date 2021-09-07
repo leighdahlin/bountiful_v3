@@ -57,7 +57,7 @@ function App() {
         <Route exact path="/dashboard/:username">
           {!Auth.loggedIn() ? <Redirect to="/" /> : <MyBounty />}
         </Route>
-        <Route exact path="/profile">
+        <Route exact path="/profile/:username">
           {!Auth.loggedIn() ? <Redirect to="/" /> : <SellerProfile />}
         </Route>
         <Route exact path="/browse/item/:id">
