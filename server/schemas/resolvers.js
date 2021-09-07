@@ -32,9 +32,7 @@ const resolvers = {
         },
         //Single item search
         item: async (parent, { _id }) => {
-            return Item.findOne({ _id: _id }).populate({
-              path:'user'
-            });
+            return Item.findOne({ _id: _id }).populate('user');
         },
 
         //Find a seller based on the username: WORKING:
