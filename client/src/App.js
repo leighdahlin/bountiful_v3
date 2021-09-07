@@ -60,7 +60,7 @@ function App() {
         <Route exact path="/profile">
           {!Auth.loggedIn() ? <Redirect to="/" /> : <SellerProfile />}
         </Route>
-        <Route exact path="/browse/item">
+        <Route exact path="/browse/item/:id">
           {!Auth.loggedIn() ? <Redirect to="/" /> : <ViewSingleItem />}
         </Route>
         <Route exact path="*">

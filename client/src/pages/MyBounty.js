@@ -10,7 +10,6 @@ import DashboardCard from '../components/DashboardCard';
 import useItemModal from '../assets/js/useItemModal';
 import ItemModal from '../components/ItemModal';
 
-// import { QUERY_ITEMS_USER } from '../utils/queries';
 import { QUERY_SINGLE_USER } from '../utils/queries';
 import { ADD_ITEM } from '../utils/mutations';
 
@@ -23,12 +22,15 @@ export default function MyBounty() {
 
     const { loading, data } = useQuery(QUERY_SINGLE_USER, {
         variables: { username: username },
-      });    
-    
-    console.log(data)
+      });
+          
+    // console.log(data)
     const profile = data?.user || {};
+    const items = profile?.items || {};
     console.log("PROFILE")
     console.log(profile)
+    console.log("ITEMS")
+    console.log(items)
 
 
     const { isItemShowing, toggleItem } = useItemModal();
@@ -145,109 +147,6 @@ export default function MyBounty() {
         // }
     };
 
-
-    // const data = [
-    //     {
-    //         id: 1,
-    //         title: "Blueberries",
-    //         item_price: "5",
-    //         item_unit: "pint",
-    //         item_quantity: "5",
-    //         name: "Blueberries",
-    //         category: "Fruit",
-    //         description: "Fresh, juicy blueberries",
-    //         createdAt: Date.now()
-    //     },
-    //     {
-    //         id: 2,
-    //         title: "Strawberries",
-    //         item_price: "8",
-    //         item_unit: "quart",
-    //         item_quantity: "3",
-    //         name: "Strawberries",
-    //         category: "Fruit",
-    //         description: "Fresh, juicy Strawberries",
-    //         createdAt: Date.now()
-
-    //     },
-    //     {
-    //         id: 3,
-    //         title: "Squash",
-    //         item_price: "5",
-    //         item_unit: "pint",
-    //         item_quantity: "5",
-    //         name: "Blueberries",
-    //         category: "Fruit",
-    //         description: "Fresh, juicy blueberries",
-    //         createdAt: Date.now()
-    //     },
-    //     {
-    //         id: 4,
-    //         title: "Seeds",
-    //         item_price: "8",
-    //         item_unit: "quart",
-    //         item_quantity: "3",
-    //         name: "Blueberries",
-    //         category: "Fruit",
-    //         description: "Fresh, juicy blueberries",
-    //         createdAt: Date.now()
-    //     },
-    //     {
-    //         id: 5,
-    //         title: "Corn",
-    //         item_price: "5",
-    //         item_unit: "pint",
-    //         item_quantity: "5",
-    //         name: "Blueberries",
-    //         category: "Fruit",
-    //         description: "Fresh, juicy blueberries",
-    //         createdAt: Date.now()
-    //     },
-    //     {
-    //         id: 6,
-    //         title: "Potatos",
-    //         item_price: "8",
-    //         item_unit: "quart",
-    //         item_quantity: "3",
-    //         name: "Blueberries",
-    //         category: "Fruit",
-    //         description: "Fresh, juicy blueberries",
-    //         createdAt: Date.now()
-    //     },
-    //     {
-    //         id: 7,
-    //         title: "Watermelon",
-    //         item_price: "8",
-    //         item_unit: "quart",
-    //         item_quantity: "3",
-    //         name: "Blueberries",
-    //         category: "Fruit",
-    //         description: "Fresh, juicy blueberries",
-    //         createdAt: Date.now()
-    //     },
-    //     {
-    //         id: 8,
-    //         title: "Eggs",
-    //         item_price: "5",
-    //         item_unit: "pint",
-    //         item_quantity: "5",
-    //         name: "Blueberries",
-    //         category: "Fruit",
-    //         description: "Fresh, juicy blueberries",
-    //         createdAt: Date.now()
-    //     },
-    //     {
-    //         id: 9,
-    //         title: "Goat Milk",
-    //         item_price: "8",
-    //         item_unit: "quart",
-    //         item_quantity: "3",
-    //         name: "Blueberries",
-    //         category: "Fruit",
-    //         description: "Fresh, juicy blueberries",
-    //         createdAt: Date.now()
-    //     }
-    // ];    
     
     return(
     <div id="dashboard-image" className="dashboard-container">
@@ -263,7 +162,7 @@ export default function MyBounty() {
                     <div className = "your-bounty">
                         <button id="add-item" className="btn" type="button" onClick={toggleItem}>Add Item</button>
                         <div className="items">
-                            <DashboardCard toggleItem = {toggleItem} />
+                            <DashboardCard toggleItem = {toggleItem} items={items}/>
                         </div>
                     </div>
                     </div>

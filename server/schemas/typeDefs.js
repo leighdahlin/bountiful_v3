@@ -62,7 +62,7 @@ const typeDefs = gql`
   type Query {
     users: [User]
     user: User
-    seller: User
+    seller(username:String): User
     categories: [Category]
     items: [Item]
     itemscat(category_name:String):[Item]
