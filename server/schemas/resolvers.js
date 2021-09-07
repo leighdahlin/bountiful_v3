@@ -132,14 +132,17 @@ const resolvers = {
           addItem: async (parent, args, context) => {
       
             if (context.user) {
+              //Create the item with the arguments coming in from the form input:
               const item = await Item.create(args);
-              console.log(args);
-              console.log("INSIDE ADD ITEM RESOLVER");
-              console.log(item);
-      
+              // console.log(args);
+              // console.log("INSIDE ADD ITEM RESOLVER");
+              // console.log(item);
+              // console.log(item._id);
+              
+              //Update a user with the created item:
               await User.findByIdAndUpdate(context.user._id, { $addToSet: { items: item } });
-      
-              return Item.findByIdAndUpdate({_id:_id}, {$addToSet: {user: {_id:context.user._id, username: context.user.username, location:context.user.location, email: context.user.email}}});
+              //Update the item with the user that created the item from context:
+              return Item.findByIdAndUpdate({_id:item._id}, {$addToSet: {user: {_id:context.user._id, username: context.user.username, location:context.user.location, email: context.user.email}}});
             }
             // If user attempts to execute this mutation and isn't logged in, throw an error
             throw new AuthenticationError('You need to be logged in!');
