@@ -28,7 +28,6 @@ const typeDefs = gql`
     category_name: String
     createdAt: String
     user: User
-    category: Category
     reviews: [Review]!
   }
 
