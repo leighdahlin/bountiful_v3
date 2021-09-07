@@ -19,6 +19,7 @@ export const QUERY_SELLER = gql`
         item_unit
         item_price
         category_name
+        createdAt
       }
     }
   }
@@ -41,6 +42,7 @@ export const QUERY_SINGLE_USER = gql`
           item_unit
           item_price
           category_name
+          createdAt
         }
     }
   }
@@ -58,6 +60,7 @@ export const QUERY_ITEMS = gql`
         item_unit
         item_price
         category_name
+        createdAt
         user{
           _id
           username
@@ -100,6 +103,7 @@ export const QUERY_SINGLE_ITEM = gql`
         item_unit
         item_price
         category_name
+        createdAt
         user{
           _id
           username

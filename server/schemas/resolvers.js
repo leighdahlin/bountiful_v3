@@ -117,10 +117,6 @@ const resolvers = {
         },
 
         // addItem: async (parent, args, context) => {
-        //     console.log(args)
-        //     console.log("INSIDE CREATE ITEM RESOLVER");
-        //     // console.log(context.data);
-        //     console.log(context.user);
         //     // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
         //     if (context.user) {
         //       return Item.create(args);
@@ -138,17 +134,26 @@ const resolvers = {
               // console.log("INSIDE ADD ITEM RESOLVER");
               // console.log(item);
               // console.log(item._id);
+
+              const item2 = await Item.findByIdAndUpdate({_id:item._id}, {$addToSet: {user: 
+                {_id:context.user._id, username: context.user.username, location:context.user.location, email: context.user.email}}},
+                {
+                  new: true,
+                  runValidators: true,
+                });
+                console.log(item2);
               
               //Update a user with the created item:
-              await User.findByIdAndUpdate(context.user._id, { $addToSet: { items: item } });
+              await User.findByIdAndUpdate(context.user._id, { $addToSet: { items: item2 } });
               //Update the item with the user that created the item from context:
-              return Item.findByIdAndUpdate({_id:item._id}, {$addToSet: {user: {_id:context.user._id, username: context.user.username, location:context.user.location, email: context.user.email}}});
+              
+              return item2;
             }
             // If user attempts to execute this mutation and isn't logged in, throw an error
             throw new AuthenticationError('You need to be logged in!');
           },
 
-          updateItem: async (parent, { title, item_name, item_description, item_quantity, item_unit, item_price, category_name }, context) => {
+          updateItem: async (parent, { _id, title, item_name, item_description, item_quantity, item_unit, item_price, category_name }, context) => {
             if(context.user){
             return Item.findOneAndUpdate(
               { _id: _id },
