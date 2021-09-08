@@ -21,8 +21,13 @@ let itemID
 
 export default function MyBounty() {
 
+    //extract username from params and save it to a variable
     const { username } = useParams();
 
+    //if true, using the item modal to add an item, if false, using modal to edit an item
+    let [formState, setFormState] = useState(true);
+
+    //initializing mutations and queries
     const [addItem, { error, itemData }] = useMutation(ADD_ITEM);
     const [ removeItem ] = useMutation(REMOVE_ITEM);
     const [ updateItem ] = useMutation(UPDATE_ITEM);
@@ -30,21 +35,16 @@ export default function MyBounty() {
     const { loading, data } = useQuery(QUERY_SINGLE_USER, {
         variables: { username: username },
       });
-          
-    // console.log(data)
+    
+    //saving the user information from QUERY_SINGLE_USER to profile variable
     const profile = data?.user || {};
+    //saving the listing information from QUERY_SINGLE_USER to profile items
     const items = profile?.items || {};
-    // console.log("PROFILE")
-    // console.log(profile)
-    // console.log("ITEMS")
-    // console.log(items)
 
-
+    //initializing the toggle function used to toggle the item modal to add and edit items
     const { isItemShowing, toggleItem } = useItemModal();
-
-    // const [addItem, { error, itemData }] = useMutation(ADD_ITEM);
-
-
+    
+    //using state to store/update the values inside the item modal
     const [addFormState, setAddFormState] = useState({
         _id: '',
         title: '',
@@ -56,23 +56,17 @@ export default function MyBounty() {
         category_name: '',
       });
 
-
-      const addHandleChange = (event) => {
+    //function to handle the changes to form state for the item modal to add/edit items
+    const addHandleChange = (event) => {
         const { name, value } = event.target;
-        // console.log("Name: " + name)
-        // console.log("Value: " + value)
-
-        // console.log("Change item id: " + itemID)
 
         setAddFormState({
         ...addFormState,
         [name]: value,
         });
 
-        // console.log(addFormState)
-
     };
-
+    //function to handle the form submit for adding items
     const addHandleFormSubmit = async (event) => {
         event.preventDefault();
 
@@ -134,19 +128,36 @@ export default function MyBounty() {
 
     };
 
-    const toggleAndEdit = async () => {
+    //function to handle toggling the item modal with 'Add Listing' is clicked
+    const toggleAndAdd = async () => {
         await toggleItem();
         const submitBtn = await document.querySelector("#create-edit-btn");
-        submitBtn.textContent = await "Save Changes";
+        submitBtn.textContent = await "Post Listing";
 
         const editForm = await document.querySelector("#create-edit-form");
-        // editForm.setAttribute('onSubmit', "{updateItemSubmit}")
+        editForm.setAttribute('onsubmit', addHandleFormSubmit)
 
         console.log(editForm)
 
 
     }
 
+    //function to handle toggling the item modal when 'Edit' is clicked on an item
+    const toggleAndEdit = async () => {
+        await setFormState(false);
+        await toggleItem();
+        const submitBtn = await document.querySelector("#create-edit-btn");
+        submitBtn.textContent = await "Save Changes";
+
+        const editForm = await document.querySelector("#create-edit-form");
+        editForm.setAttribute('onsubmit', updateItemSubmit)
+
+        console.log(editForm)
+
+
+    }
+
+    //function to handle updating the state of the form elements when a user wants to update an item
     const editButton = async (event) => {
 
         if(event.target !== event.currentTarget) {
@@ -177,14 +188,12 @@ export default function MyBounty() {
                 item_price: itemPrice,
                 category_name: itemCat,
               });
-                  
-                // console.log("NEW FORM STATE")
-                // console.log(addFormState);
-            
+                              
         }
 
     }
 
+    //function to handle the form submit when updating an item
     const updateItemSubmit = async (event) => {
         event.preventDefault();
         try { 
@@ -193,10 +202,6 @@ export default function MyBounty() {
     
             const sumbitPrice = parseFloat(addFormState.item_price)
             addFormState.item_price = sumbitPrice;
-
-            console.log(itemID)
-            console.log(addFormState)
-
 
             const { itemUpdateSumbit } = await updateItem({
             variables: {  
@@ -211,7 +216,7 @@ export default function MyBounty() {
         },
         });
 
-        //hides the signup modal
+        //hides the item modal
         toggleItem();
 
         setAddFormState({
@@ -224,6 +229,8 @@ export default function MyBounty() {
             item_price: '',
             category_name: '',
         });
+
+        setFormState(true);
 
 
         } catch (e) {
@@ -262,7 +269,7 @@ export default function MyBounty() {
             <div className="tab-content" id="v-pills-tabContent">
                 <div className="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                     <div className = "your-bounty">
-                        <button id="add-item" className="btn" type="button" onClick={toggleItem}>Add Item</button>
+                        <button id="add-item" className="btn" type="button" onClick={toggleAndAdd}>Add Listing</button>
                         <div className="items">
                             <DashboardCard editButton = {editButton} items={items} handleDelete={handleDelete} toggleItem={toggleAndEdit}/>
                         </div>
@@ -280,7 +287,7 @@ export default function MyBounty() {
               </div>
         )} */}
 
-        <ItemModal isItemShowing={isItemShowing} hide={toggleItem} addFormState={addFormState} addHandleChange={addHandleChange} addHandleFormSubmit={addHandleFormSubmit} updateItemSubmit={updateItemSubmit}/>
+        <ItemModal isItemShowing={isItemShowing} hide={toggleItem} addFormState={addFormState} addHandleChange={addHandleChange} addHandleFormSubmit={addHandleFormSubmit} updateItemSubmit={updateItemSubmit} addForm={formState}/>
                 
     </div>
     )
