@@ -191,8 +191,6 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
           },
 
-
-
           //Add createReview behind a login:
           createReview: async (_, args, context) => {//putting _ in place of 'parent'. Context is
             //related to checking for user auth as a basis for having permission to post a review
