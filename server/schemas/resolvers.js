@@ -139,7 +139,7 @@ const resolvers = {
                   new: true,
                   runValidators: true,
                 });
-                console.log(item2);
+                // console.log(item2);
               
               //Update a user with the created item:
               await User.findByIdAndUpdate(context.user._id, { $addToSet: { items: item2 } }, {
@@ -170,12 +170,29 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
           },
+          // removeItem: async (parent, { _id }, context) => {
+          //     if(context.user){
+          //       return Item.findOneAndDelete({ _id: _id });
+          //     }
+          //     throw new AuthenticationError('You need to be logged in!');
+          // },
+
           removeItem: async (parent, { _id }, context) => {
-              if(context.user){
-                return Item.findOneAndDelete({ _id: _id });
-              }
-              throw new AuthenticationError('You need to be logged in!');
+            if (context.user) {
+              const item = await Item.findOneAndDelete({_id: _id});
+      
+              await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { items: Item._id } }
+              );
+      
+              return item;
+            }
+            throw new AuthenticationError('You need to be logged in!');
           },
+
+
+
           //Add createReview behind a login:
           createReview: async (_, args, context) => {//putting _ in place of 'parent'. Context is
             //related to checking for user auth as a basis for having permission to post a review
