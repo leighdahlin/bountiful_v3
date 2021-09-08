@@ -12,6 +12,7 @@ import ItemModal from '../components/ItemModal';
 
 import { QUERY_SINGLE_USER } from '../utils/queries';
 import { ADD_ITEM } from '../utils/mutations';
+import { REMOVE_ITEM } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
@@ -19,6 +20,8 @@ export default function MyBounty() {
     // Auth.loggedIn();
 
     const { username } = useParams();
+
+    const [ removeItem ] = useMutation(REMOVE_ITEM);
 
     const { loading, data } = useQuery(QUERY_SINGLE_USER, {
         variables: { username: username },
@@ -107,10 +110,7 @@ export default function MyBounty() {
     
             // console.log("itemData Variable from addItem Mutation")
             // console.log(itemData);
-    
-            //authenticates user
-            // Auth.loggedIn();
-    
+        
             window.location.assign('/dashboard/'+ username);
     
             //hides the signup modal
@@ -124,27 +124,6 @@ export default function MyBounty() {
         }
         
 
-        // try {
-        //     console.log("INSIDE TRY FUNCTION TO ADD NEW ITEM")
-        // const { itemData } = await addItem({
-        //     variables: { ...addFormState },
-        // });
-
-        // console.log("itemData Variable from addItem Mutation")
-        // console.log(itemData);
-
-        // //authenticates user
-        // // Auth.loggedIn();
-
-        // window.location.assign('/dashboard/'+ username);
-
-        // //hides the signup modal
-        // toggleItem();
-
-        // } catch (e) {
-        // console.error(e);
-
-        // }
     };
 
     const editButton = (event) => {
@@ -153,6 +132,10 @@ export default function MyBounty() {
             console.log("TITLE")
             console.log(event.currentTarget.querySelector(".item-title"));
 
+            const itemID = event.currentTarget.querySelector(".edit-item").id;
+            console.log(itemID);      
+            
+            //gets the information for the item from the card
             const itemTitle = event.currentTarget.querySelector(".item-title").textContent.trim();
             const itemName = event.currentTarget.querySelector(".item-name").textContent.trim();
             const itemDescpt = event.currentTarget.querySelector(".item-description").textContent.trim();
@@ -161,28 +144,42 @@ export default function MyBounty() {
             const itemPrice = event.currentTarget.querySelector(".item-price").textContent.trim();
             const itemCat = event.currentTarget.querySelector(".item-categories").textContent.trim();
       
-      
+            //selects the inputs in the modal for each feild
+            // const submitBtn = document.querySelector("#create-edit-btn");
+            // const titleInpt = document.querySelector("#item-title");
+            // const nameInpt = document.querySelector("#item-name");
+            // const descptInpt = document.querySelector("#item-description");
+            // const unitInpt = document.querySelector("#item-unit");
+            // const quntyInpt = document.querySelector("#item-quantity");
+            // const priceInpt = document.querySelector("#item-price");
+            // const catInpt = document.querySelector("#item-categories");
             
-            console.log(itemTitle);
-            console.log(itemName);
-            console.log(itemDescpt);
-            console.log(itemUnit);
-            console.log(itemPrice);
-            console.log(itemCat);
-            console.log(itemQunty);
-    
+            // //inputs the values of the card into the modal for editing
+            // titleInpt.value = itemTitle;
+            // nameInpt.value = itemName;
+            // descptInpt.value = itemDescpt;
+            // unitInpt.value = itemUnit;
+            // quntyInpt.value = itemQunty;
+            // priceInpt.value = itemPrice;
+            // catInpt.value = itemCat;
+            // submitBtn.textContent = "Save Changes";
 
         }
 
     }
 
-    const handleDelete = (event) => {
+    const handleDelete = async (event) => {
 
         const id = event.target.getAttribute('data-id');
-        console.log(id)
+        console.log(id)    
 
         if (event.target.hasAttribute('data-id')) {
             console.log("DELETE")
+            const { data } = await removeItem({
+                variables: {         
+                _id: id,
+                },
+            })
 
         }
 

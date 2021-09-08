@@ -11,7 +11,7 @@ export default function DashboardCard({ editButton, items, handleDelete, toggleI
 
     if(items[0]){
         return items.map((item) => (
-            <div id = {item.id} key={item._id} className="card mb-3 item-card" style={{maxWidth: "500px"}} onClick={editButton}>
+            <div id = {item._id} key={item._id} className="card mb-3 item-card" style={{maxWidth: "500px"}} onClick={editButton}>
             <div className="row g-0">
                 <div className="col-md-4 card-pic">
                     <div className="item-buttons">
