@@ -17,8 +17,9 @@ import { REMOVE_ITEM } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
+let itemID
+
 export default function MyBounty() {
-    // Auth.loggedIn();
 
     const { username } = useParams();
 
@@ -45,6 +46,7 @@ export default function MyBounty() {
 
 
     const [addFormState, setAddFormState] = useState({
+        _id: '',
         title: '',
         item_name: '',
         item_description: '',
@@ -60,30 +62,25 @@ export default function MyBounty() {
         // console.log("Name: " + name)
         // console.log("Value: " + value)
 
+        // console.log("Change item id: " + itemID)
+
         setAddFormState({
         ...addFormState,
         [name]: value,
         });
 
-        console.log(addFormState)
+        // console.log(addFormState)
 
     };
 
     const addHandleFormSubmit = async (event) => {
         event.preventDefault();
-        // console.log("INSIDE ADD ITEM FORM SUBMIT");
-        // console.log(Auth.loggedIn());
-        // console.log("item price type");
-        // console.log(typeof(item_price));
 
         const sumbitQuantity = parseFloat(addFormState.item_quantity)
         addFormState.item_quantity = sumbitQuantity;
 
         const sumbitPrice = parseFloat(addFormState.item_price)
         addFormState.item_price = sumbitPrice;
-
-        // console.log(typeof(addFormState.item_quantity))
-        // console.log(typeof(addFormState.item_price))
 
         console.log({         
             title: addFormState.title,
@@ -98,7 +95,6 @@ export default function MyBounty() {
 
         if (Auth.loggedIn()){
             try {
-                // console.log("INSIDE TRY FUNCTION TO ADD NEW ITEM")
             const { itemDataSumbit } = await addItem({
                 variables: {         
                 title: addFormState.title,
@@ -111,14 +107,22 @@ export default function MyBounty() {
                 username:username
             },
             });
-    
-            // console.log("itemData Variable from addItem Mutation")
-            // console.log(itemData);
-        
+            
             window.location.assign('/dashboard/'+ username);
     
             //hides the signup modal
             toggleItem();
+
+            setAddFormState({
+                title: '',
+                item_name: '',
+                item_description: '',
+                item_quantity: '',
+                item_unit: '',
+                item_price: '',
+                category_name: '',
+            });
+    
     
             } catch (e) {
             console.error(e);
@@ -135,10 +139,10 @@ export default function MyBounty() {
         const submitBtn = await document.querySelector("#create-edit-btn");
         submitBtn.textContent = await "Save Changes";
 
-        const editForm = await document.querySelector(".modal");
-        editForm.onSubmit = await updateItemSubmit();
+        const editForm = await document.querySelector("#create-edit-form");
+        // editForm.setAttribute('onSubmit', "{updateItemSubmit}")
 
-        console.log(submitBtn)
+        console.log(editForm)
 
 
     }
@@ -149,8 +153,9 @@ export default function MyBounty() {
             console.log("TITLE")
             console.log(event.currentTarget.querySelector(".item-title"));
 
-            const itemID = event.currentTarget.querySelector(".edit-item").id;
-            console.log(itemID);      
+            itemID = event.currentTarget.querySelector("#card-id").getAttribute('data-id');
+            // console.log(itemID);
+            console.log("ITEM ID: " + itemID);      
             
             //gets the information for the item from the card
             const itemTitle = event.currentTarget.querySelector(".item-title").textContent.trim();
@@ -163,6 +168,7 @@ export default function MyBounty() {
         
             
             setAddFormState({
+                _id: itemID,
                 title: itemTitle,
                 item_name: itemName,
                 item_description: itemDescpt,
@@ -171,16 +177,30 @@ export default function MyBounty() {
                 item_price: itemPrice,
                 category_name: itemCat,
               });
-                console.log("NEW FORM STATE")
-                console.log(addFormState);
+                  
+                // console.log("NEW FORM STATE")
+                // console.log(addFormState);
             
         }
 
     }
 
     const updateItemSubmit = async (event) => {
-        try { const { itemUpdateSumbit } = await updateItem({
-            variables: {         
+        event.preventDefault();
+        try { 
+            const sumbitQuantity = parseFloat(addFormState.item_quantity)
+            addFormState.item_quantity = sumbitQuantity;
+    
+            const sumbitPrice = parseFloat(addFormState.item_price)
+            addFormState.item_price = sumbitPrice;
+
+            console.log(itemID)
+            console.log(addFormState)
+
+
+            const { itemUpdateSumbit } = await updateItem({
+            variables: {  
+            _id: addFormState._id,       
             title: addFormState.title,
             item_name: addFormState.item_name,
             item_description: addFormState.item_description,
@@ -188,29 +208,28 @@ export default function MyBounty() {
             item_unit: addFormState.item_unit,
             item_price: addFormState.item_price,
             category_name: addFormState.category_name,
-            username:username
         },
         });
 
-        // console.log("itemData Variable from addItem Mutation")
-        // console.log(itemData);
-    
-        window.location.assign('/dashboard/'+ username);
-
-        const editForm = await document.querySelector(".modal");
-        editForm.onClick = await addHandleFormSubmit();
-
-
         //hides the signup modal
         toggleItem();
+
+        setAddFormState({
+            _id: '',
+            title: '',
+            item_name: '',
+            item_description: '',
+            item_quantity: '',
+            item_unit: '',
+            item_price: '',
+            category_name: '',
+        });
+
 
         } catch (e) {
         console.error(e);
 
         }
-
-
-
     }
 
     const handleDelete = async (event) => {
@@ -227,8 +246,6 @@ export default function MyBounty() {
             });
 
         }
-
-        window.location.assign('/dashboard/'+ username);
 
     }
 
@@ -263,7 +280,7 @@ export default function MyBounty() {
               </div>
         )} */}
 
-        <ItemModal isItemShowing={isItemShowing} hide={toggleItem} addFormState={addFormState} addHandleChange={addHandleChange} addHandleFormSubmit={addHandleFormSubmit}/>
+        <ItemModal isItemShowing={isItemShowing} hide={toggleItem} addFormState={addFormState} addHandleChange={addHandleChange} addHandleFormSubmit={addHandleFormSubmit} updateItemSubmit={updateItemSubmit}/>
                 
     </div>
     )

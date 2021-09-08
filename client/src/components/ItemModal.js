@@ -4,13 +4,13 @@ import ReactDOM from 'react-dom';
 import logo from "../assets/images/b-logo.png";
 
 
-const ItemModal = ({ isItemShowing, hide, addFormState, addHandleChange , addHandleFormSubmit}) => isItemShowing ? ReactDOM.createPortal(
+const ItemModal = ({ isItemShowing, hide, addFormState, addHandleChange , addHandleFormSubmit, updateItemSubmit}) => isItemShowing ? ReactDOM.createPortal(
     <React.Fragment>
     <div className="modal" data-bs-backdrop="static" id="staticBackdrop">
         <form
         id="create-edit-form"
         className="modal-content animate newItemForm"
-        onSubmit={addHandleFormSubmit}
+        onSubmit={updateItemSubmit}
         >
         <div className="imgcontainer">
             <span
