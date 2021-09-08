@@ -27,10 +27,10 @@ export default function MyBounty() {
     // console.log(data)
     const profile = data?.user || {};
     const items = profile?.items || {};
-    console.log("PROFILE")
-    console.log(profile)
-    console.log("ITEMS")
-    console.log(items)
+    // console.log("PROFILE")
+    // console.log(profile)
+    // console.log("ITEMS")
+    // console.log(items)
 
 
     const { isItemShowing, toggleItem } = useItemModal();
@@ -91,7 +91,7 @@ export default function MyBounty() {
 
         if (Auth.loggedIn()){
             try {
-                console.log("INSIDE TRY FUNCTION TO ADD NEW ITEM")
+                // console.log("INSIDE TRY FUNCTION TO ADD NEW ITEM")
             const { itemDataSumbit } = await addItem({
                 variables: {         
                 title: addFormState.title,
@@ -105,8 +105,8 @@ export default function MyBounty() {
             },
             });
     
-            console.log("itemData Variable from addItem Mutation")
-            console.log(itemData);
+            // console.log("itemData Variable from addItem Mutation")
+            // console.log(itemData);
     
             //authenticates user
             // Auth.loggedIn();
@@ -147,6 +147,47 @@ export default function MyBounty() {
         // }
     };
 
+    const editButton = (event) => {
+
+        if(event.target !== event.currentTarget) {
+            console.log("TITLE")
+            console.log(event.currentTarget.querySelector(".item-title"));
+
+            const itemTitle = event.currentTarget.querySelector(".item-title").textContent.trim();
+            const itemName = event.currentTarget.querySelector(".item-name").textContent.trim();
+            const itemDescpt = event.currentTarget.querySelector(".item-description").textContent.trim();
+            const itemUnit = event.currentTarget.querySelector(".item-unit").textContent.trim();
+            const itemQunty = event.currentTarget.querySelector(".item-quantity").textContent.trim();
+            const itemPrice = event.currentTarget.querySelector(".item-price").textContent.trim();
+            const itemCat = event.currentTarget.querySelector(".item-categories").textContent.trim();
+      
+      
+            
+            console.log(itemTitle);
+            console.log(itemName);
+            console.log(itemDescpt);
+            console.log(itemUnit);
+            console.log(itemPrice);
+            console.log(itemCat);
+            console.log(itemQunty);
+    
+
+        }
+
+    }
+
+    const handleDelete = (event) => {
+
+        const id = event.target.getAttribute('data-id');
+        console.log(id)
+
+        if (event.target.hasAttribute('data-id')) {
+            console.log("DELETE")
+
+        }
+
+    }
+
     
     return(
     <div id="dashboard-image" className="dashboard-container">
@@ -162,7 +203,7 @@ export default function MyBounty() {
                     <div className = "your-bounty">
                         <button id="add-item" className="btn" type="button" onClick={toggleItem}>Add Item</button>
                         <div className="items">
-                            <DashboardCard toggleItem = {toggleItem} items={items}/>
+                            <DashboardCard editButton = {editButton} items={items} handleDelete={handleDelete} toggleItem={toggleItem}/>
                         </div>
                     </div>
                     </div>
