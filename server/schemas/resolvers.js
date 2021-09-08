@@ -104,7 +104,7 @@ const resolvers = {
       
             return { token, user };
         },
-        updateUser: async (parent, {args}, context) => {
+        updateUser: async (parent, args, context) => {
             if (context.user) {
               return User.findByIdAndUpdate(context.user.id, args, {
                 new: true,
