@@ -183,7 +183,11 @@ const resolvers = {
       
               await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $pull: { items: Item._id } }
+                { $pull: { items: item._id } },
+                {
+                  new: true,
+                  runValidators: true,
+                }
               );
       
               return item;
