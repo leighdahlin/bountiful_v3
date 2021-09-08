@@ -139,7 +139,7 @@ const resolvers = {
                   new: true,
                   runValidators: true,
                 });
-                console.log(item2);
+                // console.log(item2);
               
               //Update a user with the created item:
               await User.findByIdAndUpdate(context.user._id, { $addToSet: { items: item2 } }, {
