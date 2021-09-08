@@ -43,7 +43,7 @@ const userSchema = new Schema({
       createdAt: String
     }
   ],
-  carts: [Cart.schema]
+  // carts: [Cart.schema]
 });
 
 // middleware to create password

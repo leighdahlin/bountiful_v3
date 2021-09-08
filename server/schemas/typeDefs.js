@@ -10,7 +10,6 @@ const typeDefs = gql`
     email: String
     password: String
     items: [Item]
-    carts: [Cart]
   }
 
   type Category {
@@ -60,11 +59,6 @@ const typeDefs = gql`
     user: User
   }
 
-  type Cart {
-    _id: ID
-    purchaseDate: String
-    items: [Item]
-  }
 
   type Query {
     users: [User]
@@ -77,8 +71,7 @@ const typeDefs = gql`
     item(_id:ID!): Item
     getReviews: [Review]
     getReview(reviewId: ID!): Review
-    cart(_id: ID!): Cart
-    checkout(items: [ID]!): Checkout
+    
   }
 
   type Mutation {
@@ -87,7 +80,6 @@ const typeDefs = gql`
     updateUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): User
     createReview(body: String!, username: String!, createdAt: String!): Review
     deleteReview(_id: ID!): User!
-    addCart(items: [ID]!): Cart
 
     addItem(
       _id: ID
