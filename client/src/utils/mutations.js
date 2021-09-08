@@ -80,6 +80,21 @@ export const UPDATE_ITEM = gql`
   }
 `;
 
+export const REMOVE_ITEM = gql`
+  mutation removeItem($_id: ID!) {
+    removeItem(_id:$_id) {
+        _id
+        title
+        item_name
+        item_description
+        item_quantity
+        item_unit
+        item_price
+        category_name
+    }
+  }
+`;
+
 //TODO: CREATE_REVIEW
 //export const CREATE_REVIEW = gql`
 //  mutation createReview($_id: String!, $body: String!) {
