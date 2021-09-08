@@ -1,7 +1,7 @@
 import logo from "../assets/images/b-logo.png";
 import formatTime from "../utils/helpers.js";
 
-export default function DashboardCard({ toggleItem, items }) {
+export default function DashboardCard({ editButton, items, handleDelete, toggleItem }) {
 
     if(!items[0]){
         return(
@@ -11,7 +11,7 @@ export default function DashboardCard({ toggleItem, items }) {
 
     if(items[0]){
         return items.map((item) => (
-            <div id = {item.id} key={item._id} className="card mb-3 item-card" style={{maxWidth: "500px"}}>
+            <div id = {item._id} key={item._id} className="card mb-3 item-card" style={{maxWidth: "500px"}} onClick={editButton}>
             <div className="row g-0">
                 <div className="col-md-4 card-pic">
                     <div className="item-buttons">
@@ -33,7 +33,7 @@ export default function DashboardCard({ toggleItem, items }) {
                             <p className="card-text"><small className="text-muted">Date created: {formatTime(item.createdAt)}</small></p>
                             <div className="center-btns">
                                 <button id = {item.id} type="button" className="btn item-btn edit-item" onClick={toggleItem}>Edit</button>   
-                                <button type="button" className="btn item-btn delete-item" data-id={item.id}>Delete</button>           
+                                <button type="button" className="btn item-btn delete-item" data-id={item._id} onClick={handleDelete}>Delete</button>           
                             </div>
                         </div>
                 </div>
