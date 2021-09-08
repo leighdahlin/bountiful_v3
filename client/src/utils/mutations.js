@@ -91,9 +91,7 @@ export const REMOVE_ITEM = gql`
         item_unit
         item_price
         category_name
-        createdAt: String
-        user
-        reviews
+        createdAt
     }
   }
 `;

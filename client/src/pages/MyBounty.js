@@ -143,8 +143,18 @@ export default function MyBounty() {
             const itemQunty = event.currentTarget.querySelector(".item-quantity").textContent.trim();
             const itemPrice = event.currentTarget.querySelector(".item-price").textContent.trim();
             const itemCat = event.currentTarget.querySelector(".item-categories").textContent.trim();
-      
-            //selects the inputs in the modal for each feild
+            
+            setAddFormState({
+                title: itemTitle,
+                item_name: itemName,
+                item_description: itemDescpt,
+                item_quantity: itemQunty,
+                item_unit: itemUnit,
+                item_price: itemPrice,
+                category_name: itemCat,
+              });
+        
+            // selects the inputs in the modal for each feild
             // const submitBtn = document.querySelector("#create-edit-btn");
             // const titleInpt = document.querySelector("#item-title");
             // const nameInpt = document.querySelector("#item-name");
@@ -154,7 +164,7 @@ export default function MyBounty() {
             // const priceInpt = document.querySelector("#item-price");
             // const catInpt = document.querySelector("#item-categories");
             
-            // //inputs the values of the card into the modal for editing
+            //inputs the values of the card into the modal for editing
             // titleInpt.value = itemTitle;
             // nameInpt.value = itemName;
             // descptInpt.value = itemDescpt;
@@ -179,9 +189,11 @@ export default function MyBounty() {
                 variables: {         
                 _id: id,
                 },
-            })
+            });
 
         }
+
+        window.location.assign('/dashboard/'+ username);
 
     }
 
