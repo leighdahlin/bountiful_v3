@@ -219,6 +219,8 @@ export default function MyBounty() {
         //hides the item modal
         toggleItem();
 
+        window.location.assign('/dashboard/'+ username);
+
         setAddFormState({
             _id: '',
             title: '',
@@ -251,6 +253,8 @@ export default function MyBounty() {
                 _id: id,
                 },
             });
+
+            window.location.assign('/dashboard/'+ username);
 
         }
 
