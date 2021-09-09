@@ -41,7 +41,7 @@ export default function ProfileForm ({ profileState, profileHandleChange, submit
                 required
             />
             <label htmlFor="location-profile"><b>Location</b></label>
-            <select id="location-profile" name="location-profile" value={profileState.location} onChange={profileHandleChange} required>
+            <select id="location-profile" name="location" value={profileState.location} onChange={profileHandleChange} required>
                 <option value="Downtown Sacramento">Downtown Sacramento</option>
                 <option value="West Sacramento">West Sacramento</option>
                 <option value="East Sacramento">East Sacramento</option>

@@ -15,6 +15,9 @@ import Browse from './pages/Browse';
 import MyBounty from './pages/MyBounty';
 import SellerProfile from './pages/SellerProfile';
 import ViewSingleItem from './pages/ViewSingleItem';
+import { StoreProvider } from './utils/GlobalState';
+import Success from './pages/Success';
+import OrderHistory from './pages/OrderHistory';
 
 import Auth from './utils/auth';
 
@@ -46,6 +49,7 @@ function App() {
     <ApolloProvider client={client}>
     <Router>
       <Header />
+      <StoreProvider>
       <Switch>
         <Route exact path="/">
           <Homepage />
@@ -63,10 +67,17 @@ function App() {
         <Route exact path="/browse/item/:id">
           {!Auth.loggedIn() ? <Redirect to="/" /> : <ViewSingleItem />}
         </Route>
+        <Route exact path="/success">
+          {!Auth.loggedIn() ? <Redirect to="/" /> : <Success />}
+        </Route>
+        <Route exact path="/orderHistory">
+          {!Auth.loggedIn() ? <Redirect to="/" /> : <OrderHistory />}
+        </Route>
         <Route exact path="*">
           <Redirect to="/" />
         </Route>
       </Switch>
+      </StoreProvider>
     </Router>
     </ApolloProvider>
   );
