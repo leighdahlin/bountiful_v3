@@ -96,11 +96,18 @@ export const REMOVE_ITEM = gql`
   }
 `;
 
-//TODO: CREATE_REVIEW
-//export const CREATE_REVIEW = gql`
-//  mutation createReview($_id: String!, $body: String!) {
-//      review {
-//       
-//      }
-//  }
-//`;
+export const CREATE_REVIEW = gql`
+  mutation createReview($userId: ID!, $title: String!, $body: String!) {
+    createReview(userId: $userId, title: $title, body: $body) {
+      _id
+      title
+      body
+      createdAt
+      reviews {
+        _id
+        title
+        body
+      }
+    }
+  }
+`;
