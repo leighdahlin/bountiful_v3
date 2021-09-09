@@ -18,8 +18,8 @@ export const ADD_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation updateUser($first_name: String!, $last_name: String!, $location: String!, $username: String!, $email: String!, $password: String!) {
-    updateUser(first_name: $first_name, last_name: $last_name, location:$location, username:$username, email: $email, password: $password) {
+  mutation updateUser($first_name: String!, $last_name: String!, $location: String!, $username: String!, $email: String!) {
+    updateUser(first_name: $first_name, last_name: $last_name, location:$location, username:$username, email: $email) {
         _id
         first_name
         last_name
@@ -97,16 +97,21 @@ export const REMOVE_ITEM = gql`
 `;
 
 export const CREATE_REVIEW = gql`
-  mutation createReview($userId: ID!, $title: String!, $body: String!) {
-    createReview(userId: $userId, title: $title, body: $body) {
+  mutation createReview($userId: ID!, $title: String!, $body: String!, $reviewee: String!, $rating: Float) {
+    createReview(userId: $userId, title: $title, body: $body, reviewee: $reviewee, rating: $rating) {
       _id
       title
       body
       createdAt
+      reviewee
+      rating
       reviews {
         _id
         title
         body
+        createdAt
+        reviewee
+        rating
       }
     }
   }

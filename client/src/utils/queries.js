@@ -30,6 +30,8 @@ export const QUERY_SINGLE_USER = gql`
   query singleuser{
     user{
         _id
+        first_name
+        last_name
         username
         location
         email
@@ -152,6 +154,8 @@ export const QUERY_REVIEWS = gql`
       title
       body
       createdAt
+      reviewee
+      rating
     }
   }
 `;
@@ -164,6 +168,8 @@ export const QUERY_SINGLE_REVIEW = gql`
         title
         body
         createdAt
+        reviewee
+        rating
         user{
           _id
         }

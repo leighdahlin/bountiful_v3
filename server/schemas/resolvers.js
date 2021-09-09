@@ -111,7 +111,7 @@ const resolvers = {
         },
         updateUser: async (parent, args, context) => {
             if (context.user) {
-              return User.findByIdAndUpdate(context.user.id, args, {
+              return User.findByIdAndUpdate(context.user._id, args, {
                 new: true,
               });
             }
@@ -200,20 +200,28 @@ const resolvers = {
           },
 
           //Add createReview behind a login:
-          createReview: async (_, { userId, title, body }, context) => {
+          createReview: async (_, args, context) => {
       if (context.user) {
-        return User.findOneAndUpdate(
-          { _id: userId },
+        const review = await Review.create(args);
+
+        const review2 = await Review.findByIdAndUpdate({_id:review._id}, {$addToSet: {user: 
+        {_id:context.user._id, username: context.user.username}}},
+        {
+          new: true,
+          runValidators: true,
+        });
+      
+        await User.findByIdAndUpdate(context.user._id, 
           {
-            $addToSet: {
-              reviews: { title, body },
+            $addToSet: { reviews: review2 }
             },
-          },
+        
           {
             new: true,
             runValidators: true,
           }
         );
+        return review2;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
