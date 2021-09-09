@@ -156,6 +156,8 @@ export const QUERY_REVIEWS = gql`
       title
       body
       createdAt
+      reviewee
+      rating
     }
   }
 `;
@@ -168,6 +170,8 @@ export const QUERY_SINGLE_REVIEW = gql`
         title
         body
         createdAt
+        reviewee
+        rating
         user{
           _id
         }

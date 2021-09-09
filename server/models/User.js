@@ -37,29 +37,10 @@ const userSchema = new Schema({
       ref: "Item",
     },
   ],
-  ratings: [
-    {
-      username: {
-        type: String,
-        required: true,
-      }
-    }
-  ],
   reviews: [
     {
-      title: {
-        type: String,
-        required: true,
-      },
-      body: {
-        type: String,
-        required: true,
-      },
-      createdAt: {
-        type: String,
-        default: Date.now,
-        
-      },
+      type: Schema.Types.ObjectId,
+      ref: "Review",
     },
   ],
 });

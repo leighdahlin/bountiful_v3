@@ -1,6 +1,6 @@
 import profileImage from "../assets/images/UserProfile-1.png";
 //IMPORT RATING COMPONENT HERE?
-import Rating from './Rating'; 
+//import Rating from './Rating'; 
 
 export default function ProfileInfo({ profile }) {
     
