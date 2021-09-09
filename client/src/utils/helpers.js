@@ -8,7 +8,13 @@
 //   };
 
 export default function formatTime(date) {
-  return new Date(date).toLocaleDateString();
+  // console.log(date);
+  const newDate = parseInt(date);
+  // console.log("DATE");
+  // console.log(newDate);
+  const currentDate = new Date(newDate).toLocaleDateString();
+  // console.log(currentDate);
+  return currentDate;
 };
 
 //Helper for the cart:

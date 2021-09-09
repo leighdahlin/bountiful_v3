@@ -25,12 +25,8 @@ const resolvers = {
         //     return Item.find(params).populate('category');
         //   },
         itemscat: async(parent, {category_name}) =>{
-          console.log("IN ITEMS CAT")
-          console.log(category_name)
-
-          return Item.find({category_name:category_name}).populate({
-            path:'user'
-          });
+          const filteredItems = await Item.find({category_name:category_name}).populate('user');
+          return filteredItems;
         },
         itemsuser: async(parent, args, context) =>{
           return Item.find({username: context.user.username});
