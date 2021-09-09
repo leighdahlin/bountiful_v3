@@ -44,7 +44,12 @@ const resolvers = {
             });
         },
         //get review and get reviews Queries:
-        reviews: async () => Review.find(),
+        reviews: async (parent, { reviewee }) => { 
+          console.log("username: " + reviewee)
+          console.log("IN QUERY REVIEW")
+          return Review.find({ reviewee: reviewee }).populate({
+          path:'user'
+        })},
         
         review: async (parent, { reviewId }) => {
           return Review.findOne({ _id: reviewId });
@@ -200,7 +205,7 @@ const resolvers = {
           },
 
           //Add createReview behind a login:
-          createReview: async (_, args, context) => {
+      createReview: async (parent, args, context) => {
       if (context.user) {
         const review = await Review.create(args);
 
@@ -221,6 +226,7 @@ const resolvers = {
             runValidators: true,
           }
         );
+        console.log(review2)
         return review2;
       }
       throw new AuthenticationError('You need to be logged in!');

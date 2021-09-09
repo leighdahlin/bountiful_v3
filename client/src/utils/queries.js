@@ -148,14 +148,18 @@ export const QUERY_CATEGORIES = gql`
 
 //Query all reviews:
 export const QUERY_REVIEWS = gql`
-  query getReviews {
-    reviews {
+  query getReviews($reviewee: String!) {
+    reviews(reviewee: $reviewee) {
       _id
       title
       body
       createdAt
       reviewee
       rating
+      user{
+        _id
+        username
+      }
     }
   }
 `;

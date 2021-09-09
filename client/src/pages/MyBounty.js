@@ -28,7 +28,7 @@ export default function MyBounty() {
     let [formState, setFormState] = useState(true);
 
     //initializing mutations and queries
-    const [addItem, { error, itemData }] = useMutation(ADD_ITEM);
+    const [ addItem ] = useMutation(ADD_ITEM);
     const [ removeItem ] = useMutation(REMOVE_ITEM);
     const [ updateItem ] = useMutation(UPDATE_ITEM);
 

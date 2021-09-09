@@ -97,22 +97,14 @@ export const REMOVE_ITEM = gql`
 `;
 
 export const CREATE_REVIEW = gql`
-  mutation createReview($userId: ID!, $title: String!, $body: String!, $reviewee: String!, $rating: Float) {
-    createReview(userId: $userId, title: $title, body: $body, reviewee: $reviewee, rating: $rating) {
+  mutation createReview($title: String!, $body: String!, $reviewee: String!, $rating: Float) {
+    createReview(title: $title, body: $body, reviewee: $reviewee, rating: $rating) {
       _id
       title
       body
       createdAt
       reviewee
       rating
-      reviews {
-        _id
-        title
-        body
-        createdAt
-        reviewee
-        rating
-      }
     }
   }
 `;
