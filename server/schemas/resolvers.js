@@ -23,26 +23,25 @@ const resolvers = {
       
         //     return Item.find(params).populate('category');
         //   },
-        itemscat: async(parent, {category}) =>{
-          return Item.find({category:category});
+        itemscat: async(parent, {category_name}) =>{
+          return Item.find({category_name:category_name});
         },
-        itemsuser: async(parent, {username}) =>{
-          return Item.find({username:username});
+        itemsuser: async(parent, args, context) =>{
+          return Item.find({username: context.user.username});
         },
         //Single item search
-        item: async (parent, { itemId }) => {
-            return Item.findOne({ _id: itemId });
+        item: async (parent, { _id }) => {
+            return Item.findOne({ _id: _id }).populate('user');
         },
 
-        //Find a user based on the id (for a seller profile - does args bring in the correct id? Which one of these will work?)
-        // user: (parent, args) => {
-        //   return User.find((user) => user.id === args.id);
-        // },
-        user: async (parent, { username }) => {
+        //Find a seller based on the username: WORKING:
+        seller: async (parent, { username }) => {
             // console.log("++++++++++++++++++++++++++++++++")
             // console.log(username)
             // console.log("++++++++++++++++++++++++++++++++")
-            return User.findOne({ username: username });
+            return User.findOne({ username: username }).populate({
+              path:'items'
+            });
         },
         //get review and get reviews Queries:
         reviews: async () => Review.find(),
@@ -50,6 +49,40 @@ const resolvers = {
         review: async (parent, { reviewId }) => {
           return Review.findOne({ _id: reviewId });
         },
+
+        user: async (parent, args, context) => {
+          if(context.user){
+            const user = await User.findById(context.user._id).populate({
+              path: 'items'
+            });
+            return user;
+          }    
+      },
+
+
+        //TODO: getReviews and getReview Queries:
+        //reviews: async () => Review.find(),
+        /*async getReviews() {
+      try {
+        const reviews = await Review.find().sort({ createdAt: -1 });//tells Mongoose to sort reviews in descending order
+        return reviews;
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
+    
+    //async getReview(_, { itemId }) {
+      try {
+        const review = await Review.findById(itemId);
+        if (review) {
+          return review;
+        } else {
+          throw new Error('Review not found');
+        }
+      } catch (err) {
+        throw new Error(err);
+      }
+    }*/
     },
 
     Mutation: {
@@ -76,9 +109,9 @@ const resolvers = {
       
             return { token, user };
         },
-        updateUser: async (parent, {args}, context) => {
+        updateUser: async (parent, args, context) => {
             if (context.user) {
-              return User.findByIdAndUpdate(context.user.id, args, {
+              return User.findByIdAndUpdate(context.user._id, args, {
                 new: true,
               });
             }
@@ -87,10 +120,6 @@ const resolvers = {
         },
 
         // addItem: async (parent, args, context) => {
-        //     console.log(args)
-        //     console.log("INSIDE CREATE ITEM RESOLVER");
-        //     // console.log(context.data);
-        //     console.log(context.user);
         //     // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
         //     if (context.user) {
         //       return Item.create(args);
@@ -102,27 +131,41 @@ const resolvers = {
           addItem: async (parent, args, context) => {
       
             if (context.user) {
+              //Create the item with the arguments coming in from the form input:
               const item = await Item.create(args);
-              console.log(args);
-              console.log("INSIDE ADD ITEM RESOLVER");
-              console.log(item);
-      
-              await User.findByIdAndUpdate(context.user._id, { $addToSet: { items: item } });
-      
-              return item;
+              // console.log(args);
+              // console.log("INSIDE ADD ITEM RESOLVER");
+              // console.log(item);
+              // console.log(item._id);
+
+              const item2 = await Item.findByIdAndUpdate({_id:item._id}, {$addToSet: {user: 
+                {_id:context.user._id, username: context.user.username, location:context.user.location, email: context.user.email}}},
+                {
+                  new: true,
+                  runValidators: true,
+                });
+                // console.log(item2);
+              
+              //Update a user with the created item:
+              await User.findByIdAndUpdate(context.user._id, { $addToSet: { items: item2 } }, {
+                new: true,
+                runValidators: true,
+              });
+              //Update the item with the user that created the item from context:
+              
+              return item2;
             }
             // If user attempts to execute this mutation and isn't logged in, throw an error
             throw new AuthenticationError('You need to be logged in!');
           },
 
-          updateItem: async (parent, { title, item_name, item_description, item_quantity, item_unit, item_price, cat_name }, context) => {
+          updateItem: async (parent, { _id, title, item_name, item_description, item_quantity, item_unit, item_price, category_name }, context) => {
             if(context.user){
             return Item.findOneAndUpdate(
-              { _id: itemId },
+              { _id: _id },
               {
-                $addToSet: { title: title, item_name: item_name, item_description: item_description,
-                    item_quantity: item_quantity, item_unit: item_unit, item_price: item_price, cat_name: cat_name },
-              },
+                title: title, item_name: item_name, item_description: item_description,
+                    item_quantity: item_quantity, item_unit: item_unit, item_price: item_price, category_name: category_name },
               {
                 new: true,
                 runValidators: true,
@@ -131,27 +174,54 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
           },
-          removeItem: async (parent, { itemId }, context) => {
-              if(context.user){
-                return Item.findOneAndDelete({ _id: itemId });
-              }
-              throw new AuthenticationError('You need to be logged in!');
+          // removeItem: async (parent, { _id }, context) => {
+          //     if(context.user){
+          //       return Item.findOneAndDelete({ _id: _id });
+          //     }
+          //     throw new AuthenticationError('You need to be logged in!');
+          // },
+
+          removeItem: async (parent, { _id }, context) => {
+            if (context.user) {
+              const item = await Item.findOneAndDelete({_id: _id});
+      
+              await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { items: item._id } },
+                {
+                  new: true,
+                  runValidators: true,
+                }
+              );
+      
+              return item;
+            }
+            throw new AuthenticationError('You need to be logged in!');
           },
+
           //Add createReview behind a login:
-          createReview: async (_, { userId, title, body }, context) => {
+          createReview: async (_, args, context) => {
       if (context.user) {
-        return User.findOneAndUpdate(
-          { _id: userId },
+        const review = await Review.create(args);
+
+        const review2 = await Review.findByIdAndUpdate({_id:review._id}, {$addToSet: {user: 
+        {_id:context.user._id, username: context.user.username}}},
+        {
+          new: true,
+          runValidators: true,
+        });
+      
+        await User.findByIdAndUpdate(context.user._id, 
           {
-            $addToSet: {
-              reviews: { title, body },
+            $addToSet: { reviews: review2 }
             },
-          },
+        
           {
             new: true,
             runValidators: true,
           }
         );
+        return review2;
       }
       throw new AuthenticationError('You need to be logged in!');
     },

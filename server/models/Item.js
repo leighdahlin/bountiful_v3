@@ -29,11 +29,14 @@ const itemSchema = new Schema({
     type: String,
     required: true,
   },
-  // users: [{
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'User',
-  //   },
-  // ],
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    },
     
   // categories: [{
   //   type: Schema.Types.ObjectId,

@@ -43,6 +43,7 @@ const userSchema = new Schema({
       ref: "Review",
     },
   ],
+  // carts: [Cart.schema]
 });
 
 // middleware to create password

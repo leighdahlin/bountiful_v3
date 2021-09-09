@@ -28,9 +28,9 @@ const typeDefs = gql`
     item_unit: String
     item_price: Float
     category_name: String
+    createdAt: String
     user: User
-    category: Category
-    
+    reviews: [Review]!
   }
 
   type Review{
@@ -65,25 +65,27 @@ const typeDefs = gql`
     user: User
   }
 
+
   type Query {
     users: [User]
-    user(username:String!): User
+    user: User
+    seller(username:String): User
     categories: [Category]
     items: [Item]
-    itemscat(category:ID):[Item]
+    itemscat(category_name:String):[Item]
     itemsuser(username:String): [Item]
     item(_id:ID!): Item
     reviews: [Review]
     review(reviewId: ID!): Review
+
   }
 
   type Mutation {
     addUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    updateUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): User
-    createReview(userId: ID!, title: String, body: String!, createdAt: String, reviewee: String, rating: Float): User
-    deleteReview(userId: ID!, reviewId: ID!): User
-    rateUser(userId: ID!, rating_count:Float): User
+    updateUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!): User
+    createReview(body: String!, username: String!, createdAt: String!): Review
+    deleteReview(_id: ID!): User!
 
     addItem(
       _id: ID
@@ -104,9 +106,9 @@ const typeDefs = gql`
       item_quantity: Float
       item_unit: String
       item_price: Float
-      cat_name: String
+      category_name: String
     ): Item
-    removeItem( itemId: ID!): Item
+    removeItem( _id: ID!): Item
 
   }
 `;
