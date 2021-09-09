@@ -30,6 +30,8 @@ export const QUERY_SINGLE_USER = gql`
   query singleuser{
     user{
         _id
+        first_name
+        last_name
         username
         location
         email
@@ -150,17 +152,40 @@ export const QUERY_CHECKOUT = gql`
     checkout(items: $items) {
       session
     }
+  }`;
+
+
+//Query all reviews:
+export const QUERY_REVIEWS = gql`
+  query getReviews($reviewee: String!) {
+    reviews(reviewee: $reviewee) {
+      _id
+      title
+      body
+      createdAt
+      reviewee
+      rating
+      user{
+        _id
+        username
+      }
+    }
   }
 `;
 
-//TODO: QUERY REVIEWS
-//export const QUERY_REVIEWS = gql`
-//  {
-//    reviews {
-//     id
-//      createdAt
-//      username
-//      body
-//    }
-//  }
-//`;
+//Query a single review:
+export const QUERY_SINGLE_REVIEW = gql`
+  query getSingleReview($reviewId: ID!) {
+    review(reviewId: $reviewId) {
+        _id
+        title
+        body
+        createdAt
+        reviewee
+        rating
+        user{
+          _id
+        }
+      }
+    }
+`;

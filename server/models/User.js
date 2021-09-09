@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 const Order = require('./Order');
+//const dateFormat = require('../utils/dateFormat');
 
 const userSchema = new Schema({
   first_name: {
@@ -39,10 +40,9 @@ const userSchema = new Schema({
   ],
   reviews: [
     {
-      body: String,
-      username: String,
-      createdAt: String
-    }
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+    },
   ],
   orders: [Order.schema]
 });

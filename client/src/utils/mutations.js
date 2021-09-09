@@ -18,8 +18,8 @@ export const ADD_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation updateUser($first_name: String!, $last_name: String!, $location: String!, $username: String!, $email: String!, $password: String!) {
-    updateUser(first_name: $first_name, last_name: $last_name, location:$location, username:$username, email: $email, password: $password) {
+  mutation updateUser($first_name: String!, $last_name: String!, $location: String!, $username: String!, $email: String!) {
+    updateUser(first_name: $first_name, last_name: $last_name, location:$location, username:$username, email: $email) {
         _id
         first_name
         last_name
@@ -118,11 +118,16 @@ export const ADD_ORDER = gql`
   }
 `;
 
-//TODO: CREATE_REVIEW
-//export const CREATE_REVIEW = gql`
-//  mutation createReview($_id: String!, $body: String!) {
-//      review {
-//       
-//      }
-//  }
-//`;
+
+export const CREATE_REVIEW = gql`
+  mutation createReview($title: String!, $body: String!, $reviewee: String!, $rating: Float) {
+    createReview(title: $title, body: $body, reviewee: $reviewee, rating: $rating) {
+      _id
+      title
+      body
+      createdAt
+      reviewee
+      rating
+    }
+  }
+`;

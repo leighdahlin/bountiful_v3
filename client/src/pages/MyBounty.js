@@ -28,7 +28,7 @@ export default function MyBounty() {
     let [formState, setFormState] = useState(true);
 
     //initializing mutations and queries
-    const [addItem, { error, itemData }] = useMutation(ADD_ITEM);
+    const [ addItem ] = useMutation(ADD_ITEM);
     const [ removeItem ] = useMutation(REMOVE_ITEM);
     const [ updateItem ] = useMutation(UPDATE_ITEM);
 
@@ -219,6 +219,8 @@ export default function MyBounty() {
         //hides the item modal
         toggleItem();
 
+        window.location.assign('/dashboard/'+ username);
+
         setAddFormState({
             _id: '',
             title: '',
@@ -251,6 +253,8 @@ export default function MyBounty() {
                 _id: id,
                 },
             });
+
+            window.location.assign('/dashboard/'+ username);
 
         }
 
