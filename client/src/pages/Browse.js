@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import BrowseCard from '../components/BrowseCard';
 
 import { useQuery } from '@apollo/client';
@@ -10,6 +11,21 @@ export default function Browse() {
     const allItems = data?.items || {};
     console.log(allItems)
 
+    const [categoryState, setCategoryState] = useState({
+        category_name: '',
+      });
+
+    const categoryChange = (event) => {
+        const { name, value } = event.target;
+
+        setCategoryState({
+        ...categoryState,
+        [name]: value,
+        });
+
+        console.log(categoryState)
+    };
+
     if(loading) {
         return <div>Loading...</div>
     }
@@ -20,8 +36,8 @@ export default function Browse() {
                 <div className="form-container">
                     <form className="browse-form">
                         {/* {{!-- <label for="item-categories"><h4 id="browse-cat" className="browse-cat">Browse by Category</h4></label> --}} */}
-                        <select id="item-categories" className="browse-cat" name="category">
-                            <option selected disabled hidden>Choose a Category</option>
+                        <select id="item-categories" className="browse-cat" name="category_name" value={categoryState.category_name} onChange={categoryChange}>
+                            <option value="" disabled selected>Choose a Category</option>
                             <option value="fruits" data-id="1">Fruits</option>
                             <option value="vegetables"data-id="2">Vegetables</option>
                             <option value="herbs" data-id="3">Herbs</option>
