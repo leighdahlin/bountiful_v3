@@ -12,7 +12,6 @@ const typeDefs = gql`
     password: String
     items: [Item]
     reviews: [Review]
-    ratings: [Rating]
   }
 
   type Category {
@@ -39,13 +38,10 @@ const typeDefs = gql`
     title: String!
     body: String!
     createdAt: String
+    reviewee: String!
+    rating: Float!
+    user: User
     
-  }
-
-  type Rating {
-    _id: ID
-    rating_count: Float
-    username: String
   }
 
   input ItemData {
