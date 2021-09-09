@@ -144,6 +144,15 @@ export const QUERY_CATEGORIES = gql`
   }
 `;
 
+//Query the checkout session:
+export const QUERY_CHECKOUT = gql`
+  query getCheckout($items: [ID]!) {
+    checkout(items: $items) {
+      session
+    }
+  }
+`;
+
 //TODO: QUERY REVIEWS
 //export const QUERY_REVIEWS = gql`
 //  {
