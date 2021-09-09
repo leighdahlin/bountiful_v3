@@ -19,21 +19,21 @@ export default function Review() {
 
   const reviewFormSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const mutationResponse = await createReview({
-        //* added this from mutations.js
-        variables: {
-          // reviewTitle: reviewContent.title,
-          body: reviewContent.review,
-          username: window.location.pathname.split("/")[2],
-          createdAt: new Date().toLocaleString(),
-          // starRating: reviewContent.rating,
-          // reviewee: reviewContent.reviewee,
-        },
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    // try {
+    //   const mutationResponse = await createReview({
+    //     //* added this from mutations.js
+    //     variables: {
+    //       // reviewTitle: reviewContent.title,
+    //       body: reviewContent.review,
+    //       username: window.location.pathname.split("/")[2],
+    //       createdAt: new Date().toLocaleString(),
+    //       // starRating: reviewContent.rating,
+    //       // reviewee: reviewContent.reviewee,
+    //     },
+    //   });
+    // } catch (e) {
+    //   console.log(e);
+    // }
   };
 
   return (
