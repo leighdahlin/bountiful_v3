@@ -6,7 +6,7 @@ export default function Review() {
     rating: 5,
     reviewee: "", //need a user ID
     title: "",
-    review: "",
+    body: "",
   });
 
   const reviewChange = (event) => {
@@ -53,13 +53,13 @@ export default function Review() {
             required
           />
           <label htmlFor="review-content">
-            <b>Review</b>
+            <b>Body</b>
           </label>
           <input
-            id="review"
+            id="body"
             type="text"
             placeholder="Enter Review"
-            name="review"
+            name="body"
             value={reviewContent.review}
             onChange={reviewChange}
             required
