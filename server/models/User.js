@@ -45,6 +45,7 @@ const userSchema = new Schema({
       }
     }
   ],
+
   reviews: [
     {
       title: {
@@ -62,6 +63,7 @@ const userSchema = new Schema({
       },
     },
   ],
+  // carts: [Cart.schema]
 });
 
 // middleware to create password

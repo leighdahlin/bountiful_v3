@@ -2,8 +2,8 @@ import { gql } from '@apollo/client';
 
 //Query one user and all their associated items for sale:
 export const QUERY_SELLER = gql`
-  query user($username: String!) {
-    user(username: $username) {
+  query singleSeller($username: String!) {
+    seller(username: $username) {
         _id
         first_name
         last_name
@@ -18,7 +18,8 @@ export const QUERY_SELLER = gql`
         item_quantity
         item_unit
         item_price
-        cat_name
+        category_name
+        createdAt
       }
     }
   }
@@ -26,8 +27,8 @@ export const QUERY_SELLER = gql`
 
 //Query a single user for the seller profile:
 export const QUERY_SINGLE_USER = gql`
-  query singleuser($username: String!) {
-    user(username: $username) {
+  query singleuser{
+    user{
         _id
         username
         location
@@ -41,6 +42,7 @@ export const QUERY_SINGLE_USER = gql`
           item_unit
           item_price
           category_name
+          createdAt
         }
     }
   }
@@ -57,15 +59,12 @@ export const QUERY_ITEMS = gql`
         item_quantity
         item_unit
         item_price
-        cat_name
+        category_name
+        createdAt
         user{
           _id
           username
           location
-        }
-        category{
-          _id
-          category_name
         }
     }
   }
@@ -94,8 +93,8 @@ export const QUERY_ITEMS_USER = gql`
 
 //Query a single item:
 export const QUERY_SINGLE_ITEM = gql`
-  query getSingleItem($itemId: ID!) {
-    item(itemId: $itemId) {
+  query getSingleItem($_id: ID!) {
+    item(_id: $_id) {
         _id
         title
         item_name
@@ -103,13 +102,13 @@ export const QUERY_SINGLE_ITEM = gql`
         item_quantity
         item_unit
         item_price
-        cat_name
+        category_name
+        createdAt
         user{
           _id
-        }
-        category{
-          _id
-          category_name
+          username
+          location
+          email
         }
       }
     }
@@ -117,8 +116,8 @@ export const QUERY_SINGLE_ITEM = gql`
 
 //Query items based on category:
 export const QUERY_CAT_ITEMS = gql`
-  query getItems($category: ID) {
-    itemscat(category: $category) {
+  query getItems($category_name:String!) {
+    itemscat(category_name: $category_name) {
         _id
         title
         item_name
@@ -126,14 +125,11 @@ export const QUERY_CAT_ITEMS = gql`
         item_quantity
         item_unit
         item_price
-        cat_name
+        category_name
         user{
           _id
+          username
         }
-      category {
-        _id
-        category_name
-      }
     }
   }
 `;
