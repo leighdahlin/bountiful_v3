@@ -1,16 +1,13 @@
 import profileImage from "../assets/images/UserProfile-1.png";
-<<<<<<< HEAD
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { UPDATE_USER } from '../utils/mutations';
-=======
+
 //IMPORT RATING COMPONENT HERE?
-<<<<<<< HEAD
+
 //import Rating from './Rating'; 
-=======
+
 import Rating from './Rating'; 
->>>>>>> main
->>>>>>> main
 
 export default function ProfileInfo({ profile }) {
 
