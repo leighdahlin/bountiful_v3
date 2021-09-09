@@ -111,7 +111,7 @@ const resolvers = {
         },
         updateUser: async (parent, args, context) => {
             if (context.user) {
-              return User.findByIdAndUpdate(context.user.id, args, {
+              return User.findByIdAndUpdate(context.user._id, args, {
                 new: true,
               });
             }
