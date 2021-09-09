@@ -37,6 +37,14 @@ const userSchema = new Schema({
       ref: "Item",
     },
   ],
+  ratings: [
+    {
+      username: {
+        type: String,
+        required: true,
+      }
+    }
+  ],
   reviews: [
     {
       title: {

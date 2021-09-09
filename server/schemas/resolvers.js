@@ -45,29 +45,12 @@ const resolvers = {
             // console.log("++++++++++++++++++++++++++++++++")
             return User.findOne({ username: username });
         },
-        //TODO: getReviews and getReview Queries:
-        //reviews: async () => Review.find(),
-        /*async getReviews() {
-      try {
-        const reviews = await Review.find().sort({ createdAt: -1 });//tells Mongoose to sort reviews in descending order
-        return reviews;
-      } catch (err) {
-        throw new Error(err);
-      }
-    },
-    
-    //async getReview(_, { itemId }) {
-      try {
-        const review = await Review.findById(itemId);
-        if (review) {
-          return review;
-        } else {
-          throw new Error('Review not found');
-        }
-      } catch (err) {
-        throw new Error(err);
-      }
-    }*/
+        //get review and get reviews Queries:
+        reviews: async () => Review.find(),
+        
+        review: async (parent, { reviewId }) => {
+          return Review.findOne({ _id: reviewId });
+        },
     },
 
     Mutation: {
@@ -183,6 +166,7 @@ const resolvers = {
             $pull: {
               reviews: { 
                 _id: reviewId,
+
                },
             },
           },

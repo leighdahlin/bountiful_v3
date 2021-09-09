@@ -12,6 +12,7 @@ const typeDefs = gql`
     password: String
     items: [Item]
     reviews: [Review]
+    ratings: [Rating]
   }
 
   type Category {
@@ -39,6 +40,12 @@ const typeDefs = gql`
     body: String!
     createdAt: String
     
+  }
+
+  type Rating {
+    _id: ID
+    rating_count: Float
+    username: String
   }
 
   input ItemData {
@@ -70,8 +77,8 @@ const typeDefs = gql`
     itemscat(category:ID):[Item]
     itemsuser(username:String): [Item]
     item(_id:ID!): Item
-    getReviews: [Review]
-    getReview(reviewId: ID!): Review
+    reviews: [Review]
+    review(reviewId: ID!): Review
   }
 
   type Mutation {
@@ -80,6 +87,7 @@ const typeDefs = gql`
     updateUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): User
     createReview(userId: ID!, title: String, body: String!, createdAt: String): User
     deleteReview(userId: ID!, reviewId: ID!): User
+    rateUser(userId: ID!, rating_count:Float): User
 
     addItem(
       _id: ID

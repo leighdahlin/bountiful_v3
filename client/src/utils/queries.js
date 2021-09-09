@@ -148,14 +148,29 @@ export const QUERY_CATEGORIES = gql`
   }
 `;
 
-//TODO: QUERY REVIEWS
-//export const QUERY_REVIEWS = gql`
-//  {
-//    reviews {
-//     id
-//      createdAt
-//      username
-//      body
-//    }
-//  }
-//`;
+//Query all reviews:
+export const QUERY_REVIEWS = gql`
+  query getReviews {
+    reviews {
+      _id
+      title
+      body
+      createdAt
+    }
+  }
+`;
+
+//Query a single review:
+export const QUERY_SINGLE_REVIEW = gql`
+  query getSingleReview($reviewId: ID!) {
+    review(reviewId: $reviewId) {
+        _id
+        title
+        body
+        createdAt
+        user{
+          _id
+        }
+      }
+    }
+`;
