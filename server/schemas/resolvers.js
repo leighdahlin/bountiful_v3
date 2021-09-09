@@ -1,5 +1,6 @@
 const { AuthenticationError, UserInputError } = require('apollo-server-express');
-const { User, Item, Category, Review } = require('../models');
+const { User, Item, Category, Order, Review } = require('../models');
+const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 const { signToken } = require('../utils/auth');
 
 
@@ -60,10 +61,58 @@ const resolvers = {
             const user = await User.findById(context.user._id).populate({
               path: 'items'
             });
+            //Sort the orders a user has made by most recent:
+            user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
             return user;
           }    
       },
-
+      order: async (parent, { _id }, context) => {
+        if (context.user) {
+          const user = await User.findById(context.user._id).populate({
+            path: 'orders.orderitems'
+          });
+  
+          return user.orders.id(_id);
+        }
+  
+        throw new AuthenticationError('Not logged in');
+      },
+      checkout: async (parent, args, context) => {
+        const url = new URL(context.headers.referer).origin;
+        const order = new Order({ orderitems: args.orderitems });
+        const line_items = [];
+  
+        const { orderitems } = await order.populate('orderitems').execPopulate();
+  
+        for (let i = 0; i < items.length; i++) {
+          const item = await stripe.orderitems.create({
+            item_name: orderitems[i].item_name,
+            item_description: orderitems[i].item_description,            
+          });
+  
+          const price = await stripe.prices.create({
+            item: item.id,
+            unit_amount: orderitems[i].item_quantity * orderitems[i].item_price,
+            currency: 'usd',
+          });
+  
+          line_items.push({
+            price: price.id,
+            quantity: 1
+          });
+        }
+  
+        const session = await stripe.checkout.sessions.create({
+          payment_method_types: ['card'],
+          line_items,
+          mode: 'payment',
+          success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `${url}/`
+        });
+  
+        return { session: session.id };
+      }
+    },
 
         //TODO: getReviews and getReview Queries:
         //reviews: async () => Review.find(),
@@ -88,7 +137,7 @@ const resolvers = {
         throw new Error(err);
       }
     }*/
-    },
+    
 
     Mutation: {
         login: async (parent, { email, password }) => {
@@ -179,12 +228,17 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
           },
-          // removeItem: async (parent, { _id }, context) => {
-          //     if(context.user){
-          //       return Item.findOneAndDelete({ _id: _id });
-          //     }
-          //     throw new AuthenticationError('You need to be logged in!');
-          // },
+          addOrder: async (parent, { items }, context) => {
+            if (context.user) {
+              const order = new Order({ items });
+      
+              await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+      
+              return order;
+            }
+      
+            throw new AuthenticationError('Not logged in');
+          },
 
           removeItem: async (parent, { _id }, context) => {
             if (context.user) {

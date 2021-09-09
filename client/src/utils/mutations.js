@@ -96,6 +96,29 @@ export const REMOVE_ITEM = gql`
   }
 `;
 
+export const ADD_ORDER = gql`
+  mutation addOrder($items: [ID]!) {
+    addOrder(items: $items) {
+      purchaseDate
+      items {
+        _id
+          title
+          item_name
+          item_description
+          item_quantity
+          item_unit
+          item_price
+          category_name
+          user{
+            _id
+            username
+          }
+      }
+    }
+  }
+`;
+
+
 export const CREATE_REVIEW = gql`
   mutation createReview($title: String!, $body: String!, $reviewee: String!, $rating: Float) {
     createReview(title: $title, body: $body, reviewee: $reviewee, rating: $rating) {
