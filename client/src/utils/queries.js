@@ -30,6 +30,8 @@ export const QUERY_SINGLE_USER = gql`
   query singleuser{
     user{
         _id
+        first_name
+        last_name
         username
         location
         email
