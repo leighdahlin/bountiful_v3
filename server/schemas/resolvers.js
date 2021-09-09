@@ -1,6 +1,5 @@
 const { AuthenticationError, UserInputError } = require('apollo-server-express');
-const { User, Item, Category } = require('../models');
-
+const { User, Item, Category, Review } = require('../models');
 const { signToken } = require('../utils/auth');
 
 
@@ -43,6 +42,12 @@ const resolvers = {
             return User.findOne({ username: username }).populate({
               path:'items'
             });
+        },
+        //get review and get reviews Queries:
+        reviews: async () => Review.find(),
+        
+        review: async (parent, { reviewId }) => {
+          return Review.findOne({ _id: reviewId });
         },
 
         user: async (parent, args, context) => {
@@ -195,31 +200,47 @@ const resolvers = {
           },
 
           //Add createReview behind a login:
-          createReview: async (_, args, context) => {//putting _ in place of 'parent'. Context is
-            //related to checking for user auth as a basis for having permission to post a review
-            //const user = checkAuth(context);
-            if (context.user) {
-              return Review.create(args);
-            }
-            throw new AuthenticationError('You need to be logged in!');
+          createReview: async (_, { userId, title, body }, context) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: userId },
+          {
+            $addToSet: {
+              reviews: { title, body },
+            },
           },
-    
-          //TODO: Add deleteReview behind a login:
-         // deleteReview: async (_, { reviewId }, context) => {
-            //try {
-             // const review = await Review.findById({id: reviewId});
-             // if (context.user) {
-             //   await review.delete();
-             //   return 'Review deleted successfully';
-             // } else {
-                //throw new AuthenticationError('Action not allowed');
-             // }
-           // } catch (err) {
-             // throw new Error(err);
-           // }
-          
-        },
-      };
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    //Delete a review behind a login:
+    deleteReview: async (_, { userId, reviewId }, context) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: userId },
+          {
+            $pull: {
+              reviews: { 
+                _id: reviewId,
+
+               },
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+  },
+  };
     
 
 

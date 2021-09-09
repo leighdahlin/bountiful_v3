@@ -1,4 +1,5 @@
 const { gql } = require('apollo-server-express');
+//const dateFormat = require('../utils/dateFormat');
 
 const typeDefs = gql`
   type User {
@@ -10,6 +11,8 @@ const typeDefs = gql`
     email: String
     password: String
     items: [Item]
+    reviews: [Review]
+    ratings: [Rating]
   }
 
   type Category {
@@ -32,10 +35,17 @@ const typeDefs = gql`
   }
 
   type Review{
-    _id: ID!
-    createdAt: String!
-    user: User
+    _id: ID
+    title: String!
     body: String!
+    createdAt: String
+    
+  }
+
+  type Rating {
+    _id: ID
+    rating_count: Float
+    username: String
   }
 
   input ItemData {
@@ -69,17 +79,18 @@ const typeDefs = gql`
     itemscat(category_name:String):[Item]
     itemsuser(username:String): [Item]
     item(_id:ID!): Item
-    getReviews: [Review]
-    getReview(reviewId: ID!): Review
-    
+    reviews: [Review]
+    review(reviewId: ID!): Review
+
   }
 
   type Mutation {
     addUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     updateUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): User
-    createReview(body: String!, username: String!, createdAt: String!): Review
-    deleteReview(_id: ID!): User!
+    createReview(userId: ID!, title: String, body: String!, createdAt: String): User
+    deleteReview(userId: ID!, reviewId: ID!): User
+    rateUser(userId: ID!, rating_count:Float): User
 
     addItem(
       _id: ID
