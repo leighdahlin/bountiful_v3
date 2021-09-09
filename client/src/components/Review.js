@@ -65,7 +65,6 @@ export default function Review() {
             required
           />
         </div>
-        //TODO add seller
         <div className="container" style={{ background: "var(--gray)" }}>
           <button type="submit" className="submitbtn">
             Submit Review
