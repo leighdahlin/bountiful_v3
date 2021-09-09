@@ -97,9 +97,16 @@ const profile = reviewData?.review || {};
             onChange={reviewChange}
             required
           />
+
+          <label htmlFor="rating">
+            <b>Rating</b>
+          </label>
           <div className="slidecontainer">
-            <input type="range" min="1" max="5" value="50" className="slider" id="myRange" name="rating" value={reviewContent.rating} onChange={reviewChange}/>
+            <span>0</span>
+            <input id="rating" type="range" min="1" max="5" value="50" className="slider" id="myRange" name="rating" value={reviewContent.rating} onChange={reviewChange}/>
+            <span>5</span>
           </div>
+
         </div>
         <div className="container" style={{ background: "var(--gray)" }}>
           <button type="submit" className="submitbtn">

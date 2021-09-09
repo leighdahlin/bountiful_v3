@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { useMutation } from '@apollo/client';
 
-import ProfileInfo from '../components/ProfileInfo';
+import ProfileCard from '../components/ProfileCard';
 import DashboardCard from '../components/DashboardCard';
 import useItemModal from '../assets/js/useItemModal';
 import ItemModal from '../components/ItemModal';
@@ -279,7 +279,7 @@ export default function MyBounty() {
                         </div>
                     </div>
                     </div>
-                <div className="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"><ProfileInfo profile={profile}/></div>
+                <div className="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"><ProfileCard profile={profile}/></div>
                 <div className="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
                 <div className="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab"></div>
             </div>
