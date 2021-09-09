@@ -13,8 +13,8 @@ const reviewSchema = new Schema({
     },
   createdAt: {
     type: String,
-    //default: Date.now,
-    //get: (timestamp) => dateFormat(timestamp),
+    default: Date.now,
+    
   },
   users: [{
     type: Schema.Types.ObjectId,

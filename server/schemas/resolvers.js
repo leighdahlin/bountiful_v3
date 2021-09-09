@@ -1,6 +1,5 @@
 const { AuthenticationError, UserInputError } = require('apollo-server-express');
-const { User, Item, Category } = require('../models');
-const Review = require('../models/Review');
+const { User, Item, Category, Review } = require('../models');
 const { signToken } = require('../utils/auth');
 
 

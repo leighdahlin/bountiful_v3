@@ -57,8 +57,8 @@ const userSchema = new Schema({
       },
       createdAt: {
         type: String,
-        //default: Date.now,
-        //get: (timestamp) => dateFormat(timestamp),
+        default: Date.now,
+        
       },
     },
   ],
