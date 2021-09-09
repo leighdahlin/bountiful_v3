@@ -12,36 +12,41 @@ import ItemModal from '../components/ItemModal';
 
 import { QUERY_SINGLE_USER } from '../utils/queries';
 import { ADD_ITEM } from '../utils/mutations';
+import { UPDATE_ITEM } from '../utils/mutations';
 import { REMOVE_ITEM } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
-export default function MyBounty() {
-    // Auth.loggedIn();
+let itemID
 
+export default function MyBounty() {
+
+    //extract username from params and save it to a variable
     const { username } = useParams();
 
+    //if true, using the item modal to add an item, if false, using modal to edit an item
+    let [formState, setFormState] = useState(true);
+
+    //initializing mutations and queries
+    const [addItem, { error, itemData }] = useMutation(ADD_ITEM);
     const [ removeItem ] = useMutation(REMOVE_ITEM);
+    const [ updateItem ] = useMutation(UPDATE_ITEM);
 
     const { loading, data } = useQuery(QUERY_SINGLE_USER, {
         variables: { username: username },
       });
-          
-    // console.log(data)
+    
+    //saving the user information from QUERY_SINGLE_USER to profile variable
     const profile = data?.user || {};
+    //saving the listing information from QUERY_SINGLE_USER to profile items
     const items = profile?.items || {};
-    // console.log("PROFILE")
-    // console.log(profile)
-    // console.log("ITEMS")
-    // console.log(items)
 
-
+    //initializing the toggle function used to toggle the item modal to add and edit items
     const { isItemShowing, toggleItem } = useItemModal();
-
-    // const [addItem, { error, itemData }] = useMutation(ADD_ITEM);
-
-
+    
+    //using state to store/update the values inside the item modal
     const [addFormState, setAddFormState] = useState({
+        _id: '',
         title: '',
         item_name: '',
         item_description: '',
@@ -51,12 +56,9 @@ export default function MyBounty() {
         category_name: '',
       });
 
-      const [addItem, { error, itemData }] = useMutation(ADD_ITEM);
-
-      const addHandleChange = (event) => {
+    //function to handle the changes to form state for the item modal to add/edit items
+    const addHandleChange = (event) => {
         const { name, value } = event.target;
-        // console.log("Name: " + name)
-        // console.log("Value: " + value)
 
         setAddFormState({
         ...addFormState,
@@ -64,22 +66,15 @@ export default function MyBounty() {
         });
 
     };
-
+    //function to handle the form submit for adding items
     const addHandleFormSubmit = async (event) => {
         event.preventDefault();
-        // console.log("INSIDE ADD ITEM FORM SUBMIT");
-        // console.log(Auth.loggedIn());
-        // console.log("item price type");
-        // console.log(typeof(item_price));
 
         const sumbitQuantity = parseFloat(addFormState.item_quantity)
         addFormState.item_quantity = sumbitQuantity;
 
         const sumbitPrice = parseFloat(addFormState.item_price)
         addFormState.item_price = sumbitPrice;
-
-        // console.log(typeof(addFormState.item_quantity))
-        // console.log(typeof(addFormState.item_price))
 
         console.log({         
             title: addFormState.title,
@@ -94,7 +89,6 @@ export default function MyBounty() {
 
         if (Auth.loggedIn()){
             try {
-                // console.log("INSIDE TRY FUNCTION TO ADD NEW ITEM")
             const { itemDataSumbit } = await addItem({
                 variables: {         
                 title: addFormState.title,
@@ -107,14 +101,22 @@ export default function MyBounty() {
                 username:username
             },
             });
-    
-            // console.log("itemData Variable from addItem Mutation")
-            // console.log(itemData);
-        
+            
             window.location.assign('/dashboard/'+ username);
     
             //hides the signup modal
             toggleItem();
+
+            setAddFormState({
+                title: '',
+                item_name: '',
+                item_description: '',
+                item_quantity: '',
+                item_unit: '',
+                item_price: '',
+                category_name: '',
+            });
+    
     
             } catch (e) {
             console.error(e);
@@ -126,14 +128,45 @@ export default function MyBounty() {
 
     };
 
-    const editButton = (event) => {
+    //function to handle toggling the item modal with 'Add Listing' is clicked
+    const toggleAndAdd = async () => {
+        await toggleItem();
+        const submitBtn = await document.querySelector("#create-edit-btn");
+        submitBtn.textContent = await "Post Listing";
+
+        const editForm = await document.querySelector("#create-edit-form");
+        editForm.setAttribute('onsubmit', addHandleFormSubmit)
+
+        console.log(editForm)
+
+
+    }
+
+    //function to handle toggling the item modal when 'Edit' is clicked on an item
+    const toggleAndEdit = async () => {
+        await setFormState(false);
+        await toggleItem();
+        const submitBtn = await document.querySelector("#create-edit-btn");
+        submitBtn.textContent = await "Save Changes";
+
+        const editForm = await document.querySelector("#create-edit-form");
+        editForm.setAttribute('onsubmit', updateItemSubmit)
+
+        console.log(editForm)
+
+
+    }
+
+    //function to handle updating the state of the form elements when a user wants to update an item
+    const editButton = async (event) => {
 
         if(event.target !== event.currentTarget) {
             console.log("TITLE")
             console.log(event.currentTarget.querySelector(".item-title"));
 
-            const itemID = event.currentTarget.querySelector(".edit-item").id;
-            console.log(itemID);      
+            itemID = event.currentTarget.querySelector("#card-id").getAttribute('data-id');
+            // console.log(itemID);
+            console.log("ITEM ID: " + itemID);      
             
             //gets the information for the item from the card
             const itemTitle = event.currentTarget.querySelector(".item-title").textContent.trim();
@@ -143,8 +176,10 @@ export default function MyBounty() {
             const itemQunty = event.currentTarget.querySelector(".item-quantity").textContent.trim();
             const itemPrice = event.currentTarget.querySelector(".item-price").textContent.trim();
             const itemCat = event.currentTarget.querySelector(".item-categories").textContent.trim();
+        
             
             setAddFormState({
+                _id: itemID,
                 title: itemTitle,
                 item_name: itemName,
                 item_description: itemDescpt,
@@ -153,29 +188,55 @@ export default function MyBounty() {
                 item_price: itemPrice,
                 category_name: itemCat,
               });
-        
-            // selects the inputs in the modal for each feild
-            // const submitBtn = document.querySelector("#create-edit-btn");
-            // const titleInpt = document.querySelector("#item-title");
-            // const nameInpt = document.querySelector("#item-name");
-            // const descptInpt = document.querySelector("#item-description");
-            // const unitInpt = document.querySelector("#item-unit");
-            // const quntyInpt = document.querySelector("#item-quantity");
-            // const priceInpt = document.querySelector("#item-price");
-            // const catInpt = document.querySelector("#item-categories");
-            
-            //inputs the values of the card into the modal for editing
-            // titleInpt.value = itemTitle;
-            // nameInpt.value = itemName;
-            // descptInpt.value = itemDescpt;
-            // unitInpt.value = itemUnit;
-            // quntyInpt.value = itemQunty;
-            // priceInpt.value = itemPrice;
-            // catInpt.value = itemCat;
-            // submitBtn.textContent = "Save Changes";
-
+                              
         }
 
+    }
+
+    //function to handle the form submit when updating an item
+    const updateItemSubmit = async (event) => {
+        event.preventDefault();
+        try { 
+            const sumbitQuantity = parseFloat(addFormState.item_quantity)
+            addFormState.item_quantity = sumbitQuantity;
+    
+            const sumbitPrice = parseFloat(addFormState.item_price)
+            addFormState.item_price = sumbitPrice;
+
+            const { itemUpdateSumbit } = await updateItem({
+            variables: {  
+            _id: addFormState._id,       
+            title: addFormState.title,
+            item_name: addFormState.item_name,
+            item_description: addFormState.item_description,
+            item_quantity: addFormState.item_quantity,
+            item_unit: addFormState.item_unit,
+            item_price: addFormState.item_price,
+            category_name: addFormState.category_name,
+        },
+        });
+
+        //hides the item modal
+        toggleItem();
+
+        setAddFormState({
+            _id: '',
+            title: '',
+            item_name: '',
+            item_description: '',
+            item_quantity: '',
+            item_unit: '',
+            item_price: '',
+            category_name: '',
+        });
+
+        setFormState(true);
+
+
+        } catch (e) {
+        console.error(e);
+
+        }
     }
 
     const handleDelete = async (event) => {
@@ -193,8 +254,6 @@ export default function MyBounty() {
 
         }
 
-        window.location.assign('/dashboard/'+ username);
-
     }
 
     
@@ -210,9 +269,9 @@ export default function MyBounty() {
             <div className="tab-content" id="v-pills-tabContent">
                 <div className="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                     <div className = "your-bounty">
-                        <button id="add-item" className="btn" type="button" onClick={toggleItem}>Add Item</button>
+                        <button id="add-item" className="btn" type="button" onClick={toggleAndAdd}>Add Listing</button>
                         <div className="items">
-                            <DashboardCard editButton = {editButton} items={items} handleDelete={handleDelete} toggleItem={toggleItem}/>
+                            <DashboardCard editButton = {editButton} items={items} handleDelete={handleDelete} toggleItem={toggleAndEdit}/>
                         </div>
                     </div>
                     </div>
@@ -228,7 +287,7 @@ export default function MyBounty() {
               </div>
         )} */}
 
-        <ItemModal isItemShowing={isItemShowing} hide={toggleItem} addFormState={addFormState} addHandleChange={addHandleChange} addHandleFormSubmit={addHandleFormSubmit}/>
+        <ItemModal isItemShowing={isItemShowing} hide={toggleItem} addFormState={addFormState} addHandleChange={addHandleChange} addHandleFormSubmit={addHandleFormSubmit} updateItemSubmit={updateItemSubmit} addForm={formState}/>
                 
     </div>
     )

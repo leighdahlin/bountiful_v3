@@ -65,8 +65,8 @@ export const ADD_ITEM = gql`
 `;
 
 export const UPDATE_ITEM = gql`
-  mutation updateItem($title: String!, $item_name: String!, $item_description: String!, $item_quantity: Float!, $item_unit: String!, $item_price: Float, $category_name: String!) {
-    updateItem(title: $title, item_name: $item_name, item_description: $item_description,
+  mutation updateItem($_id: ID!, $title: String!, $item_name: String!, $item_description: String!, $item_quantity: Float!, $item_unit: String!, $item_price: Float, $category_name: String!) {
+    updateItem(_id: $_id, title: $title, item_name: $item_name, item_description: $item_description,
       item_quantity: $item_quantity, item_unit: $item_unit, item_price: $item_price, category_name: $category_name) {
         _id
         title

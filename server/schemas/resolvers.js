@@ -159,9 +159,8 @@ const resolvers = {
             return Item.findOneAndUpdate(
               { _id: _id },
               {
-                $addToSet: { title: title, item_name: item_name, item_description: item_description,
+                title: title, item_name: item_name, item_description: item_description,
                     item_quantity: item_quantity, item_unit: item_unit, item_price: item_price, category_name: category_name },
-              },
               {
                 new: true,
                 runValidators: true,

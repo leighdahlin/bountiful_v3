@@ -11,14 +11,14 @@ export default function DashboardCard({ editButton, items, handleDelete, toggleI
 
     if(items[0]){
         return items.map((item) => (
-            <div id = {item._id} key={item._id} className="card mb-3 item-card" style={{maxWidth: "500px"}} onClick={editButton}>
+            <div id = "item-card" key={item._id} className="card mb-3 item-card" style={{maxWidth: "500px"}} onClick={editButton}>
             <div className="row g-0">
                 <div className="col-md-4 card-pic">
                     <div className="item-buttons">
                     </div>
                     <img src={logo} className="img-fluid rounded-start items-b-logo" alt={item.item_name}/>
                 </div>
-                <div className="col-md-8">
+                <div id="card-id" className="col-md-8 card-id" data-id={item._id}>
                         <div className="card-title">
                             <h2 className="item-title"><strong>{item.title}</strong> </h2>
                         </div>
