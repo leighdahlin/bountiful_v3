@@ -75,7 +75,7 @@ const typeDefs = gql`
     itemscat(category_name:String):[Item]
     itemsuser(username:String): [Item]
     item(_id:ID!): Item
-    reviews: [Review]
+    reviews(reviewee:String): [Review]
     review(reviewId: ID!): Review
 
   }
@@ -84,7 +84,7 @@ const typeDefs = gql`
     addUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     updateUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!): User
-    createReview(body: String!, username: String!, createdAt: String!): Review
+    createReview(_id: ID, body: String!, reviewee: String!, title: String!, rating: Float): Review
     deleteReview(_id: ID!): User!
 
     addItem(
