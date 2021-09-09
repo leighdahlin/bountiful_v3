@@ -53,7 +53,7 @@ export default function Review() {
             required
           />
           <label htmlFor="review-content">
-            <b>Body</b>
+            <b>Review</b>
           </label>
           <input
             id="body"
