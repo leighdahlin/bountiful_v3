@@ -14,9 +14,16 @@ const reviewSchema = new Schema({
   createdAt: {
     type: String,
     default: Date.now,
-    
   },
-  users: [{
+  reviewee: {
+    type: String,
+    required: true,
+  },
+  rating: {
+    type: Number,
+    required: true,
+  },
+  user: [{
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'User'
