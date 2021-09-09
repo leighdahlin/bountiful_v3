@@ -10,6 +10,7 @@ const typeDefs = gql`
     email: String
     password: String
     items: [Item]
+    orders: [Order]
   }
 
   type Category {
@@ -58,7 +59,15 @@ const typeDefs = gql`
     token: ID!
     user: User
   }
+  type Checkout {
+    session: ID
+  }
 
+  type Order{
+    _id: ID
+    purchaseDate: String
+    orderitems: [Item]
+  }
 
   type Query {
     users: [User]
@@ -71,6 +80,8 @@ const typeDefs = gql`
     item(_id:ID!): Item
     getReviews: [Review]
     getReview(reviewId: ID!): Review
+    order(_id: ID!): Order
+    checkout(items: [ID]!): Checkout
     
   }
 
@@ -80,6 +91,7 @@ const typeDefs = gql`
     updateUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): User
     createReview(body: String!, username: String!, createdAt: String!): Review
     deleteReview(_id: ID!): User!
+    addOrder(items: [ID]!): Order
 
     addItem(
       _id: ID
