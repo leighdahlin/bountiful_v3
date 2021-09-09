@@ -59,6 +59,7 @@ const typeDefs = gql`
     user: User
   }
 
+
   type Query {
     users: [User]
     user: User
@@ -70,6 +71,7 @@ const typeDefs = gql`
     item(_id:ID!): Item
     getReviews: [Review]
     getReview(reviewId: ID!): Review
+    
   }
 
   type Mutation {

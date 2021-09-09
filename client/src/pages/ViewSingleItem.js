@@ -51,7 +51,7 @@ export default function ViewSingleItem() {
             <div className="page-container">
                 <div className="left-container">
                     <SellerProfileInfo userData = {userData}/>
-                    <Link className="seller-btn" to="/profile"><button>Go to Seller's Profile</button></Link>
+                    <Link className="seller-btn" to={`/profile/${userData.username}`}><button>Go to Seller's Profile</button></Link>
                 </div>
                 <div className="right-container">
                     <SingleItemInfo singleItemData = {itemData} />

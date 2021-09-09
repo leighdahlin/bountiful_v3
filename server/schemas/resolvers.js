@@ -104,7 +104,7 @@ const resolvers = {
       
             return { token, user };
         },
-        updateUser: async (parent, {args}, context) => {
+        updateUser: async (parent, args, context) => {
             if (context.user) {
               return User.findByIdAndUpdate(context.user.id, args, {
                 new: true,
@@ -139,7 +139,7 @@ const resolvers = {
                   new: true,
                   runValidators: true,
                 });
-                console.log(item2);
+                // console.log(item2);
               
               //Update a user with the created item:
               await User.findByIdAndUpdate(context.user._id, { $addToSet: { items: item2 } }, {
@@ -159,9 +159,8 @@ const resolvers = {
             return Item.findOneAndUpdate(
               { _id: _id },
               {
-                $addToSet: { title: title, item_name: item_name, item_description: item_description,
+                title: title, item_name: item_name, item_description: item_description,
                     item_quantity: item_quantity, item_unit: item_unit, item_price: item_price, category_name: category_name },
-              },
               {
                 new: true,
                 runValidators: true,
@@ -170,12 +169,31 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
           },
+          // removeItem: async (parent, { _id }, context) => {
+          //     if(context.user){
+          //       return Item.findOneAndDelete({ _id: _id });
+          //     }
+          //     throw new AuthenticationError('You need to be logged in!');
+          // },
+
           removeItem: async (parent, { _id }, context) => {
-              if(context.user){
-                return Item.findOneAndDelete({ _id: _id });
-              }
-              throw new AuthenticationError('You need to be logged in!');
+            if (context.user) {
+              const item = await Item.findOneAndDelete({_id: _id});
+      
+              await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { items: item._id } },
+                {
+                  new: true,
+                  runValidators: true,
+                }
+              );
+      
+              return item;
+            }
+            throw new AuthenticationError('You need to be logged in!');
           },
+
           //Add createReview behind a login:
           createReview: async (_, args, context) => {//putting _ in place of 'parent'. Context is
             //related to checking for user auth as a basis for having permission to post a review
