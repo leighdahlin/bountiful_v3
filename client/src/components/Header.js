@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Nav from './Navbar';
+import Cart from './Cart/Cart';
 
 import logo from "../assets/images/b-logo.png";
 
@@ -19,6 +20,7 @@ export default function Header() {
               </div>
             </div>
           </nav>
+          <Cart />
     </header>
     
     )

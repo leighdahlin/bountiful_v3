@@ -48,8 +48,8 @@ function App() {
   return (
     <ApolloProvider client={client}>
     <Router>
-      <Header />
       <StoreProvider>
+      <Header />
       <Switch>
         <Route exact path="/">
           <Homepage />
