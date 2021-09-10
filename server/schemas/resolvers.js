@@ -1,29 +1,12 @@
 const { AuthenticationError, UserInputError } = require('apollo-server-express');
-const { User, Item, Category, Order, Review } = require('../models');
+const { User, Item, Order, Review } = require('../models');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 const { signToken } = require('../utils/auth');
 
 
 const resolvers = {
     Query: {
-        categories: async () => Category.find(),
         items: async () => Item.find(),
-        //Find items by category or username:
-        // items: async (parent, { category, username }) => {
-        //     const params = {};
-      
-        //     if (category) {
-        //       params.category = category;
-        //     }
-      
-        //     if (username) {
-        //       params.username = {
-        //         $regex: username,
-        //       };
-        //     }
-      
-        //     return Item.find(params).populate('category');
-        //   },
         itemscat: async(parent, {category_name}) =>{
           const filteredItems = await Item.find({category_name:category_name}).populate('user');
           return filteredItems;
@@ -47,8 +30,8 @@ const resolvers = {
         },
         //get review and get reviews Queries:
         reviews: async (parent, { reviewee }) => { 
-          console.log("username: " + reviewee)
-          console.log("IN QUERY REVIEW")
+          // console.log("username: " + reviewee)
+          // console.log("IN QUERY REVIEW")
           return Review.find({ reviewee: reviewee }).populate({
           path:'user'
         })},
@@ -174,15 +157,6 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        // addItem: async (parent, args, context) => {
-        //     // If context has a `user` property, that means the user executing this mutation has a valid JWT and is logged in
-        //     if (context.user) {
-        //       return Item.create(args);
-        //     }
-        //     // If user attempts to execute this mutation and isn't logged in, throw an error
-        //     throw new AuthenticationError('You need to be logged in!');
-        //   },
-
           addItem: async (parent, args, context) => {
       
             if (context.user) {
@@ -193,6 +167,7 @@ const resolvers = {
               // console.log(item);
               // console.log(item._id);
 
+              //Since the item also has an associated user, update the created item with the user information:
               const item2 = await Item.findByIdAndUpdate({_id:item._id}, {$addToSet: {user: 
                 {_id:context.user._id, username: context.user.username, location:context.user.location, email: context.user.email}}},
                 {
@@ -205,9 +180,7 @@ const resolvers = {
               await User.findByIdAndUpdate(context.user._id, { $addToSet: { items: item2 } }, {
                 new: true,
                 runValidators: true,
-              });
-              //Update the item with the user that created the item from context:
-              
+              });              
               return item2;
             }
             // If user attempts to execute this mutation and isn't logged in, throw an error
