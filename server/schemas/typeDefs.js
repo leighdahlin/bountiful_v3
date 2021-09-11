@@ -10,13 +10,11 @@ const typeDefs = gql`
     location: String
     email: String
     password: String
+    signedRequest: String
+    picURL: String
     items: [Item]
+    orders: [Order]
     reviews: [Review]
-  }
-
-  type Category {
-    _id: ID
-    category_name: String
   }
 
   type Item {
@@ -44,38 +42,32 @@ const typeDefs = gql`
     
   }
 
-  input ItemData {
-    _id: ID
-    title: String
-    item_name: String
-    item_description: String
-    item_quantity: Float
-    item_unit: String
-    item_price: Float
-    cat_name: String
-  }
-
-  type itemResponse{
-    success: Boolean
-    item: Item
-  }
-
   type Auth {
     token: ID!
     user: User
   }
+  type Checkout {
+    session: ID
+  }
 
+  type Order{
+    _id: ID
+    purchaseDate: String
+    orderitems: [Item]
+  }
 
+  
   type Query {
     users: [User]
     user: User
     seller(username:String): User
-    categories: [Category]
     items: [Item]
     itemscat(category_name:String):[Item]
     itemsuser(username:String): [Item]
     item(_id:ID!): Item
-    reviews: [Review]
+    order(_id: ID!): Order
+    checkout(items: [ID]!): Checkout   
+    reviews(reviewee:String): [Review]
     review(reviewId: ID!): Review
 
   }
@@ -84,8 +76,9 @@ const typeDefs = gql`
     addUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     updateUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!): User
-    createReview(body: String!, username: String!, createdAt: String!): Review
+    createReview(_id: ID, body: String!, reviewee: String!, title: String!, rating: Float): Review
     deleteReview(_id: ID!): User!
+    addOrder(items: [ID]!): Order
 
     addItem(
       _id: ID

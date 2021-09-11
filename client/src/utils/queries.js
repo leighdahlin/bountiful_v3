@@ -136,26 +136,30 @@ export const QUERY_CAT_ITEMS = gql`
   }
 `;
 
-//Query all the categories:
-export const QUERY_CATEGORIES = gql`
-  {
-    categories {
-      _id
-      category_name
+
+//Query the checkout session:
+export const QUERY_CHECKOUT = gql`
+  query getCheckout($items: [ID]!) {
+    checkout(items: $items) {
+      session
     }
-  }
-`;
+  }`;
+
 
 //Query all reviews:
 export const QUERY_REVIEWS = gql`
-  query getReviews {
-    reviews {
+  query getReviews($reviewee: String!) {
+    reviews(reviewee: $reviewee) {
       _id
       title
       body
       createdAt
       reviewee
       rating
+      user{
+        _id
+        username
+      }
     }
   }
 `;

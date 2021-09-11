@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
+const Order = require('./Order');
 //const dateFormat = require('../utils/dateFormat');
 
 const userSchema = new Schema({
@@ -31,6 +32,12 @@ const userSchema = new Schema({
     required: true,
     minlength: 8,
   },
+  signedRequest: {
+    type: String,
+  },
+  picURL: {
+    type: String,
+  },
   items: [
     {
       type: Schema.Types.ObjectId,
@@ -43,7 +50,7 @@ const userSchema = new Schema({
       ref: "Review",
     },
   ],
-  // carts: [Cart.schema]
+  orders: [Order.schema]
 });
 
 // middleware to create password

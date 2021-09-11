@@ -1,13 +1,32 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import ReactDOM from "react-dom";
+import { useMutation } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import { CREATE_REVIEW } from "../utils/mutations";
+import { QUERY_REVIEWS } from "../utils/queries";
 
 export default function Review() {
+  //extract username from params and save it to a variable
+  const { username } = useParams();
+
+  const [createReview] = useMutation(CREATE_REVIEW);
+  const { reviewData } = useQuery(QUERY_REVIEWS, {
+    variables: { reviewee: username },
+  });
+  console.log("REVIEW DATA");
+  console.log(reviewData);
+  //saving the user information from QUERY_SINGLE_USER to profile variable
+  const profile = reviewData?.review || {};
+
   const [reviewContent, setContent] = useState({
-    rating: 5,
+    rating: 0,
     reviewee: "", //need a user ID
     title: "",
     body: "",
   });
+
+  reviewContent.reviewee = username;
 
   const reviewChange = (event) => {
     const { name, value } = event.target;
@@ -19,21 +38,32 @@ export default function Review() {
 
   const reviewFormSubmit = async (event) => {
     event.preventDefault();
-    // try {
-    //   const mutationResponse = await createReview({
-    //     //* added this from mutations.js
-    //     variables: {
-    //       // reviewTitle: reviewContent.title,
-    //       body: reviewContent.review,
-    //       username: window.location.pathname.split("/")[2],
-    //       createdAt: new Date().toLocaleString(),
-    //       // starRating: reviewContent.rating,
-    //       // reviewee: reviewContent.reviewee,
-    //     },
-    //   });
-    // } catch (e) {
-    //   console.log(e);
-    // }
+
+    const sumbitRating = parseFloat(reviewContent.rating);
+    reviewContent.rating = sumbitRating;
+
+    console.log(reviewContent);
+
+    try {
+      const mutationResponse = await createReview({
+        //* added this from mutations.js
+        variables: {
+          rating: reviewContent.rating,
+          reviewee: reviewContent.reviewee, //need a user ID
+          title: reviewContent.title,
+          body: reviewContent.body,
+          // reviewTitle: reviewContent.title,
+          // body: reviewContent.review,
+          // username: window.location.pathname.split("/")[2],
+          // starRating: reviewContent.rating,
+          // reviewee: reviewContent.reviewee,
+        },
+      });
+
+      window.location.assign("/profile/" + username);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -60,10 +90,30 @@ export default function Review() {
             type="text"
             placeholder="Enter Review"
             name="body"
-            value={reviewContent.review}
+            value={reviewContent.body}
             onChange={reviewChange}
             required
           />
+
+          <label htmlFor="rating">
+            <b>Rating</b>
+          </label>
+          <div className="slidecontainer">
+            <span>0</span>
+            <input
+              id="rating"
+              type="range"
+              min="1"
+              max="5"
+              value="50"
+              className="slider"
+              id="myRange"
+              name="rating"
+              value={reviewContent.rating}
+              onChange={reviewChange}
+            />
+            <span>5</span>
+          </div>
         </div>
         <div className="container" style={{ background: "var(--gray)" }}>
           <button type="submit" className="submitbtn">

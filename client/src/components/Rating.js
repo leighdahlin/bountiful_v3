@@ -1,6 +1,6 @@
 import React from "react";
 
-//import "../styles/components/Rating.css";
+// import "../styles/components/Rating.css";
 //credit: Traversy Media MERN ecommerce platform tutorial on Udemy, portion on creating a Rating component
 
 export default function Rating({ value, text, color }) {
@@ -73,6 +73,6 @@ export default function Rating({ value, text, color }) {
   );
 }
 
-Rating.defaultProps = {
-  color: "#FAAE20",
-};
+// Rating.defaultProps = {
+//   color: "#FAAE20",
+// };

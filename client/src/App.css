@@ -339,9 +339,17 @@ a:hover, .navbar-brand:hover {
 
 .profile-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
 
+}
+
+#see-profile {
+  margin-top: 12%;
+  background-color: var(--gold);
+  color: var(--forest)
 }
 
 .profile {
