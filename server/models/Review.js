@@ -23,12 +23,11 @@ const reviewSchema = new Schema({
     type: Number,
     required: true,
   },
-  user: [{
+  user: {
     type: Schema.Types.ObjectId,
     required: true,
     ref: 'User'
   },
-],
 });
 
 const Review = model('Review', reviewSchema);
