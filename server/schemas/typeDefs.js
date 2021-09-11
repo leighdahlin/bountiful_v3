@@ -10,14 +10,11 @@ const typeDefs = gql`
     location: String
     email: String
     password: String
+    signedRequest: String
+    picURL: String
     items: [Item]
     orders: [Order]
     reviews: [Review]
-  }
-
-  type Category {
-    _id: ID
-    category_name: String
   }
 
   type Item {
@@ -45,22 +42,6 @@ const typeDefs = gql`
     
   }
 
-  input ItemData {
-    _id: ID
-    title: String
-    item_name: String
-    item_description: String
-    item_quantity: Float
-    item_unit: String
-    item_price: Float
-    cat_name: String
-  }
-
-  type itemResponse{
-    success: Boolean
-    item: Item
-  }
-
   type Auth {
     token: ID!
     user: User
@@ -75,11 +56,11 @@ const typeDefs = gql`
     orderitems: [Item]
   }
 
+  
   type Query {
     users: [User]
     user: User
     seller(username:String): User
-    categories: [Category]
     items: [Item]
     itemscat(category_name:String):[Item]
     itemsuser(username:String): [Item]

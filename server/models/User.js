@@ -32,6 +32,12 @@ const userSchema = new Schema({
     required: true,
     minlength: 8,
   },
+  signedRequest: {
+    type: String,
+  },
+  picURL: {
+    type: String,
+  },
   items: [
     {
       type: Schema.Types.ObjectId,
