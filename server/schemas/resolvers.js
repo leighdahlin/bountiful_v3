@@ -53,7 +53,7 @@ const resolvers = {
       order: async (parent, { _id }, context) => {
         if (context.user) {
           const user = await User.findById(context.user._id).populate({
-            path: 'orders.orderitems'
+            path: 'orders.items'
           });
   
           return user.orders.id(_id);
@@ -67,25 +67,25 @@ const resolvers = {
         const url = new URL(context.headers.referer).origin;
         // console.log("URL:");
         // console.log(url);
-        const order = new Order({ orderitems: args.items });
+        const order = new Order({ items: args.items });
         // console.log("CREATED Items");
         // console.log(args.items);
         const line_items = [];
 
         
   
-        const { orderitems } = await order.populate('orderitems').execPopulate();
+        const { items } = await order.populate('items').execPopulate();
         // console.log("ORDER ITEMS IN RESOLVER:");
         // console.log(orderitems.length);
   
-        for (let i = 0; i < orderitems.length; i++) {
+        for (let i = 0; i < items.length; i++) {
           // console.log("INSIDE FOR LOOP");
           // console.log(i);
-          // console.log(orderitems);
+          // console.log(items);
 
           //stripe.products is specific to stripe naming convention. The name: is also a stripe specific key.
           const item = await stripe.products.create({
-            name: orderitems[i].item_name,
+            name: items[i].item_name,
                         
           });
           // console.log("STRIPE ITEM CREATION");
@@ -94,7 +94,7 @@ const resolvers = {
   
           const price = await stripe.prices.create({
             product: item.id,
-            unit_amount: orderitems[i].item_quantity * orderitems[i].item_price *100,
+            unit_amount: items[i].item_quantity * items[i].item_price *100,
             currency: 'usd',
           });
 
@@ -117,37 +117,13 @@ const resolvers = {
           success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
           cancel_url: `${url}/`
         });
-        console.log("SESSION IN RESOLVER:");
-        console.log(session);
+        // console.log("SESSION IN RESOLVER:");
+        // console.log(session);
   
         return { session: session.id };
       }
     },
-
-        //TODO: getReviews and getReview Queries:
-        //reviews: async () => Review.find(),
-        /*async getReviews() {
-      try {
-        const reviews = await Review.find().sort({ createdAt: -1 });//tells Mongoose to sort reviews in descending order
-        return reviews;
-      } catch (err) {
-        throw new Error(err);
-      }
-    },
-    
-    //async getReview(_, { itemId }) {
-      try {
-        const review = await Review.findById(itemId);
-        if (review) {
-          return review;
-        } else {
-          throw new Error('Review not found');
-        }
-      } catch (err) {
-        throw new Error(err);
-      }
-    }*/
-    
+  
 
     Mutation: {
         login: async (parent, { email, password }) => {
