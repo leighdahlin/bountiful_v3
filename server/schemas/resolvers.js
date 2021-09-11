@@ -1,6 +1,6 @@
 const { AuthenticationError, UserInputError } = require('apollo-server-express');
 const { User, Item, Order, Review } = require('../models');
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const stripe = require('stripe')('sk_test_51JYJT2JDMSXsetnhqF7kZfG3mAEbFNjNMIN05OXkkCzOugaPFqkXlev6a1XyFVFbWCbSAxivmQwmwsNSEOZlQQmR001eRq7MnD');
 const { signToken } = require('../utils/auth');
 
 
@@ -62,30 +62,54 @@ const resolvers = {
         throw new AuthenticationError('Not logged in');
       },
       checkout: async (parent, args, context) => {
+        // console.log("HITTING CHECKOUT RESOLVER");
+        // console.log(args);
         const url = new URL(context.headers.referer).origin;
-        const order = new Order({ orderitems: args.orderitems });
+        // console.log("URL:");
+        // console.log(url);
+        const order = new Order({ orderitems: args.items });
+        // console.log("CREATED Items");
+        // console.log(args.items);
         const line_items = [];
+
+        
   
         const { orderitems } = await order.populate('orderitems').execPopulate();
+        // console.log("ORDER ITEMS IN RESOLVER:");
+        // console.log(orderitems.length);
   
-        for (let i = 0; i < items.length; i++) {
-          const item = await stripe.orderitems.create({
-            item_name: orderitems[i].item_name,
-            item_description: orderitems[i].item_description,            
+        for (let i = 0; i < orderitems.length; i++) {
+          // console.log("INSIDE FOR LOOP");
+          // console.log(i);
+          // console.log(orderitems);
+
+          //stripe.products is specific to stripe naming convention. The name: is also a stripe specific key.
+          const item = await stripe.products.create({
+            name: orderitems[i].item_name,
+                        
           });
+          // console.log("STRIPE ITEM CREATION");
+          //   console.log(item);
+          
   
           const price = await stripe.prices.create({
-            item: item.id,
-            unit_amount: orderitems[i].item_quantity * orderitems[i].item_price,
+            product: item.id,
+            unit_amount: orderitems[i].item_quantity * orderitems[i].item_price *100,
             currency: 'usd',
           });
+
+          // console.log("STRIPE PRICE CREATION");
+          // console.log(price);
   
           line_items.push({
             price: price.id,
             quantity: 1
           });
         }
-  
+        // console.log("LINE ITEM CREATION");
+        // console.log(line_items);
+        
+
         const session = await stripe.checkout.sessions.create({
           payment_method_types: ['card'],
           line_items,
@@ -93,6 +117,8 @@ const resolvers = {
           success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
           cancel_url: `${url}/`
         });
+        console.log("SESSION IN RESOLVER:");
+        console.log(session);
   
         return { session: session.id };
       }

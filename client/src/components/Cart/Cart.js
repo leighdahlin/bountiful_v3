@@ -9,19 +9,21 @@ import { useStoreContext } from '../../utils/GlobalState';
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../../utils/actions';
 import './cart.css';
 
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+const stripePromise = loadStripe('pk_test_51JYJT2JDMSXsetnh9vVQ3zYFkW4oBsOIrTlBQL0GH4IINJg09Wmfdb9XuCpJ2MwZAI38nfpAq3v4ayAsZwI5woJY00vCFBfV20');
 
 const Cart = () => {
   const [state, dispatch] = useStoreContext();
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
   useEffect(() => {
+    console.log("HIT USE EFFECT FOR CART");
     if (data) {
+      console.log("HIT USE EFFECT FOR CART");
       stripePromise.then((res) => {
         res.redirectToCheckout({ sessionId: data.checkout.session });
       });
     }
-  }, [data]);
+  },[data]);
 
   useEffect(() => {
     async function getCart() {
@@ -48,10 +50,13 @@ const Cart = () => {
 
   function submitCheckout() {
     const itemIds = [];
+    console.log("SUBMIT CHECKOUT");
 
     state.cart.forEach((item) => {
       for (let i = 0; i < item.purchaseQuantity; i++) {
         itemIds.push(item._id);
+        console.log(itemIds);
+        console.log(state.cart);
       }
     });
 
