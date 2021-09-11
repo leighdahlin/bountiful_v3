@@ -15,9 +15,9 @@ export default function Review() {
   const { data } = useQuery(QUERY_REVIEWS, {
     variables: { reviewee: username },
   });
-  console.log("REVIEW DATA");
-  console.log(username);
-  console.log(data);
+  // console.log("REVIEW DATA");
+  // console.log(username);
+  // console.log(data);
   const reviews = data?.reviews || {};
 
   const [reviewContent, setContent] = useState({
@@ -61,7 +61,7 @@ export default function Review() {
         },
       });
 
-      window.location.assign("/profile/" + username);
+      // window.location.assign("/profile/" + username);
     } catch (e) {
       console.log(e);
     }
