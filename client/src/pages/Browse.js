@@ -25,7 +25,7 @@ export default function Browse() {
     if (data && !usefilter) {
         items = data?.items || {};
     } else {
-        items = data?.items.filter((item) => item.category_name === categoryState.category_name) || {}
+        items = data?.items.filter((item) => item.category_name === categoryState.category_name) || {};
     }
     // console.log(allItems)
 
@@ -45,7 +45,9 @@ export default function Browse() {
     if(loading) {
         return <div>Loading...</div>
     }
-    
+    const filterButton = document.querySelector("#browse-cat-btn");
+    const clearFilter = document.querySelector('#clear-filter')
+
 
     const filterCategory = async (event) => {
         event.preventDefault();
@@ -70,13 +72,28 @@ export default function Browse() {
 
         setUseFilter(true)
 
+        filterButton.className = "browse-cat hide"
+        clearFilter.className="btn browse-cat"
+
+    }
+
+    const removeFilter = async() => {
+
+        await setUseFilter(false)
+
+        
+        clearFilter.className = await "browse-cat hide"
+        filterButton.className = await "btn browse-cat"
+
+
+
     }
 
     return (
         <div id="browse-background">
             <div className="browse-container">
                 <div className="form-container">
-                    <form className="browse-form" onSubmit={filterCategory}>
+                    <form className="browse-form">
                         {/* {{!-- <label for="item-categories"><h4 id="browse-cat" className="browse-cat">Browse by Category</h4></label> --}} */}
                         <select id="item-categories" className="browse-cat" name="category_name" value={categoryState.category_name} onChange={categoryChange}>
                             <option value="" disabled selected>Choose a Category</option>
@@ -86,7 +103,8 @@ export default function Browse() {
                             <option value="dairy" data-id="4">Dairy</option>
                             <option value="flowers" data-id="5">Flowers</option>
                         </select>
-                        <button id="browse-cat-btn" type="submit" className="btn browse-cat">FILTER</button>
+                        <button id="browse-cat-btn" type="submit" className="btn browse-cat" onClick={filterCategory}>FILTER</button>
+                        <button id="clear-filter" type="submit" className="hide browse-cat" onClick={removeFilter}>CLEAR FILTER</button>
                     </form>
         
                 {/* {{!-- Add in an IF statement to render a heading for the category when a category is selected?? --}} */}
