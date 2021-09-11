@@ -1,26 +1,24 @@
 import React, { useState } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import ReactDOM from "react-dom";
-import { useMutation } from '@apollo/client';
-import { useQuery } from '@apollo/client';
-import { CREATE_REVIEW } from '../utils/mutations';
-import { QUERY_REVIEWS } from '../utils/queries';
+import { useMutation } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import { CREATE_REVIEW } from "../utils/mutations";
+import { QUERY_REVIEWS } from "../utils/queries";
 import ReviewCard from "./ReviewCard";
-
 
 export default function Review() {
   //extract username from params and save it to a variable
   const { username } = useParams();
 
-  const [ createReview ] = useMutation(CREATE_REVIEW);
+  const [createReview] = useMutation(CREATE_REVIEW);
   const { data } = useQuery(QUERY_REVIEWS, {
     variables: { reviewee: username },
   });
-  console.log("REVIEW DATA")
-  console.log(username)
+  console.log("REVIEW DATA");
+  console.log(username);
   console.log(data);
   const reviews = data?.reviews || {};
-
 
   const [reviewContent, setContent] = useState({
     rating: 0,
@@ -42,10 +40,10 @@ export default function Review() {
   const reviewFormSubmit = async (event) => {
     event.preventDefault();
 
-    const sumbitRating = parseFloat(reviewContent.rating)
+    const sumbitRating = parseFloat(reviewContent.rating);
     reviewContent.rating = sumbitRating;
 
-    console.log(reviewContent)
+    console.log(reviewContent);
 
     try {
       const mutationResponse = await createReview({
@@ -63,8 +61,7 @@ export default function Review() {
         },
       });
 
-      window.location.assign('/profile/'+ username);
-
+      window.location.assign("/profile/" + username);
     } catch (e) {
       console.log(e);
     }
@@ -90,7 +87,7 @@ export default function Review() {
             <b>Review</b>
           </label>
           <input
-            id="review"
+            id="body"
             type="text"
             placeholder="Enter Review"
             name="body"
@@ -104,10 +101,20 @@ export default function Review() {
           </label>
           <div className="slidecontainer">
             <span>0</span>
-            <input id="rating" type="range" min="1" max="5" value="50" className="slider" id="myRange" name="rating" value={reviewContent.rating} onChange={reviewChange}/>
+            <input
+              id="rating"
+              type="range"
+              min="1"
+              max="5"
+              value="50"
+              className="slider"
+              id="myRange"
+              name="rating"
+              value={reviewContent.rating}
+              onChange={reviewChange}
+            />
             <span>5</span>
           </div>
-
         </div>
         <div className="container" style={{ background: "var(--gray)" }}>
           <button type="submit" className="submitbtn">
@@ -117,6 +124,5 @@ export default function Review() {
       </form>
       <ReviewCard reviewData={reviews} />
     </div>
-    
   );
 }
