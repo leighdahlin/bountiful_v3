@@ -41,7 +41,7 @@ const Cart = () => {
   function calculateTotal() {
     let sum = 0;
     state.cart.forEach((item) => {
-      sum += item.price * item.purchaseQuantity;
+      sum += item.item_price * item.purchaseQuantity;
     });
     return sum.toFixed(2);
   }
@@ -73,7 +73,7 @@ const Cart = () => {
   return (
     <div className="cart">
       <div className="close" onClick={toggleCart}>
-        [close]
+        X
       </div>
       <h2>Shopping Cart</h2>
       {state.cart.length ? (
@@ -94,10 +94,7 @@ const Cart = () => {
         </div>
       ) : (
         <h3>
-          <span role="img" aria-label="shocked">
-            😱
-          </span>
-          You haven't added anything to your cart yet!
+          You cart is empty!
         </h3>
       )}
     </div>
