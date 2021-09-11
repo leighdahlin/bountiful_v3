@@ -10,6 +10,8 @@ const typeDefs = gql`
     location: String
     email: String
     password: String
+    signedRequest: String
+    picURL: String
     items: [Item]
     orders: [Order]
     reviews: [Review]
@@ -54,6 +56,7 @@ const typeDefs = gql`
     orderitems: [Item]
   }
 
+  
   type Query {
     users: [User]
     user: User
