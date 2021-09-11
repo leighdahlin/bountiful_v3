@@ -9,6 +9,7 @@ const LoginModal = ({
   loginFormState,
   loginHandleChange,
   loginHandleFormSubmit,
+  errors
 }) =>
   isLoginShowing
     ? ReactDOM.createPortal(
@@ -25,9 +26,8 @@ const LoginModal = ({
                 <img src={logo} alt="bountiful logo" className="avatar" />
               </div>
               <div className="container">
-                <label htmlFor="emailLogin">
-                  <b>Email Address</b>
-                </label>
+                <div>
+                <label htmlFor="emailLogin"><b>Email Address</b></label>
                 <input
                   id="email-login"
                   type="text"
@@ -36,9 +36,10 @@ const LoginModal = ({
                   onChange={loginHandleChange}
                   required
                 />
-                <label htmlFor="psw">
-                  <b>Password</b>
-                </label>
+                <span style={{ color: "red" }}>{errors.email}</span>
+                </div>
+                <div>
+                <label htmlFor="psw"><b>Password</b></label>
                 <input
                   id="password-login"
                   type="password"
@@ -47,6 +48,8 @@ const LoginModal = ({
                   onChange={loginHandleChange}
                   required
                 />
+                <span style={{ color: "red" }}>{errors.password}</span>
+                </div>
                 {/* <!-- REMEMBER ME BUTTON -->  
                 <!-- <button type="submit">Login</button> */}
                 {/* <label>
