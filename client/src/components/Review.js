@@ -5,19 +5,20 @@ import { useMutation } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import { CREATE_REVIEW } from "../utils/mutations";
 import { QUERY_REVIEWS } from "../utils/queries";
+import ReviewCard from "./ReviewCard";
 
 export default function Review() {
   //extract username from params and save it to a variable
   const { username } = useParams();
 
   const [createReview] = useMutation(CREATE_REVIEW);
-  const { reviewData } = useQuery(QUERY_REVIEWS, {
+  const { data } = useQuery(QUERY_REVIEWS, {
     variables: { reviewee: username },
   });
   console.log("REVIEW DATA");
-  console.log(reviewData);
-  //saving the user information from QUERY_SINGLE_USER to profile variable
-  const profile = reviewData?.review || {};
+  console.log(username);
+  console.log(data);
+  const reviews = data?.reviews || {};
 
   const [reviewContent, setContent] = useState({
     rating: 0,
@@ -121,6 +122,7 @@ export default function Review() {
           </button>
         </div>
       </form>
+      <ReviewCard reviewData={reviews} />
     </div>
   );
 }
