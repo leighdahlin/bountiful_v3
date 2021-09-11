@@ -116,7 +116,7 @@ export default function Review() {
             <span>5</span>
           </div>
         </div>
-        <div className="container" style={{ background: "var(--gray)" }}>
+        <div className="container">
           <button type="submit" className="submitbtn">
             Submit Review
           </button>
