@@ -1,34 +1,45 @@
 import React, { useState } from 'react';
 import BrowseCard from '../components/BrowseCard';
 
-import { useQuery } from '@apollo/client';
+import { useQuery, useLazyQuery } from '@apollo/client';
 import { QUERY_ITEMS, QUERY_CAT_ITEMS } from '../utils/queries';
 // import {  } from '../utils/queries';
 
+
 export default function Browse() {
 
+    // let filterItems = {}
+    let items = {}
+
+    const [usefilter, setUseFilter] = useState(false)
+
     const { loading, data } = useQuery(QUERY_ITEMS)
-    let allItems = data?.items || {};
-    console.log(allItems)
 
     const [categoryState, setCategoryState] = useState({
-        category_name: 'dairy',
+        category_name: '',
       });
     
-      const { categoryData } = useQuery(QUERY_CAT_ITEMS, {
-        variables: { category_name: "dairy" },
-    })
+    //   const [executeFilter, filteredData] = useLazyQuery(QUERY_CAT_ITEMS)
+      console.log(usefilter)
 
-    console.log(categoryData);
+    if (data && !usefilter) {
+        items = data?.items || {};
+    } else {
+        items = data?.items.filter((item) => item.category_name === categoryState.category_name) || {}
+    }
+    // console.log(allItems)
+
+
+    // console.log(filteredData.data);
 
 
     const categoryChange = (event) => {
-        // const { name, value } = event.target;
+        const { name, value } = event.target;
 
-        // setCategoryState({
-        // ...categoryState,
-        // [name]: value,
-        // });
+        setCategoryState({
+        ...categoryState,
+        [name]: value,
+        });
     };
 
     if(loading) {
@@ -36,16 +47,29 @@ export default function Browse() {
     }
     
 
-    const filterCategory = (event) => {
+    const filterCategory = async (event) => {
         event.preventDefault();
+        // console.log("ITEMS IN FILTER")
+        // console.log(filteredData.data.itemscat)
 
-        console.log(categoryState.category_name)
-        console.log(categoryData)
+        // console.log(categoryState.category_name)
 
-        let allItems = categoryData?.items || {};
-        console.log("NEW ITEMS")
-        console.log(allItems)
-    
+        // executeFilter({
+        //     variables: { category_name: categoryState.category_name }
+        // })
+        // filterItems = await filteredData.data?.itemscat || {};
+
+        // console.log("NEW ITEMS")
+        // console.log(filteredData)
+
+
+        // console.log(categoryState)
+        // filterItems = await allItems.filter((item) => item.category_name === categoryState.category_name);
+        // console.log("FILTERED ITEMS")
+        // console.log(filterItems)
+
+        setUseFilter(true)
+
     }
 
     return (
@@ -69,7 +93,8 @@ export default function Browse() {
         
                 </div>
                 <div className="browse-items">
-                    <BrowseCard data = {allItems} />
+                    <BrowseCard data={items} />
+                    {/* {usefilter? <BrowseCard data = {filterItems} />:<BrowseCard data = {allItems} />} */}
                     {/* {{#each items as |item|}}
                         {{>browsecard}}
                     {{/each}} */}
