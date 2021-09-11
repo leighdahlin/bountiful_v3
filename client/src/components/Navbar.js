@@ -36,6 +36,13 @@ export default function LoggedIn() {
         email: '',
         password: '',
         location: '',
+        errors: {
+            first_name: '',
+            last_name: '',
+            username: '',
+            email: '',
+            password: '',    
+        }
       });
     
       const [addUser, { error, data }] = useMutation(ADD_USER);
@@ -62,6 +69,8 @@ export default function LoggedIn() {
                     : '';
                 break;
         }
+
+        console.log()
       };
 
       // update state based on form input changes
@@ -74,6 +83,26 @@ export default function LoggedIn() {
         ...signupFormState,
         [name]: value,
         });
+
+        switch(name) {
+            // case 'first_name':
+            // case 'last_name':
+            // case 'username':
+            case 'email':
+                signupFormState.errors.email = 
+                    validEmailRegex.test(value)
+                    ? ''
+                    : 'Email is not valid!';
+                break;
+            case 'password':
+                signupFormState.errors.password = 
+                    value.length < 8
+                    ? 'Password must be at least 8 characters long!'
+                    : '';
+                break;
+        
+      };
+
 
     };
     const loginHandleFormSubmit = async (event) => {
@@ -182,7 +211,7 @@ export default function LoggedIn() {
                 </li>
 
                 <LoginModal isLoginShowing={isLoginShowing} hide={toggleLogin} loginFormState={loginFormState} loginHandleChange={loginHandleChange} loginHandleFormSubmit={loginHandleFormSubmit} errors={loginFormState.errors}/>
-                <SignupModal isSignupShowing={isSignupShowing} hide={toggleSignup}  signupFormState={signupFormState} signupHandleChange={signupHandleChange} signupHandleFormSubmit={signupHandleFormSubmit} />
+                <SignupModal isSignupShowing={isSignupShowing} hide={toggleSignup}  signupFormState={signupFormState} signupHandleChange={signupHandleChange} signupHandleFormSubmit={signupHandleFormSubmit} errors={signupFormState.errors}/>
 
             </div>
 
