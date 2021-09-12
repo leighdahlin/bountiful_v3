@@ -43,7 +43,7 @@ export default function Review() {
     const sumbitRating = parseFloat(reviewContent.rating);
     reviewContent.rating = sumbitRating;
 
-    console.log(reviewContent);
+    // console.log(reviewContent);
 
     try {
       const mutationResponse = await createReview({
