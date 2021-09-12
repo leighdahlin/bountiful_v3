@@ -81,13 +81,13 @@ export default function MyBounty() {
         switch(name){
             case "item_quantity":
                 addFormState.errors.item_quantity = 
-                value.match(/^[0-9]+$/)
+                value.match(/[0-9]+\.?[0-9]*/)
                 ? ''
                 : 'Item Quantity must be a number!';
             break;
             case "item_price":
                 addFormState.errors.item_price = 
-                value.match(/^[0-9]+$/)
+                value.match(/[0-9]+\.?[0-9]*/)
                 ? ''
                 : 'Item Price must be a number!';
             break;
