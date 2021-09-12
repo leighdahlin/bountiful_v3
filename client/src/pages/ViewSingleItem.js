@@ -99,8 +99,8 @@ export default function ViewSingleItem() {
 
         return (
         <div id="itemview-cart">
-            <Cart />
             <div id="itemvview-image">
+                <Cart />
                 <div className="button-form">
                 <Link to="/browse"><button className="btn back-browse"><p><i class="arrow left"></i></p>Back</button></Link>
 
