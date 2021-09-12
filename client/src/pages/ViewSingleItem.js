@@ -87,7 +87,7 @@ export default function ViewSingleItem() {
             type: ADD_TO_CART,
             item: { ...item, purchaseQuantity: item_quantity }
           });
-          idbPromise('cart', 'put', { ...item, purchaseQuantity: 1 });
+          idbPromise('cart', 'put', { ...item, purchaseQuantity: item_quantity });
         }
     }
 

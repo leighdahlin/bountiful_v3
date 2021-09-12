@@ -16,9 +16,9 @@ const Cart = () => {
   const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
   useEffect(() => {
-    console.log("HIT USE EFFECT FOR CART");
+    // console.log("HIT USE EFFECT FOR CART");
     if (data) {
-      console.log("HIT USE EFFECT FOR CART");
+      // console.log("HIT USE EFFECT FOR CART");
       stripePromise.then((res) => {
         res.redirectToCheckout({ sessionId: data.checkout.session });
       });
@@ -56,8 +56,8 @@ const Cart = () => {
     state.cart.forEach((item) => {
       for (let i = 0; i < item.purchaseQuantity; i++) {
         itemIds.push(item._id);
-        console.log(itemIds);
-        console.log(state.cart);
+        // console.log(itemIds);
+        // console.log(state.cart);
       }
     });
 
