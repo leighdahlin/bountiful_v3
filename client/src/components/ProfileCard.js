@@ -59,7 +59,7 @@ export default function ProfileCard ({ profile }) {
 
     const submitUpdate = async (event) => {
         event.preventDefault();
-        console.log("SUBMIT UPDATE CLICKED")
+        // console.log("SUBMIT UPDATE CLICKED")
         try {
             const { submitUpdateProfile } = await updateProfile({
                 variables: {  
@@ -75,7 +75,7 @@ export default function ProfileCard ({ profile }) {
     
         }
     }
-    console.log(profile)
+    // console.log(profile)
     return (
         <div className="profile-container">
             <div>
