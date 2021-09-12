@@ -61,7 +61,7 @@ export default function Review() {
         },
       });
 
-      // window.location.assign("/profile/" + username);
+      window.location.assign("/profile/" + username);
     } catch (e) {
       console.log(e);
     }

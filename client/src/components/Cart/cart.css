@@ -51,8 +51,12 @@
     align-items: flex-end */
   }
 
-  #dashboard-image .cart-closed{
+  #dashboard-image .cart-closed {
     align-self: flex-end;
+  }
+
+  .seller-profile-container .cart-closed {
+    justify-self: flex-end;
   }
   
   .cart-closed:hover {
