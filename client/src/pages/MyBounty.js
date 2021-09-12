@@ -203,12 +203,12 @@ export default function MyBounty() {
     const editButton = async (event) => {
 
         if(event.target !== event.currentTarget) {
-            console.log("TITLE")
-            console.log(event.currentTarget.querySelector(".item-title"));
+            // console.log("TITLE")
+            // console.log(event.currentTarget.querySelector(".item-title"));
 
             itemID = event.currentTarget.querySelector("#card-id").getAttribute('data-id');
             // console.log(itemID);
-            console.log("ITEM ID: " + itemID);      
+            // console.log("ITEM ID: " + itemID);      
             
             //gets the information for the item from the card
             const itemTitle = event.currentTarget.querySelector(".item-title").textContent.trim();

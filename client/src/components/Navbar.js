@@ -69,8 +69,6 @@ export default function LoggedIn() {
                     : '';
                 break;
         }
-
-        console.log()
       };
 
       // update state based on form input changes
@@ -146,8 +144,8 @@ export default function LoggedIn() {
           let username = mutationResponse.data.login.user.username;
           localStorage.setItem('username', username);
 
-          console.log(mutationResponse.data.login.user.username)
-          console.log(username)
+        //   console.log(mutationResponse.data.login.user.username)
+        //   console.log(username)
 
           window.location.assign('/dashboard/'+ username);
 
@@ -175,8 +173,8 @@ export default function LoggedIn() {
             variables: { ...signupFormState },
         });
 
-        console.log("Data from signup: ")
-        console.log(data.addUser.user.username);
+        // console.log("Data from signup: ")
+        // console.log(data.addUser.user.username);
 
         let username = data.addUser.user.username;
 
