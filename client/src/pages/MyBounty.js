@@ -10,6 +10,7 @@ import DashboardCard from '../components/DashboardCard';
 import useItemModal from '../assets/js/useItemModal';
 import ItemModal from '../components/ItemModal';
 import ReviewCard from '../components/ReviewCard';
+import Cart from '../components/Cart/Cart';
 
 import { QUERY_SINGLE_USER } from '../utils/queries';
 import { QUERY_REVIEWS } from '../utils/queries';
@@ -304,12 +305,13 @@ export default function MyBounty() {
     
     return(
     <div id="dashboard-image" className="dashboard-container">
+        <Cart />
         <div className="d-flex">
             <div className="nav nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <button className="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Listings</button>
                 <button className="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</button>
                 {/* <button className="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</button> */}
-                <button className="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Reviews</button>
+                <button className="nav-link" id="v-pills-reviews-tab" data-bs-toggle="pill" data-bs-target="#v-pills-reviews" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Reviews</button>
             </div>
             <div className="tab-content" id="v-pills-tabContent">
                 <div className="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
@@ -322,7 +324,7 @@ export default function MyBounty() {
                     </div>
                 <div className="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"><ProfileCard profile={profile}/></div>
                 {/* <div className="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div> */}
-                <div className="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab"><ReviewCard reviewData={reviews}/></div>
+                <div className="tab-pane fade" id="v-pills-reviews" role="tabpanel" aria-labelledby="v-pills-reviews-tab"><ReviewCard reviewData={reviews}/></div>
             </div>
         </div>
 

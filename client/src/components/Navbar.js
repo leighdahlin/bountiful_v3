@@ -5,7 +5,7 @@ import LoginModal from './LoginModal';
 import useLoginModal from '../assets/js/useLoginModal';
 import SignupModal from './SignUpModal';
 import useSignupModal from '../assets/js/useSignupModal';
-import Cart from './Cart/Cart';
+// import Cart from './Cart/Cart';
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
@@ -212,18 +212,18 @@ export default function LoggedIn() {
                     <Link className="nav-link" to={`/dashboard/${currentUsername}`}>My Bounty</Link>
                     {/* <Link className="nav-link" to="/dashboard">My Bounty</Link> */}
                 </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="/">Cart</Link>
+                {/* <li className="nav-item">
+                    <Link className="nav-link" to="/">Cart</Link> */}
                     {/* <Link className="nav-link" to="/api/cart">Cart</Link> */}
     
-                </li>
+                {/* </li> */}
                 <li className="nav-item">
                     <Link className="nav-link" id = "logout" to="/" onClick={() => Auth.logout()}>Logout</Link>
                     {/* <Link className="nav-link" id = "logout" href="#">Logout</Link> */}
     
                 </li>
                 <li>
-                    <Cart />
+                    {/* <Cart /> */}
                 </li>
             </div>
         )

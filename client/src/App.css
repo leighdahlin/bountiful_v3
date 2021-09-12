@@ -189,9 +189,9 @@ a:hover,
   color: var(--gray);
 }
 
-.dashboard-container .nav-link,
-.seller-profile-container .nav-link {
-  color: var(--gray);
+
+.dashboard-container .nav-link, .seller-profile-container .nav-link {
+  color: var(--gray)
 }
 
 .dashboard-container .nav-link:focus,

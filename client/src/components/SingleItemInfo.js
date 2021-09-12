@@ -1,4 +1,4 @@
-import tomato from "../assets/images/tomato.jpg"
+// import tomato from "../assets/images/tomato.jpg"
 import formatTime from "../utils/helpers.js";
 
 
@@ -13,7 +13,7 @@ export default function SingleItemInfo({ singleItemData }) {
         <p>Date posted: <span id="itemview-createdAt">{formatTime(singleItemData.createdAt)}</span></p>
         {/* <p>Updated at: <span id="itemview-updatedAt">{{format_time updatedAt}}</span></p> */}
         <p>{singleItemData.item_description}</p>
-        <img id="item-view-img" src={tomato} className="card-img-top itemview-components" alt="..."/>    
+        {/* <img id="item-view-img" src={tomato} className="card-img-top itemview-components" alt="..."/>     */}
     </div>
 
     )
