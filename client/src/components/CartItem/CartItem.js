@@ -45,9 +45,9 @@ const CartItem = ({ item }) => {
         /> */}
       </div>
       <div>
-        <div>{item.item_name}, ${item.item_price}/{item.item_unit}</div>
+        <div className="cart-detail">{item.item_name}, ${item.item_price}/{item.item_unit}</div>
         <div>
-          <span>Qty:</span>
+          <span className="qty">Qty:</span>
           <input
             type="number"
             placeholder="1"

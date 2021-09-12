@@ -431,6 +431,37 @@ a:hover,
   background-color: var(--gold);
 }
 
+#itemvview-image .back-browse {
+  background-color: var(--gold);
+  color: var(--forest);
+}
+
+.button-form {
+  display: flex;
+  margin: 3%;
+
+}
+
+.back-browse {
+  display: inline;
+}
+
+.back-browse-btn {
+  display: flex;
+}
+
+.arrow {
+  border: solid var(--forest);
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
 .item-card {
   margin: 2%;
 }
