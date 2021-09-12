@@ -434,6 +434,9 @@ a:hover,
 .item-card {
   margin: 2%;
 }
+#item-categories {
+  margin-left: 3%;
+}
 
 .dashboad-c-body {
   width: 100%;
