@@ -11,7 +11,7 @@ export default function ReviewCard({ reviewData }) {
       <div
         id="item-card"
         key={review._id}
-        className="card mb-3 item-card"
+        className="mb-3 item-card"
         style={{ maxWidth: "500px" }}
       >
         <div className="row g-0">
@@ -34,7 +34,7 @@ export default function ReviewCard({ reviewData }) {
               <p className="card-text" id="rev-username">
                 {review.user.username}
               </p>
-              <p className="card-text">{review.rating}</p>
+              <p className="card-text">Rating: {review.rating}</p>
               <p className="card-text">{review.body}</p>
               <p className="card-text">
                 <small className="text-muted">

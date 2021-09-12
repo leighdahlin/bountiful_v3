@@ -1,5 +1,11 @@
-.rev-card-body {
-  background-color: var(--gray);
+.item-card {
+  background-color: #fff;
+  padding: 4vh 5vh;
+  border-bottom-left-radius: 1rem;
+  border-top-left-radius: 1rem;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 1rem;
+  border: transparent;
 }
 
 .card-text {
@@ -9,4 +15,8 @@
 #rev-username {
   color: var(--gold);
   font-weight: bold;
+}
+
+.rev-card-body .card-body {
+  text-align: left;
 }
