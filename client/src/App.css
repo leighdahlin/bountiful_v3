@@ -222,7 +222,8 @@ a:hover,
 #add-item,
 #edit-profile,
 .save-btn,
-#send-message {
+#send-message,
+.left-container .seller-btn {
   justify-self: center;
   width: 80%;
   font-size: 0.85rem;
@@ -328,10 +329,15 @@ a:hover,
   background-color: var(--blue);
 }
 
+#seller-cart-container {
+  background-color: var(--blue);
+
+}
+
 .seller-profile-container {
   display: flex;
   align-items: flex-start;
-  background-color: var(--blue);
+  /* background-color: var(--blue); */
 }
 
 .seller-nav-container {
@@ -530,7 +536,7 @@ a:hover,
 }
 
 #browse-cat-btn,
-.add-cart {
+#add-cart-form .add-cart, #clear-filter {
   background-color: var(--gold);
   color: var(--forest);
   width: 125px;
@@ -739,10 +745,23 @@ a:hover,
     width: 50%;
   }
 
-  .profile {
-    width: 70%;
-    align-self: center;
+  .form-container {
+    margin-top: 5%;
   }
+
+  .profile {
+    width: 100%;
+    /* align-self: center; */
+  }
+
+  .left-container, .right-container {
+    width: 80%;
+  }
+
+  .right-container {
+    margin-top: 5%;
+  }
+
 
   .profile,
   .items .card {
@@ -760,6 +779,8 @@ a:hover,
 
   .dashboard-container .nav {
     flex-direction: row;
+    justify-content: center;
+    
   }
 
   .item-card .card-pic {
@@ -776,6 +797,12 @@ a:hover,
 
   .seller-profile-container .profile {
     padding: 3%;
+  }
+
+  .page-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }
 
