@@ -9,8 +9,10 @@ import ProfileCard from '../components/ProfileCard';
 import DashboardCard from '../components/DashboardCard';
 import useItemModal from '../assets/js/useItemModal';
 import ItemModal from '../components/ItemModal';
+import ReviewCard from '../components/ReviewCard';
 
 import { QUERY_SINGLE_USER } from '../utils/queries';
+import { QUERY_REVIEWS } from '../utils/queries';
 import { ADD_ITEM } from '../utils/mutations';
 import { UPDATE_ITEM } from '../utils/mutations';
 import { REMOVE_ITEM } from '../utils/mutations';
@@ -35,6 +37,12 @@ export default function MyBounty() {
     const { loading, data } = useQuery(QUERY_SINGLE_USER, {
         variables: { username: username },
       });
+    const reviewData = useQuery(QUERY_REVIEWS, {
+        variables: { reviewee: username },
+      });
+    
+    const reviews = reviewData.data?.reviews || {};
+    
     
     //saving the user information from QUERY_SINGLE_USER to profile variable
     const profile = data?.user || {};
@@ -267,7 +275,7 @@ export default function MyBounty() {
             <div className="nav nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <button className="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Listings</button>
                 <button className="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</button>
-                <button className="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</button>
+                {/* <button className="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</button> */}
                 <button className="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Reviews</button>
             </div>
             <div className="tab-content" id="v-pills-tabContent">
@@ -280,8 +288,8 @@ export default function MyBounty() {
                     </div>
                     </div>
                 <div className="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"><ProfileCard profile={profile}/></div>
-                <div className="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-                <div className="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab"></div>
+                {/* <div className="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div> */}
+                <div className="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab"><ReviewCard reviewData={reviews}/></div>
             </div>
         </div>
 
