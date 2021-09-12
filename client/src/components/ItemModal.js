@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import logo from "../assets/images/b-logo.png";
 
 
-const ItemModal = ({ isItemShowing, hide, addFormState, addHandleChange , addForm, addHandleFormSubmit, updateItemSubmit}) => isItemShowing ? ReactDOM.createPortal(
+const ItemModal = ({ isItemShowing, hide, addFormState, addHandleChange , addForm, addHandleFormSubmit, updateItemSubmit, errors}) => isItemShowing ? ReactDOM.createPortal(
     <React.Fragment>
     <div className="modal" data-bs-backdrop="static" id="staticBackdrop">
         <form
@@ -23,6 +23,7 @@ const ItemModal = ({ isItemShowing, hide, addFormState, addHandleChange , addFor
         </div>
 
         <div className="container">
+            <div>
             <label htmlFor="item-title"><b>Title</b></label>
             <input
             id="item-title"
@@ -33,7 +34,9 @@ const ItemModal = ({ isItemShowing, hide, addFormState, addHandleChange , addFor
             onChange={addHandleChange}
             required
             />
+            </div>
 
+            <div>
             <label htmlFor="item-name"><b>Item Name</b></label>
             <input
             id="item-name"
@@ -44,7 +47,9 @@ const ItemModal = ({ isItemShowing, hide, addFormState, addHandleChange , addFor
             onChange={addHandleChange}
             required
             />
+            </div>
 
+            <div>
             <label htmlFor="item-description"><b>Description</b></label>
             <input
             id="item-description"
@@ -55,7 +60,9 @@ const ItemModal = ({ isItemShowing, hide, addFormState, addHandleChange , addFor
             onChange={addHandleChange}
             required
             />
+            </div>
 
+            <div>
             <label htmlFor="item-unit"><b>Item Unit</b></label>
             <input
             id="item-unit"
@@ -66,7 +73,9 @@ const ItemModal = ({ isItemShowing, hide, addFormState, addHandleChange , addFor
             onChange={addHandleChange}
             required
             />
+            </div>
 
+            <div>
             <label htmlFor="item-quantity"><b>Quantity</b></label>
             <input
             id="item-quantity"
@@ -77,7 +86,10 @@ const ItemModal = ({ isItemShowing, hide, addFormState, addHandleChange , addFor
             onChange={addHandleChange}
             required
             />
+            <span style={{ color: "red" }}>{errors.item_quantity}</span>
+            </div>
 
+            <div>
             <label htmlFor="item-price"><b>Price per Unit</b></label>
             <input
             id="item-price"
@@ -88,10 +100,12 @@ const ItemModal = ({ isItemShowing, hide, addFormState, addHandleChange , addFor
             onChange={addHandleChange}
             required
             />
+            <span style={{ color: "red" }}>{errors.item_price}</span>
+            </div>
 
             <div>
                 <label htmlFor="item-categories"><b>Categories</b></label>
-                <select id="item-categories" name="category_name" value={addFormState.category_name} onChange={addHandleChange}>
+                <select id="item-categories" name="category_name" value={addFormState.category_name} onChange={addHandleChange} required>
                     <option value="" disabled>Choose...</option>
                     <option value="fruits" data-id="1">Fruits</option>
                     <option value="vegetables"data-id="2">Vegetables</option>
