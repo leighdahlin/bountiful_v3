@@ -20,7 +20,6 @@ export default function ProfileCard ({ profile }) {
     const [profileState, setProfileState] = useState({
         first_name: '',
         last_name: '',
-        // username: '',
         email: '',
         location: '',
     });
@@ -40,7 +39,6 @@ export default function ProfileCard ({ profile }) {
         setProfileState({
             first_name: profile.first_name,
             last_name: profile.last_name,
-            // username: profile.username,
             email: profile.email,
             location: profile.location,    
         })
@@ -65,11 +63,7 @@ export default function ProfileCard ({ profile }) {
         try {
             const { submitUpdateProfile } = await updateProfile({
                 variables: {  
-                    first_name: profile.first_name,
-                    last_name: profile.last_name,
-                    // username: profile.username,
-                    email: profile.email,
-                    location: profile.location,    
+                    ...profileState    
                 },
             });
 
