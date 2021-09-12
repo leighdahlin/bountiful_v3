@@ -51,9 +51,13 @@
     align-items: flex-end */
   }
 
-  #dashboard-image .cart-closed{
+  #dashboard-image .cart-closed {
     align-self: flex-end;
   }
+
+  /* .seller-profile-container .cart-closed {
+    justify-self: flex-end;
+  } */
   
   .cart-closed:hover {
     transform: rotate(8deg);
@@ -76,11 +80,6 @@
       max-width: 100%;
       max-height: auto;
       box-shadow: none;
-      background-color: inherit;
     }
   
-    .cart-closed {
-      position: relative;
-      margin: 0 auto;
-    }
   }

@@ -98,19 +98,22 @@ export default function ViewSingleItem() {
     }
 
         return (
-        <div id="itemvview-image">
+        <div id="itemview-cart">
             <Cart />
-            <div>
-                    <CartForm quantity={quantity} handleQuantityChange={handleQuantityChange} addToCart={addToCart}/>
-            </div>
-            <div className="page-container">
-                <div className="left-container">
-                    <SellerProfileInfo userData = {userData}/>
-                    <Link className="seller-btn" to={`/profile/${userData.username}`}><button>Go to Seller's Profile</button></Link>
+            <div id="itemvview-image">
+                <div>
+                        <CartForm quantity={quantity} handleQuantityChange={handleQuantityChange} addToCart={addToCart}/>
                 </div>
-                <div className="right-container">
-                    <SingleItemInfo singleItemData = {itemData} />
+                <div className="page-container">
+                    <div className="left-container">
+                        <SellerProfileInfo userData = {userData}/>
+                        <Link to={`/profile/${userData.username}`}><button className="btn seller-btn">Go to Seller's Profile</button></Link>
+                    </div>
+                    <div className="right-container">
+                        <SingleItemInfo singleItemData = {itemData} />
+                    </div>
                 </div>
+
             </div>
 
         </div>

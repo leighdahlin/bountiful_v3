@@ -156,6 +156,10 @@ export default function MyBounty() {
                 item_unit: '',
                 item_price: '',
                 category_name: '',
+                errors: {
+                    item_quantity: '',
+                    item_price: '',
+                }        
             });
     
     
@@ -279,6 +283,10 @@ export default function MyBounty() {
             item_unit: '',
             item_price: '',
             category_name: '',
+            errors: {
+                item_quantity: '',
+                item_price: '',
+            }    
         });
 
         setFormState(true);
