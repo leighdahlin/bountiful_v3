@@ -63,6 +63,10 @@ export default function MyBounty() {
         item_unit: '',
         item_price: '',
         category_name: '',
+        errors: {
+            item_quantity: '',
+            item_price: '',
+        }
       });
 
     //function to handle the changes to form state for the item modal to add/edit items
@@ -74,10 +78,38 @@ export default function MyBounty() {
         [name]: value,
         });
 
+        switch(name){
+            case "item_quantity":
+                addFormState.errors.item_quantity = 
+                value.match(/^[0-9]+$/)
+                ? ''
+                : 'Item Quantity must be a number!';
+            break;
+            case "item_price":
+                addFormState.errors.item_price = 
+                value.match(/^[0-9]+$/)
+                ? ''
+                : 'Item Price must be a number!';
+            break;
+        }
     };
+
+    const validateForm = errors => {
+        let valid = true;
+        Object.values(errors).forEach(val => val.length > 0 && (valid = false));
+        return valid;
+      };
+
     //function to handle the form submit for adding items
     const addHandleFormSubmit = async (event) => {
         event.preventDefault();
+        //Form validation to catch any errors with logging in:
+        if(validateForm(addFormState.errors)) {
+            console.info('Valid Form')
+          }else{
+            console.error('Invalid Form')
+            alert("Invalid Item Form");
+          }
 
         const sumbitQuantity = parseFloat(addFormState.item_quantity)
         addFormState.item_quantity = sumbitQuantity;
@@ -129,6 +161,7 @@ export default function MyBounty() {
     
             } catch (e) {
             console.error(e);
+            alert(e);
     
             }
 
@@ -301,7 +334,7 @@ export default function MyBounty() {
               </div>
         )} */}
 
-        <ItemModal isItemShowing={isItemShowing} hide={toggleItem} addFormState={addFormState} addHandleChange={addHandleChange} addHandleFormSubmit={addHandleFormSubmit} updateItemSubmit={updateItemSubmit} addForm={formState}/>
+        <ItemModal isItemShowing={isItemShowing} hide={toggleItem} addFormState={addFormState} addHandleChange={addHandleChange} addHandleFormSubmit={addHandleFormSubmit} updateItemSubmit={updateItemSubmit} addForm={formState} errors={addFormState.errors}/>
                 
     </div>
     )

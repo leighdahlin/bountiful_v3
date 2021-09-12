@@ -53,7 +53,7 @@ const typeDefs = gql`
   type Order{
     _id: ID
     purchaseDate: String
-    orderitems: [Item]
+    items: [Item]
   }
 
   
@@ -75,7 +75,7 @@ const typeDefs = gql`
   type Mutation {
     addUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    updateUser(first_name: String!, last_name: String!, location: String!, username: String!, email: String!): User
+    updateUser(first_name: String!, last_name: String!, location: String!, email: String!): User
     createReview(_id: ID, body: String!, reviewee: String!, title: String!, rating: Float): Review
     deleteReview(_id: ID!): User!
     addOrder(items: [ID]!): Order

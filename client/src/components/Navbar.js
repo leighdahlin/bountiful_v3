@@ -85,9 +85,25 @@ export default function LoggedIn() {
         });
 
         switch(name) {
-            // case 'first_name':
-            // case 'last_name':
-            // case 'username':
+            
+            case 'first_name': 
+                signupFormState.errors.last_name = 
+                value.match(/^[a-zA-Z]+$/)
+                ? ''
+                : 'First Name must be letters!';
+            break;  
+            case 'last_name': 
+                signupFormState.errors.last_name = 
+                value.match(/^[a-zA-Z]+$/)
+                ? ''
+                : 'Last Name must be letters!';
+                break;
+            case 'username': 
+                signupFormState.errors.username = 
+                value.length < 5
+                ? 'Username must be at least 5 characters long!'
+                : '';
+                break;
             case 'email':
                 signupFormState.errors.email = 
                     validEmailRegex.test(value)
@@ -103,10 +119,24 @@ export default function LoggedIn() {
         
       };
 
-
     };
+    const validateForm = errors => {
+        let valid = true;
+        Object.values(errors).forEach(val => val.length > 0 && (valid = false));
+        return valid;
+      };
+
     const loginHandleFormSubmit = async (event) => {
         event.preventDefault();
+        //Form validation to catch any errors with logging in:
+        if(validateForm(loginFormState.errors)) {
+            console.info('Valid Form')
+          }else{
+            console.error('Invalid Form')
+            alert("Invalid Login Form");
+          }
+
+        //Continue with running the code if login credentials are correct:
         try {
           const mutationResponse = await login({
             variables: { email: loginFormState.email, password: loginFormState.password },
@@ -125,12 +155,20 @@ export default function LoggedIn() {
           toggleLogin();
         } catch (e) {
           console.log(e);
+          alert(e);
         }
       };
     // submit form
     const signupHandleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(signupFormState);
+        // console.log(signupFormState);
+        //Form validation to catch any errors with signing in:
+        if(validateForm(signupFormState.errors)) {
+            console.info('Valid Form')
+          }else{
+            console.error('Invalid Form')
+            alert("Invalid Signup Form");
+          }
 
         try {
         const { data } = await addUser({
@@ -155,7 +193,7 @@ export default function LoggedIn() {
 
         } catch (e) {
         console.error(e);
-
+        alert(e);
         }
     };
 

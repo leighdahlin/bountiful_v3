@@ -49,7 +49,8 @@ export function idbPromise(storeName, method, object) {
       db.onerror = function(e) {
         console.log('error', e);
       };
-
+      console.log("INSIDE CART HELPER FUNCTION");
+      console.log(object);
       switch (method) {
         case 'put':
           store.put(object);
@@ -62,6 +63,8 @@ export function idbPromise(storeName, method, object) {
           };
           break;
         case 'delete':
+          console.log("INSIDE DELETE HELPER FUNCTION");
+          console.log(object._id);
           store.delete(object._id);
           break;
         default:
