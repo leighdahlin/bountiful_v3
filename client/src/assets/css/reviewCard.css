@@ -1,3 +1,12 @@
+.rev-card-body {
+  background-color: var(--gray);
+}
+
 .card-text {
-  color: red;
+  color: var(--blue);
+}
+
+#rev-username {
+  color: var(--gold);
+  font-weight: bold;
 }

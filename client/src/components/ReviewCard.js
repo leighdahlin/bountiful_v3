@@ -20,14 +20,20 @@ export default function ReviewCard({ reviewData }) {
                         </div>
                         <img src={logo} className="img-fluid rounded-start items-b-logo" alt={item.item_name}/>
                     </div> */}
-          <div id="card-id" className="col-md-8 card-id" data-id={review._id}>
+          <div
+            id="card-id"
+            className="col-md-8 card-id rev-card-body"
+            data-id={review._id}
+          >
             <div className="card-title">
               <h2 className="item-title">
                 <strong>{review.title}</strong>{" "}
               </h2>
             </div>
             <div className="card-body">
-              <p className="card-text">{review.user.username}</p>
+              <p className="card-text" id="rev-username">
+                {review.user.username}
+              </p>
               <p className="card-text">{review.rating}</p>
               <p className="card-text">{review.body}</p>
               <p className="card-text">
