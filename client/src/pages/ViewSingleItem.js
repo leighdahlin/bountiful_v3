@@ -101,8 +101,10 @@ export default function ViewSingleItem() {
         <div id="itemview-cart">
             <Cart />
             <div id="itemvview-image">
-                <div>
-                        <CartForm quantity={quantity} handleQuantityChange={handleQuantityChange} addToCart={addToCart}/>
+                <div className="button-form">
+                <Link to="/browse"><button className="btn back-browse"><p><i class="arrow left"></i></p>Back</button></Link>
+
+                <CartForm quantity={quantity} handleQuantityChange={handleQuantityChange} addToCart={addToCart}/>
                 </div>
                 <div className="page-container">
                     <div className="left-container">
