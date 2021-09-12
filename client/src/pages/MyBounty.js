@@ -233,6 +233,10 @@ export default function MyBounty() {
                 item_unit: itemUnit,
                 item_price: itemPrice,
                 category_name: itemCat,
+                errors: {
+                    item_quantity: '',
+                    item_price: '',
+                }        
               });
                               
         }
