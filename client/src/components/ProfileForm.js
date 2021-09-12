@@ -22,7 +22,7 @@ export default function ProfileForm ({ profileState, profileHandleChange, submit
                 onChange={profileHandleChange}
                 required
             />
-            <label htmlFor="username"><b>Username</b></label>
+            {/* <label htmlFor="username"><b>Username</b></label>
             <input
                 id="username"
                 type="text"
@@ -30,7 +30,7 @@ export default function ProfileForm ({ profileState, profileHandleChange, submit
                 value={profileState.username}
                 onChange={profileHandleChange}
                 required
-            />
+            /> */}
             <label htmlFor="email"><b>Email</b></label>
             <input
                 id="email"

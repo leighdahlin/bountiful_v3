@@ -2,7 +2,8 @@
     position: fixed;
     top: 0;
     right: 0;
-    min-width: 20%;
+    /* float: right; */
+    min-width: 30%;
     max-width: 30%;
     max-height: 60%;
     background-color: var(--gray);
@@ -25,6 +26,7 @@
     right: .5rem;
     cursor: pointer;
     color: var(--tertiary);
+    border: none;
   }
   
   .cart .close:hover {
@@ -32,9 +34,11 @@
   }
   
   .cart-closed {
-    position: fixed;
+    /* position: relative; */
+    float: right;
+    width: 100%;
     top: 2%;
-    right: 1%;
+    left: 100%;
     font-size: 2rem;
     cursor: pointer;
     background-color: var(--secondary);
@@ -42,6 +46,13 @@
     padding: .25rem;
     width: 50px;
     height: 50px;
+    /* display: flex;
+    justify-content: center;
+    align-items: flex-end */
+  }
+
+  #dashboard-image .cart-closed{
+    align-self: flex-end;
   }
   
   .cart-closed:hover {

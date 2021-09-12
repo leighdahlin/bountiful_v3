@@ -10,6 +10,7 @@ import { QUERY_SINGLE_ITEM } from '../utils/queries';
 import { useStoreContext } from "../utils/GlobalState";
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../utils/actions";
 import { idbPromise } from "../utils/helpers";
+import Cart from '../components/Cart/Cart';
 
 
 export default function ViewSingleItem() {    
@@ -96,10 +97,9 @@ export default function ViewSingleItem() {
         return <div>Loading...</div>
     }
 
-
-
         return (
         <div id="itemvview-image">
+            <Cart />
             <div>
                     <CartForm quantity={quantity} handleQuantityChange={handleQuantityChange} addToCart={addToCart}/>
             </div>

@@ -1,6 +1,7 @@
 import SellerProfileInfo from '../components/SellerProfileInfo';
 import SellerProfileCard from '../components/SellerProfileCard';
 import Review from '../components/Review';
+import Cart from '../components/Cart/Cart';
 
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
@@ -24,6 +25,7 @@ export default function MyBounty() {
 
     return(
     <div className="seller-profile-container">
+        <Cart />
         <SellerProfileInfo userData={profile}/>
         
         <div className="seller-nav-container d-flex flex-column">

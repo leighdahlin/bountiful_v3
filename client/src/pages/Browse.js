@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import BrowseCard from '../components/BrowseCard';
+import Cart from '../components/Cart/Cart';
 
 import { useQuery, useLazyQuery } from '@apollo/client';
 import { QUERY_ITEMS, QUERY_CAT_ITEMS } from '../utils/queries';
@@ -91,6 +92,7 @@ export default function Browse() {
 
     return (
         <div id="browse-background">
+            <Cart />
             <div className="browse-container">
                 <div className="form-container">
                     <form className="browse-form">
