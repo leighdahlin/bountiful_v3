@@ -238,6 +238,13 @@ export default function MyBounty() {
     //function to handle the form submit when updating an item
     const updateItemSubmit = async (event) => {
         event.preventDefault();
+        //Form validation to catch any errors with logging in:
+        if(validateForm(addFormState.errors)) {
+            console.info('Valid Form')
+          }else{
+            console.error('Invalid Form')
+            alert("Invalid Item Form");
+          }
         try { 
             const sumbitQuantity = parseFloat(addFormState.item_quantity)
             addFormState.item_quantity = sumbitQuantity;
