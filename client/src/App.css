@@ -788,4 +788,5 @@ a:hover,
   margin-top: 2%;
   background-color: var(--clay);
   color: var(--gray);
+  border-radius: 0.25rem;
 }
