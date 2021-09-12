@@ -28,7 +28,7 @@ When you browse, all items for sale will populate. Filter by a category to fine 
 
 Happy eating!
 
-https://bountiful-ca.herokuapp.com/
+https://bountiful-us.herokuapp.com/
 
 
 ## License
