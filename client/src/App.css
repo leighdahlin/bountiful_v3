@@ -850,3 +850,7 @@ a:hover,
   background-color: var(--clay);
   color: var(--gray);
 }
+
+#location-signup {
+  margin-left: 2%;
+}
