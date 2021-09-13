@@ -176,7 +176,23 @@ export default function MyBounty() {
 
     //function to handle toggling the item modal with 'Add Listing' is clicked
     const toggleAndAdd = async () => {
+
+        setAddFormState({
+            title: '',
+            item_name: '',
+            item_description: '',
+            item_quantity: '',
+            item_unit: '',
+            item_price: '',
+            category_name: '',
+            errors: {
+                item_quantity: '',
+                item_price: '',
+            }        
+        });
+
         await toggleItem();
+        
         const submitBtn = await document.querySelector("#create-edit-btn");
         submitBtn.textContent = await "Post Listing";
 
@@ -191,6 +207,7 @@ export default function MyBounty() {
     //function to handle toggling the item modal when 'Edit' is clicked on an item
     const toggleAndEdit = async () => {
         await setFormState(false);
+
         await toggleItem();
         const submitBtn = await document.querySelector("#create-edit-btn");
         submitBtn.textContent = await "Save Changes";
