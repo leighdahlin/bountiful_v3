@@ -421,6 +421,10 @@ a:hover,
   justify-content: center;
 }
 
+.seller-items a{
+  text-decoration: none;
+}
+
 .items .card-body,
 .seller-items .card-body {
   text-align: left;
