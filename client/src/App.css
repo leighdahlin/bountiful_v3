@@ -841,7 +841,7 @@ a:hover,
 }
 
 /* ** REVIEWS PUBLIC VIEW ** */
-.submitbtn {
+.container .submitbtn {
   justify-self: left;
   width: 20%;
   font-size: 0.85rem;
@@ -850,4 +850,8 @@ a:hover,
   background-color: var(--clay);
   color: var(--gray);
   border-radius: 0.25rem;
+}
+
+#location-signup {
+  margin-left: 2%;
 }
