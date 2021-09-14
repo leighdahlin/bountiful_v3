@@ -15,7 +15,7 @@ export default function ProfileInfo ({profile, editProfile }) {
 
     return (
     <div className="profile">
-        <img id="profile-img" src={profile.picURL} alt="profile"/>
+        <img id="profile-img" src={profileImage} alt="profile"/>
         <div className="profile-info">
             <h6 id="dashboard-firstname">{profile.first_name} {profile.last_name}</h6>
             <h6 id="dashboard-username">{profile.username}</h6>
