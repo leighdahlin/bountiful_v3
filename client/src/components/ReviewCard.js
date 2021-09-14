@@ -34,7 +34,7 @@ export default function ReviewCard({ reviewData }) {
               <p className="card-text" id="rev-username">
                 {review.user.username}
               </p>
-              <p className="card-text">Rating: {review.rating}</p>
+              <p className="card-text">Rating: {review.rating}/5 stars</p>
               <p className="card-text">{review.body}</p>
               <p className="card-text">
                 <small className="text-muted">
