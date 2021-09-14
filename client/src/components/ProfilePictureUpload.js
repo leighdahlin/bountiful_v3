@@ -111,6 +111,7 @@ export default function ProfilePictureUpload () {
     // )
 
      return (
+
         <div {...getRootProps({ isDragActive, isDragAccept, isDragReject })} className="photo-div">
         <input {...getInputProps()} name="name" pictureHandleChange={pictureHandleChange} value={pictureState.name} />
             {isDragActive ? (

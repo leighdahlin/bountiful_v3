@@ -321,6 +321,11 @@ const resolvers = {
       await User.findOneAndUpdate(
         { _id: context.user._id },
         { $push: { picURL: URL } },
+      const url = `https://${s3Bucket}.s3.amazonaws.com/${filename}`;
+
+      await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $push: { picURL: url } },
         {
           new: true,
           runValidators: true,
