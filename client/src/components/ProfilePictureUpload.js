@@ -71,7 +71,7 @@ export default function ProfilePictureUpload () {
           .toString(36)
           .substring(2, 7);
         const cleanFileName = name.toLowerCase().replace(/[^a-z0-9]/g, "-");
-        const newFilename = `images/${date}-${randomString}-${name}`;
+        const newFilename = `${date}-${randomString}-${name}`;
         return newFilename.substring(0, 60);
       };
 
