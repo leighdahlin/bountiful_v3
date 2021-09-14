@@ -1,4 +1,4 @@
-.item-card {
+.review-card {
   background-color: #fff;
   padding: 4vh 5vh;
   border-bottom-left-radius: 1rem;
@@ -6,6 +6,10 @@
   box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 1rem;
   border: transparent;
+}
+
+textarea {
+  width: 100%;
 }
 
 .card-text {
@@ -19,4 +23,69 @@
 
 .rev-card-body .card-body {
   text-align: left;
+}
+
+.review-card #card-id {
+  width: 100%;
+}
+
+.make-review-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-container .make-review {
+  justify-self: left;
+  /* width: 20%; */
+  font-size: 0.85rem;
+  margin-bottom: 4%;
+  margin-top: 2%;
+  background-color: var(--clay);
+  color: var(--gray);
+  border-radius: 0.25rem;
+}
+
+#submit-review {
+  width: 50%;
+}
+
+.rating-submit-div, .btn-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2%;
+}
+
+
+.slidecontainer {
+  width: 75%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.zero, .five {
+  margin-left: 3%;
+  margin-right: 3%;
+  font-size: 1.25rem;
+
+
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  background-color: var(--gold);
+  /* width: 200px; */
+   height:10px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: var(--forest);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
 }

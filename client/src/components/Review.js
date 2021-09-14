@@ -6,6 +6,7 @@ import { useQuery } from "@apollo/client";
 import { CREATE_REVIEW } from "../utils/mutations";
 import { QUERY_REVIEWS } from "../utils/queries";
 import ReviewCard from "./ReviewCard";
+import ReviewForm from "./ReviewForm";
 
 export default function Review() {
   //extract username from params and save it to a variable
@@ -62,66 +63,34 @@ export default function Review() {
       });
 
       window.location.assign("/profile/" + username);
+      setMakeReview(true)
+
     } catch (e) {
       console.log(e);
     }
   };
 
+  const [makeReview, setMakeReview] = useState(true)
+  const [showMakeReview, setShowMakeReview] = useState(true)
+  const loggedInUser = localStorage.getItem('username');
+
+  console.log("USERNAME: " + username)
+  console.log("LOGGED IN USER: " + loggedInUser)
+  console.log()
+
+
+  const makeReviewForm = () => {
+    console.log(loggedInUser)
+    setMakeReview(false)
+    
+  }
+
   return (
     <div className="review-container">
-      <form className="animate login-form" onSubmit={reviewFormSubmit}>
-        <div className="container">
-          <label htmlFor="title">
-            <b>Title</b>
-          </label>
-          <input
-            id="title"
-            type="text"
-            placeholder="Title"
-            name="title"
-            value={reviewContent.title}
-            onChange={reviewChange}
-            required
-          />
-          <label htmlFor="review-content">
-            <b>Review</b>
-          </label>
-          <input
-            id="body"
-            type="text"
-            placeholder="Enter Review"
-            name="body"
-            value={reviewContent.body}
-            onChange={reviewChange}
-            required
-          />
-
-          <label htmlFor="rating">
-            <b>Rating</b>
-          </label>
-          <div className="slidecontainer">
-            <span>0</span>
-            <input
-              id="rating"
-              type="range"
-              min="1"
-              max="5"
-              value="50"
-              className="slider"
-              id="myRange"
-              name="rating"
-              value={reviewContent.rating}
-              onChange={reviewChange}
-            />
-            <span>5</span>
-          </div>
-        </div>
-        <div className="container">
-          <button type="submit" className="submitbtn">
-            Submit Review
-          </button>
-        </div>
-      </form>
+      <div className="make-review-container">
+        {username === loggedInUser? <div></div>: <button className="btn make-review" onClick={makeReviewForm}>Make a Review</button>}
+      </div>
+      {makeReview? <div></div>:<ReviewForm reviewFormSubmit={reviewFormSubmit} reviewContent={reviewContent} reviewChange={reviewChange} />}
       <ReviewCard reviewData={reviews} />
     </div>
   );
