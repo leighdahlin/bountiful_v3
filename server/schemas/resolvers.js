@@ -303,6 +303,9 @@ const resolvers = {
         region: 'us-west-1',
       });
 
+      console.log("s3 OBJECT CREATED:");
+      console.log(s3);
+
       const s3Params = {
         Bucket: s3Bucket,
         Key: filename,
