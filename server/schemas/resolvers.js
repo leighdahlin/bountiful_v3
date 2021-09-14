@@ -303,6 +303,9 @@ const resolvers = {
         region: 'us-west-1',
       });
 
+      console.log("s3 OBJECT CREATED:");
+      console.log(s3);
+
       const s3Params = {
         Bucket: s3Bucket,
         Key: filename,
@@ -314,11 +317,6 @@ const resolvers = {
       const URL = `https://${s3Bucket}.s3.amazonaws.com/${filename}`;
       console.log("URL CREATED");
       console.log(URL);
-
-      await User.findOneAndUpdate(
-        { _id: context.user._id },
-        { $push: { picURL: URL } },
-      const url = `https://${s3Bucket}.s3.amazonaws.com/${filename}`;
 
       await User.findOneAndUpdate(
         { _id: context.user._id },

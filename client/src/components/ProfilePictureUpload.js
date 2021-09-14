@@ -119,6 +119,7 @@ export default function ProfilePictureUpload () {
             ) : (
                 <p className="upload-box">Drop file here, or click to select the file</p>
             )}
+          <input type="hidden" id="avatar-url" name="avatar-url" value="/images/default.png"></input>
       </div>
     )
 }
