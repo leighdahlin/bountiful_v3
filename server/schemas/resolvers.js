@@ -2,6 +2,8 @@ const { AuthenticationError, UserInputError } = require('apollo-server-express')
 const { User, Item, Order, Review } = require('../models');
 const stripe = require('stripe')('sk_test_51JYJT2JDMSXsetnhqF7kZfG3mAEbFNjNMIN05OXkkCzOugaPFqkXlev6a1XyFVFbWCbSAxivmQwmwsNSEOZlQQmR001eRq7MnD');
 const { signToken } = require('../utils/auth');
+const AWS = require('aws-sdk');
+const s3Bucket = process.env.S3_BUCKET;
 
 
 const resolvers = {
@@ -256,7 +258,7 @@ const resolvers = {
             runValidators: true,
           }
         );
-        console.log(review2)
+        // console.log(review2)
         return review2;
       }
       throw new AuthenticationError('You need to be logged in!');
@@ -283,6 +285,45 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+
+    //S3 Creation for profile pic:
+    uploadFile: async (parent, {filename}, context) => {
+      if(context.user){
+
+        console.log("INSIDE UPLOAD FILE RESOLVER!!")
+      const s3 = new AWS.S3({
+        signatureVersion: 'v4',
+        region: 'us-west-1',
+      });
+
+      const s3Params = {
+        Bucket: s3Bucket,
+        Key: filename,
+        Expires: 60,
+        ACL: 'public-read',
+      };
+
+      const signedRequest = await s3.getSignedUrl('putObject', s3Params);
+      const url = `https://${s3Bucket}.s3.amazonaws.com/${filename}`;
+
+      await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $push: { picURL: url } },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+      const data = await s3.upload(s3Params).promise();
+      const { Location } = data;
+
+      return {
+        signedRequest,
+        url,
+        Location
+      };
+      }     
+    },    
   },
   };
     

@@ -10,7 +10,6 @@ const typeDefs = gql`
     location: String
     email: String
     password: String
-    signedRequest: String
     picURL: String
     items: [Item]
     orders: [Order]
@@ -56,6 +55,10 @@ const typeDefs = gql`
     items: [Item]
   }
 
+  type S3Object {
+    signedRequest: String
+    URL: String
+  }
   
   type Query {
     users: [User]
@@ -79,6 +82,7 @@ const typeDefs = gql`
     createReview(_id: ID, body: String!, reviewee: String!, title: String!, rating: Float): Review
     deleteReview(_id: ID!): User!
     addOrder(items: [ID]!): Order
+    uploadFile(filename: String!): S3Object
 
     addItem(
       _id: ID

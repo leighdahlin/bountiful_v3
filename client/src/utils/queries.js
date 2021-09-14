@@ -10,6 +10,7 @@ export const QUERY_SELLER = gql`
         username
         location
         email
+        picURL
       items {
         _id
         title
@@ -35,6 +36,7 @@ export const QUERY_SINGLE_USER = gql`
         username
         location
         email
+        picURL
         items {
           _id
           title
