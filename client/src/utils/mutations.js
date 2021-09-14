@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 
+
 export const ADD_USER = gql`
   mutation addUser($first_name: String!, $last_name: String!, $location: String!, $username: String!, $email: String!, $password: String!) {
     addUser(first_name: $first_name, last_name: $last_name, location:$location, username:$username, email: $email, password: $password) {
@@ -126,6 +127,15 @@ export const CREATE_REVIEW = gql`
       createdAt
       reviewee
       rating
+    }
+  }
+`;
+
+export const UPLOAD_PROFILE_IMG = gql`
+  mutation uploadFile($filename: String!) {
+    uploadFile(filename: $filename) {
+      url
+      signedRequest
     }
   }
 `;
