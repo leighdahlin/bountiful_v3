@@ -57,8 +57,8 @@ const LoginModal = ({
                     me
                 </label>--> */}
               </div>
-              <div className="container" style={{ background: "var(--gray)" }}>
-                <button type="submit" className="submitbtn">
+              <div className="container">
+                <button type="submit" className="btn submitbtn">
                   Login
                 </button>
                 {/* <!-- FORGOT PASSWORD LINK -->

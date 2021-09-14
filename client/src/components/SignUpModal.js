@@ -109,11 +109,11 @@ const SignupModal = ({ isSignupShowing, hide, signupFormState, signupHandleFormS
                 </label>--> */}
             </div> 
 
-            <div className="container" style={{background: "var(--gray)"}}>
+            <div className="container">
                 <button
                 type="submit"
                 // onClick={hide}
-                className="submitbtn">
+                className="btn submitbtn">
                 Sign-up
                 </button>
                 {/* <!-- FORGOT PASSWORD LINK -->

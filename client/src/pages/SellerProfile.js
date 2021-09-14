@@ -38,9 +38,9 @@ export default function MyBounty() {
                     <li className="nav-item">
                         <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#reviews" role="tab" aria-controls="profile" aria-selected="false">Reviews</button>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <button className="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#message" role="tab" aria-controls="contact" aria-selected="false">Message</button>
-                    </li>
+                    </li> */}
                 </ul>
                 <div className="tab-content" id="myTabContent">
                     <div className="tab-pane fade show active" id="bounty" role="tabpanel" aria-labelledby="home-tab">
@@ -55,11 +55,11 @@ export default function MyBounty() {
                             <Review />
                         </div>
                     </div>
-                    <div className="tab-pane fade" id="message" role="tabpanel" aria-labelledby="contact-tab">
+                    {/* <div className="tab-pane fade" id="message" role="tabpanel" aria-labelledby="contact-tab">
                         <div className="seller-message-form">
                             Message Form
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
