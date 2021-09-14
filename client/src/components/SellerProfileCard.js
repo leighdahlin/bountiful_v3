@@ -1,8 +1,10 @@
 import logo from "../assets/images/b-logo.png";
 import formatTime from "../utils/helpers.js";
+import { Link } from 'react-router-dom';
 
 export default function DashboardCard({ data }) {
     return data.map((item) => (
+        <Link to={`/browse/item/${item._id}`}>
             <div id = {item.id} key={item.id} className="card mb-3 item-card" style={{maxWidth: "500px"}}>
                 <div className="row g-0">
                     <div className="col-md-4 card-pic">
@@ -29,6 +31,8 @@ export default function DashboardCard({ data }) {
                     </div>
                 </div>
             </div>
+        </Link>
+
 
 
 
