@@ -11,7 +11,7 @@ export default function ReviewCard({ reviewData }) {
       <div
         id="item-card"
         key={review._id}
-        className="mb-3 item-card"
+        className="mb-3 item-card review-card"
         style={{ maxWidth: "500px" }}
       >
         <div className="row g-0">
