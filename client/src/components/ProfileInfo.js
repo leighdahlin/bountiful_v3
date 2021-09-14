@@ -22,6 +22,7 @@ export default function ProfileInfo ({profile, editProfile }) {
             <h6 id="dashboard-location">{profile.location}</h6>
             <h6 id="dashboard-email">{profile.email}</h6>
             <button id="edit-profile" type="button" className="btn" data-id={profile._id} onClick={editProfile}>Update</button>
+
             <button id="add-image" type="button" className="btn" data-id={profile._id} onClick={renderUpload}>Upload Profile Picture</button>
         </div>
         {showPicUpload?<ProfilePictureUpload />:<div></div>}

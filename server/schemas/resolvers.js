@@ -3,6 +3,8 @@ const { User, Item, Order, Review } = require('../models');
 const stripe = require('stripe')('sk_test_51JYJT2JDMSXsetnhqF7kZfG3mAEbFNjNMIN05OXkkCzOugaPFqkXlev6a1XyFVFbWCbSAxivmQwmwsNSEOZlQQmR001eRq7MnD');
 const { signToken } = require('../utils/auth');
 const AWS = require('aws-sdk');
+require('dotenv').config();
+var fs = require('fs');
 const s3Bucket = process.env.S3_BUCKET;
 
 
@@ -291,8 +293,13 @@ const resolvers = {
       if(context.user){
 
         console.log("INSIDE UPLOAD FILE RESOLVER!!")
+        AWS.config.update({
+          accessKeyId: process.env.AWS_ACCESS_ID,
+          secretAccessKey: process.env.AWS_SECRET_KEY
+        });
+       
       const s3 = new AWS.S3({
-        signatureVersion: 'v4',
+        // apiVersion: '2006-03-01',
         region: 'us-west-1',
       });
 
@@ -304,6 +311,13 @@ const resolvers = {
       };
 
       const signedRequest = await s3.getSignedUrl('putObject', s3Params);
+      const URL = `https://${s3Bucket}.s3.amazonaws.com/${filename}`;
+      console.log("URL CREATED");
+      console.log(URL);
+
+      await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $push: { picURL: URL } },
       const url = `https://${s3Bucket}.s3.amazonaws.com/${filename}`;
 
       await User.findOneAndUpdate(
@@ -314,13 +328,27 @@ const resolvers = {
           runValidators: true,
         }
       );
-      const data = await s3.upload(s3Params).promise();
-      const { Location } = data;
+
+      const dataUpload = async file => {
+        console.log("INSIDE DATA UPLOAD: FILE")
+        console.log(file);
+        var fileStream = fs.createReadStream(file);
+        console.log("CREATING FILESTREAM:")
+        console.log(fileStream);
+
+        return s3.upload({...s3Params, Body: fileStream}).promise();
+      }
+      const s3upload= await dataUpload(filename);
+
+      console.log("S3 UPLOAD ");
+      console.log(s3upload);
+
+      // const s3upload = s3.upload(s3Params).promise();
 
       return {
         signedRequest,
-        url,
-        Location
+        URL,
+        s3upload
       };
       }     
     },    

@@ -71,7 +71,7 @@ export default function ProfilePictureUpload () {
           .toString(36)
           .substring(2, 7);
         const cleanFileName = name.toLowerCase().replace(/[^a-z0-9]/g, "-");
-        const newFilename = `images/${date}-${randomString}-${name}`;
+        const newFilename = `${date}-${randomString}-${name}`;
         return newFilename.substring(0, 60);
       };
 
@@ -111,6 +111,7 @@ export default function ProfilePictureUpload () {
     // )
 
      return (
+
         <div {...getRootProps({ isDragActive, isDragAccept, isDragReject })} className="photo-div">
         <input {...getInputProps()} name="name" pictureHandleChange={pictureHandleChange} value={pictureState.name} />
             {isDragActive ? (

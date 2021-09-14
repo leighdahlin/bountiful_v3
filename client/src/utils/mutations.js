@@ -134,7 +134,7 @@ export const CREATE_REVIEW = gql`
 export const UPLOAD_PROFILE_IMG = gql`
   mutation uploadFile($filename: String!) {
     uploadFile(filename: $filename) {
-      url
+      URL
       signedRequest
     }
   }
