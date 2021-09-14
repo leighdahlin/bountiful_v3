@@ -221,6 +221,7 @@ a:hover,
 
 #add-item,
 #edit-profile,
+#add-image,
 .save-btn,
 #send-message,
 .left-container .seller-btn {
@@ -316,6 +317,23 @@ a:hover,
 
 #profile-img {
   width: 50%;
+}
+
+.upload-box {
+  height: 100%;
+}
+
+.photo-div {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4%;
+  padding: 3%;
+  border: 5px solid var(--blue);
+  cursor: pointer;
+  background-color: var(--gray);
+
 }
 
 .seller-profile-container #profile-img {
