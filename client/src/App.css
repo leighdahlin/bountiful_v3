@@ -224,6 +224,7 @@ a:hover,
 #add-image,
 .save-btn,
 #send-message,
+#checkout,
 .left-container .seller-btn {
   justify-self: center;
   width: 80%;
@@ -232,6 +233,15 @@ a:hover,
   margin-top: 6%;
   background-color: var(--clay);
   color: var(--gray);
+}
+
+#checkout {
+  width: 35%;
+  margin-left: 3%;
+}
+
+#trash {
+  cursor: pointer;
 }
 
 #send-message {
