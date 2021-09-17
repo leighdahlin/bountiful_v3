@@ -33,10 +33,10 @@ https://bountiful-us.herokuapp.com/
 
 ## Screenshots
 
-![Homepage](client\src\assets\images\Bountiful V3 Screenshots\homepage.png)
-![Dashboard-Listings](client\src\assets\images\Bountiful V3 Screenshots\dashboard - listings.png)
-![Dashboard-Profile](client\src\assets\images\Bountiful V3 Screenshots\dashboard - profile.png)
-![Seller-Profile-Review](client\src\assets\images\Bountiful V3 Screenshots\seller - profile - reviewform.png)
+![Homepage](client/src/assets/images/screenshots/homepage.png)
+![Dashboard-Listings](client/src/assets/images/screenshots/dashboard-listings.png)
+![Dashboard-Profile](client/src/assets/images/screenshots/dashboard-profile.png)
+![Seller-Profile-Review](client/src/assets/images/screenshots/seller-profile-reviewform.png)
 
 ## License
  ![badge](https://img.shields.io/badge/license-isc-blue?style=flat-square)<br>
