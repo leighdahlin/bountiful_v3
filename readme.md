@@ -7,6 +7,7 @@ Bountiful is a peer-to-peer gardening service that allows users to buy and sell 
   - [Description](#description)
   - [Installation](#installation)
   - [Usage](#usage)
+  - [Screenshots](#screenshots)
   - [License](#license)
   - [Testing](#testing)
   - [Contributions](#contributions)  
@@ -30,6 +31,12 @@ Happy eating!
 
 https://bountiful-us.herokuapp.com/
 
+## Screenshots
+
+![Homepage](client\src\assets\images\Bountiful V3 Screenshots\homepage.png)
+![Dashboard-Listings](client\src\assets\images\Bountiful V3 Screenshots\dashboard - listings.png)
+![Dashboard-Profile](client\src\assets\images\Bountiful V3 Screenshots\dashboard - profile.png)
+![Seller-Profile-Review](client\src\assets\images\Bountiful V3 Screenshots\seller - profile - reviewform.png)
 
 ## License
  ![badge](https://img.shields.io/badge/license-isc-blue?style=flat-square)<br>
